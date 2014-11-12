@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Page/Post Title
 ---
 LE STRUM is a pretty small device, on account of keeping the PCB costs down. However, the components and control surfaces are quite packed on to the PCB and it may be rather fiddly for serious performance use.
 

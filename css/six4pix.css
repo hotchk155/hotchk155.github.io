@@ -1,0 +1,28 @@
+
+body {
+    font-family: courier, monospace;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+h1 {
+    font-size: 48px;
+	color: white;
+	background: black;
+	text-align: center;
+}
+div {
+    position: relative;
+    width: 640px;
+    top: 0px;
+    left: 50px;
+}
+img {
+    width: 300px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
+

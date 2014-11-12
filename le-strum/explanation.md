@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Page/Post Title
 ---
 The simple and boring answer is that its all done in code, and you can take a look at that right here on GitHub. However you probably want to know about the electronics right, what is all that stuff on the board? Hopefully this little description might help you turn your curiosity into understanding and might inspire you to make your own projects
 

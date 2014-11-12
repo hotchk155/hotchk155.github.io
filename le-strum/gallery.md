@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Page/Post Title
 ---
 I love hearing about the amazing ways some people have modded their Le Strum kit or built it into instruments
 <br>

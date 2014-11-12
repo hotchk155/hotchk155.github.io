@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Page/Post Title
 ---
 LE STRUM is a MIDI controller that rewards experimentation. Try playing with dynamics (Envelope attack and release) and reverb/delay effects on your synth or sound module. 
 
