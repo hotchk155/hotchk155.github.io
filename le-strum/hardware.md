@@ -1,3 +1,7 @@
+---
+layout: default
+title: Page/Post Title
+---
 Parts List
 * R1, R2 - 220R resistor (x2)
 * R4, R8 - 1K resistor (x2)
