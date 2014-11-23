@@ -26,3 +26,11 @@ img {
 	margin-bottom: 50;
 }
 
+img.wide {
+    width: 500px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
