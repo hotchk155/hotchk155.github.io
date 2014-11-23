@@ -1,7 +1,8 @@
-name: ""
-description: ""
+﻿name: "six4pix.com"
+description: "Sixty Four Pixels Ltd."
+url: "http://localhost:4000"
 
-url: "[YOUR DOMAIN]"
-
-
-
+markdown: kramdown
+highlighter: rouge
+encoding: utf-8
+markdown_ext: md
