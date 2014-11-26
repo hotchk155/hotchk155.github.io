@@ -37,8 +37,17 @@ The notes of the arpeggio can be forced into a musical scale defined by a scale 
 
 ARPIE has a number of fun other features up it's sleeve such as accent and glide patterns (Long press PATN) and chord gating (MODE). Read on to find out more.
 
+
+<img class="wide" src="img/arpie_face.png">
+<img class="wide" src="img/arpie_back.png">
+<img class="wide" src="img/arpie_left.png">
+<img class="wide" src="img/arpie_right.png">
+<img class="wide" src="img/arpie_front.png">
+
+
 # Connections And Power
 The rear panel of ARPIE is shown below:
+
 
 The minimal requirements to make music with ARPIE are 
 
@@ -107,47 +116,125 @@ The HOLD button toggles the chord hold function on and off. An indicator LED bes
 
 
 # PATN 
-In this mode the sixteen data display LEDs show a pattern of ?ote?(LED on) or "rest" (LED off). You can toggle an LED on and off by pressing the data button below the LED.
-This pattern of notes and rests and allows a rhythmic structure to be applied to the currently playing arpeggio. Arpeggiated notes are muted when they coincide with a rest in the pattern. 
-PATN is the default function, and the one to which ARPIE returns when you don't press anything for a while. You can return to this mode immediately by pressing PATN at any time.
+
+##Rhythmic Pattern Edit
+
+ARPIE's rhythmic pattern acts allows you to mute or play selected steps of the arpeggiated sequence. Press the data buttons to toggle the LEDs on and off. When the LED is on, the corresponding note of the arpeggio plays. When the LED is off the corresponding note is muted. 
+
+PATN allows you to groove up your arpeggios, rather than having to have a note at every step. This can be especially effective with the tied GATE mode.
+
+The pattern has up to 16 steps (you can use PLEN to select the pattern length), but the arpeggiate sequence may have more or less notes than this. While the arpeggio is playing, both the arpeggiated sequence and the pattern will restart when they reach their last step. The interplay of these two cycles can create interesting loops that reapeat less frequently than the basic arpeggio would.
+
+PATN is the default function, and ARPIE returns to it when you don't press anything for a while (you can turn this off via the preferences menum)
+
+You can also return by pressing the PATN button at any time. 
+
+##Accent Edit
+
+Accent is a feature that plays specific steps of the arpeggio sequence at full MIDI velocity, regardless of the VELO setting. This is most effective when the basic VELO velocity setting is reduced.
+
+Just like the rhythmic pattern, the accent pattern length is controlled by the PLEN setting and can loop with a different cycle length to the arpeggio sequence.
+
+To edit accent you need to do two things:
+
+- You need to select Accent as the PATN secondary function in the performance options menu
+
+- You need to press and hold PATN to access its "long press" function. You can then edit accent just like rhythmic pattern. 
+
+If you do not press any key for a while ARPIE will revert back to the normal rhythmic pattern mode.
+
+##Glide Edit
+
+Glide is a feature that plays specific steps of the arpeggio sequence at whole step length or tied to the next note, regardless of the GATE setting. This obviously works best if the basic GATE setting is reduced, so the "glide" notes contrast better.
+
+Just like the rhythmic pattern, the accent pattern length is controlled by the PLEN setting and can loop with a different cycle length to the arpeggio sequence.
+
+To edit glide you need to:
+
+- Select Glide as the PATN secondary function in the performance options menu
+
+- Select either Whole Note or Tied as the Glide mode in the performace options menu.
+
+- You need to press and hold PATN to access its "long press" function. You can then edit glide just like rhythmic pattern. 
+
+If you do not press any key for a while ARPIE will revert back to the normal rhythmic pattern mode.
+
+Note that accent, glide and rhythmic pattern are all active together - even though only either accent or glide can be edited at a time.
 
 # PLEN
 
 ## Rhythmic Pattern Length
-Press the PLEN button to view and change the length of the rhythmic pattern (from 1-16 steps). The current pattern length is indicated with a brighter LED and can be changed by pressing a data button.
 
-The pattern restarts when it reaches the point defined by PLEN. This can be different from the length of the arpeggio sequence, allowing some interesting effects as the rhythmic pattern of notes and moves across the arpeggio sequence.
+Press the PLEN button to view and change the length of the rhythmic pattern (from 1-16 steps). The current pattern length is indicated with a brighter LED and can be changed by pressing the corresponding data button.
+
+The pattern restarts when it reaches the point defined by PLEN. This also defines the cycle point of the accent and glide patterns, if you have defined them. Setting a shorter PLEN does not clear the later steps in these patterns, so you can bring them back later.
 
 <img class="wide" src="img/plen.png">
 
 ## Preferences
+
+Press and hold PLEN to access the configuration preferences
+
 <img class="wide" src="img/prefs.png">
+
+The first eight LEDs control built-in functionality for the "hack header" (the small expansion header on the ARPIE base board). This is quite a big subject and has it's own section later in the manual!
+
+- **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the PATN button to get back!
+
+- **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the PATN button to get back!
+
+- **Long Press Time** controls how long you need to hold one of ARPIE's menu buttons to access the second function of a menu button.
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50">B1</td><td width="50">B0</td><td  width="150">Long Press Time</td></tr>
+<tr><td>OFF</td><td>OFF</td><td>1.5 seconds</td></tr>
+<tr><td>OFF</td><td>ON</td><td>1 second</td></tr>
+<tr><td>ON</td><td>OFF</td><td>0.5 seconds</td></tr>
+<tr><td>ON</td><td>ON</td><td>0.25 seconds</td></tr>
+</table>
+</center>
+
+
+- **LED Profile** sets the how the 16 data LEDs are controlled. Different types of LEDs have different characteristics; some are much brighter than others and need to be driven at shorter "duty cycles" to get decent contrast between ARPIE's three different LED brightnesses (bright, medium, dim). The LED profile shown below are recommendations but your may prefer to use a different ones (don't worry, it won't damage the LEDs to use the "wrong" profile!)
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50">B1</td><td width="50">B0</td><td  width="300">Recommended for LED type</td></tr>
+<tr><td>OFF</td><td>OFF</td><td>Very high intensity (e.g. bright white)</td></tr>
+<tr><td>OFF</td><td>ON</td><td>High intensity (e.g. bright blue/green)</td></tr>
+<tr><td>ON</td><td>OFF</td><td>Medium intensity (e.g bright red)</td></tr>
+<tr><td>ON</td><td>ON</td><td>Low intensity (e.g standard red/green)</td></tr>
+</table>
+</center>
+
+
+All of these settings are saved in EEPROM. This means they are remembered when ARPIE is switched off.
 
 # MODE
 
-## Arpeggio mode
-Press and release the MODE menu button to select the basic arpeggio type or reset the pattern sequence
+## Arpeggio Mode
 
 <img class="wide" src="img/mode.png">
 
+This option allows you to select between ARPIE's basic arp modes
 
-The MODE menu maps the data entry buttons as follows...
+- **Up** mode plays notes of the chord in ascending order 
+- **Down** mode plays notes of the chord in descending order
+- **Alternate** plays notes of the chord in ascending then descending order. If the sequence spans multiple octaves, all octaves are spanned on the way "up" before returning "down". The highest note is not repeated.
+- **Random** plays the notes in a random order. 
+- **Manual** plays the notes of the chord in the order they were played on a controller keyboard.
+- **Poly Gate** plays all the notes of the chord at the same time. Thicken up with SPAN and Use with the rhythmic pattern editor to get dancey chord stabs!
 
+## Pattern Fill
 
+The far right data entry buttons can be used to reset the rhythmic pattern information.
 
-The following arpeggio types are available:
+- **Random** sets steps to a randomised combination of play and mute steps and sets PLEN to a random value.
+- **All Mute** sets all steps to mute (LED off) and sets PLEN to 16 steps
+- **All Play** sets all steps to play (LED on) and sets PLEN to 16 steps
 
-- UP - notes of the chord are sorted into ascending order 
-- DOWN - notes of the chord are sorted into descending order
-- UP-DOWN - notes of the chord are sorted into ascending, then descending order If the sequence spans multiple octaves, all octaves are spanned on the way "up" before returning "down". The highest note is not repeated.
-- RANDOM - notes placed into a random order. 
-- KEYBOARD - notes of the chord are not reordered, so will be in the order they were received by MIDI.
-
-The far right data entry buttons can be used to reset the pattern data 
-PATTERN SETUP
-RANDOM - The rhythmic pattern (PATN mode) is randomised and its length (PLEN) is set to a random number.
-CLEAR - Pattern is cleared (all rests) and set to 16 step length.
-PATTERN FILL - Pattern is filled (all notes on) and set to 16 step length.
+Accent and Glide patterns are not affected.
 
 ## Performance Options
 <img class="wide" src="img/opts.png">
@@ -356,3 +443,6 @@ Synch SOURCE setting
 Synch SEND setting
 MIDI input channel (or OMNI) setting
 MIDI output channel setting
+
+#Block Diagram
+<a target="_new" href="img/schematic.png"><img class="full" src="img/schematic.png"></a>

@@ -34,3 +34,16 @@ img.wide {
 	margin-top: 150;
 	margin-bottom: 50;
 }
+
+img.full {
+    width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
+
+table.data {
+	border: 1px
+}
