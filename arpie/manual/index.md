@@ -1,13 +1,6 @@
 ---
 layout: default
 ---
-# Introducing ARPIE
-ARPIE is a MIDI arpeggiator based around open-source software and hardware. The Arduino-based firmware allows maximum hackability and the hardware is designed for easy DIY assembly and customisation.
-
-Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation, tempo synchronisation and standalone features to enable ARPIE to be used creatively without an attached MIDI keyboard.
-
-A distinctive feature of ARPIE is the minimal control surface. While this has only simple LEDs for visual feedback, it is simple to use once you get familiar with it.
-
 # Quick Start
 
 I know you just want to get started... So connect up your MIDI keyboard to MIDI in, and a sound module to MIDI out. Switch on the ARPIE.. after a short delay (1-2 seconds) the 16 blue data display LEDs should light and the CLK LED should start blinking. 
@@ -18,7 +11,17 @@ If you don't have a keyboard handy, turn on HOLD, press INST and then press the 
 
 OK, now we've broken the tension lets move on :o)
 
-# Basic Operations
+# Introducing ARPIE
+
+## What Is It?
+
+ARPIE is a MIDI arpeggiator based around open-source software and hardware. The Arduino-based firmware allows maximum hackability and the hardware is designed for easy DIY assembly and customisation.
+
+Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation, tempo synchronisation and standalone features to enable ARPIE to be used creatively without an attached MIDI keyboard.
+
+A distinctive feature of ARPIE is the minimal control surface. While this has only simple LEDs for visual feedback, it is simple to use once you get familiar with it.
+
+## Basic Operations
 
 When you play a chord into ARPIE, it takes the notes of that chord and builds them into an "arpeggio" based on the selected arpeggio mode (MODE button). 
 
@@ -34,7 +37,7 @@ Notes in the arpeggio sequence can be selectively muted using the rhythmic patte
 
 ARPIE has loads more features up it's sleeve such as accent and glide patterns,  polyphonic chord gating and force-to-scale. Read on to find out more!
 
-# The ARPIE Hardware
+# Know Your ARPIE
 
 ## Control Surface
 
@@ -66,61 +69,73 @@ The rear panel of ARPIE is shown below:
 
 <img class="wide" src="img/arpie_left.png">
 
-- The **on/off switch**. Well, it turns the power on and off...
-
-- ..leading us to the **power led** !
+- The **on/off switch**... turns the power on and off (battery or external DC), leading us to the **power led** !
 
 - The **battery holder** accepts a 9V PP3 battery. Alkaline batteries recommended. To replace the battery you need to remove the four screws that secure the control surface and pull the control surface connector pins from their socket.
 
 ## Right Side
 
-
 <img class="wide" src="img/arpie_right.png">
+
+- The **hack header** breaks out 5V power and four spare I/O lines from ARPIE's microcontroller. It allows DIY add-ons and offers a lot of fun for those brave enough to experiment with it... more about this later!
+
+- **Diagnostic LED 1** is connected to the main ATMEGA328 microcontroller - ARPIE's "brain". When the brain is alive, this LED should blink about once per second.
+
+- **Serial Programmer Header** allows new program code to be loaded into ARPIE's brain using a suitable programmer (a 6-pin USB-TLL serial programmer). 
+
+## Front Side
+
 <img class="wide" src="img/arpie_front.png">
 
+- **Diagnostic LED 2** is connected to the PIC16F1825 microcontroller that manages the aux midi synch port. This LED should blink every second or two.
 
+- **PIC icsp header** can be used to update firmware on the PIC chip, using a PICKit2 type programmer. Usually it would be rare to need to do this, and typically there is no need to solder a header here
 
+- **Control Surface Connector** electrically joins the control surface to the main board. When inserting the connector in the socket be careful to make sure all the pins are aligned correctly.
 
-The minimal requirements to make music with ARPIE are 
+#Using Arpie
 
-- A synthesizer or other sound module connected to MIDI OUT
+## General Points
 
-- A power source. This can be an internally mounted PP3 battery or a DC supply of between 9 and 24V connected to the rear 2.1mm socket. ARPIE accepts both center positive (most supplies) and center negative (e.g. BOSS) polarity power plugs. The socket automatically disconnects the battery when a plug is inserted.
+- When you press one of the twelve main menu buttons, the function of the sixteen data entry buttons is changed according to the selected function.
 
-- Additionally, you can connect a MIDI controller to MIDI IN. Typically a piano type keyboard is used to play chords which provide input for ARPIEs arpeggiation engine however ARPIE can also be initialised with random or fixed chords without an external keyboard.
+- Most menu buttons have dual functions: press and release the button to access the primary function, press and hold the button for a few seconds to select the secondary function.
 
-- Optionally a MIDI clock source can be connected to MIDI SYNCH IN. For example you might want ARPIE to synchronise as a slave to a drum machine which can output a MIDI beat clock. 
+- To exit from a secondary menu function, press the same (or a different) menu button. There is no need to exit from primary menu function (you can just press another button)
 
-- ARPIE can also slave to a MIDI beat clock on MIDI IN, though often the note controller and master clock sources will often be separate devices, which is where the external synch input is useful.
+- By default ARPIE returns to the pattern edit mode (PATN function) after a few seconds of inactivity. You can turn this off if you want.
 
-- The main power switch is on the side of the device, close to the DC socket. Slide the switch toward the back of the unit to switch on power. The power LED (close to the switch) lights when power is on.
+- Sections in the manual describe how the 16 data buttons are assigned in each mode. A yellow colour is used for primary menu function and a purple colour for secondary.
 
-- The "hack-header" makes 5V power and four general purpose I/O lines available for add-on projects such as control pots and pulse clock input and outputs. 
+## Keypad Buttons
 
+Click a menu button in the table below for more information on the menu functions available via that button.
 
-#The Control Surface 
-
-The top row contains three activity LEDs:
-- The RX LED flickers when MIDI information is received via the input port
-- The CLK LED - flickers at the start of each beat
-- Then TX LED flickers when MIDI information being sent via the output port
-
-The function of the Data Display LEDs and Data Entry Buttons depends on which of the function buttons was last pressed. Each function assigns specific meanings to each of the LEDs and Data Entry buttons. If no buttons are pressed for a few seconds the display function returns to Pattern Mode (PATN)
-
-The HOLD button toggles the chord hold function on and off. An indicator LED beside the HOLD button shows when the chord hold function is in effect. This function means that a chord you press on a controller keyboard will continue to play after you release the keys. The HOLD feature also has some more subtle effects regarding sequencing and step timing, which are listed later.
-
-#Functions 
-
-## By Location
-<table width="100%">
-<tr><td width="33%">Power</td><td width="33%">MIDI I/O</td><td width="33%">Reset</td></tr>
-<tr><td>RX</td><td>CLK</td><td>TX</td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td>PATN</td><td>PLEN</td><td>MODE</td></tr>
-<tr><td>SHFT</td><td>SPAN</td><td>RATE</td></tr>
-<tr><td>VELO</td><td>GATE</td><td>INST</td></tr>
-<tr><td>SYNC</td><td>CHAN</td><td>TRAN</td></tr>
-<tr><td>HOLD</td><td></td><td>Hack Header</td></tr>
+<table style="border:1px solid black; font-size:24pt; font-weight:bold" width="100%">
+<tr><td width="33%"></td><td width="33%"></td><td width="33%"></td></tr>
+<tr>
+<td>*&nbsp;<a href="#patn">PATN</a></td>
+<td>*&nbsp;<a href="#plen">PLEN</a></td>
+<td>*&nbsp;<a href="#mode">MODE</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#shft">SHFT</a></td>
+<td>*&nbsp;<a href="#span">SPAN</a></td>
+<td>*&nbsp;<a href="#rate">RATE</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#velo">VELO</a></td>
+<td>*&nbsp;<a href="#gate">GATE</a></td>
+<td>*&nbsp;<a href="#inst">INST</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#sync">SYNC</a></td>
+<td>*&nbsp;<a href="#chan">CHAN</a></td>
+<td>*&nbsp;<a href="#tran">TRAN</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#hold">HOLD</a></td>
+<td></td><td></td></tr>
 </table>
 
 ## By Description
@@ -148,7 +163,7 @@ The HOLD button toggles the chord hold function on and off. An indicator LED bes
 
 
 # PATN 
-
+<a name="patn">
 ##Rhythmic Pattern Edit
 
 ARPIE's rhythmic pattern acts allows you to mute or play selected steps of the arpeggiated sequence. Press the data buttons to toggle the LEDs on and off. When the LED is on, the corresponding note of the arpeggio plays. When the LED is off the corresponding note is muted. 
@@ -194,7 +209,7 @@ If you do not press any key for a while ARPIE will revert back to the normal rhy
 Note that accent, glide and rhythmic pattern are all active together - even though only either accent or glide can be edited at a time.
 
 # PLEN
-
+<a name="plen">
 ## Rhythmic Pattern Length
 
 Press the PLEN button to view and change the length of the rhythmic pattern (from 1-16 steps). The current pattern length is indicated with a brighter LED and can be changed by pressing the corresponding data button.
@@ -244,7 +259,7 @@ The first eight LEDs control built-in functionality for the "hack header" (the s
 All of these settings are saved in EEPROM. This means they are remembered when ARPIE is switched off.
 
 # MODE
-
+<a name="mode">
 ## Arpeggio Mode
 
 <img class="wide" src="img/mode.png">
@@ -272,7 +287,7 @@ Accent and Glide patterns are not affected.
 <img class="wide" src="img/opts.png">
 
 #SHFT 
-
+<a name="shft">
 ## Octave shift
 <img class="wide" src="img/shft.png">
 Transposes the arpeggiated sequence by whole octaves. 
@@ -282,7 +297,7 @@ The default ?o shift?position is indicated by a slightly brighter LED.
 <img class="wide" src="img/fscale.png">
 
 # SPAN 
-
+<a name="span">
 ## Octave Span
 <img class="wide" src="img/span.png">
 Determine the number of octaves the arpeggiated sequence will be extended over. 
@@ -291,7 +306,7 @@ Determine the number of octaves the arpeggiated sequence will be extended over.
 <img class="wide" src="img/froot.png">
 
 #RATE
-
+<a name="rate">
 ## Time Division
 Determines the length of notes in the arpeggiated sequence, as a fraction of a beat (It does not alter the tempo/BPM)
 <img class="wide" src="img/rate.png">
@@ -310,7 +325,7 @@ T triplet time (two thirds normal note duration)
 Whole time divisions (Without suffix) are shown on the display with brighter LEDs to assist interpreting the display.
 
 #VELO
-
+<a name="velo">
 ## MIDI Velocity Override
 Controls the MIDI velocity of the notes output by the sequencer. 
 <img class="wide" src="img/velo.png">
@@ -322,19 +337,19 @@ Adjustable velocity mode allows you to override the velocity of all arpeggiated 
 Original velocity mode plays each arpeggiated note using the velocity of the note as it was played in the chord on the input device. This mode can be identified by the right-most LED being on and all the others off. In this mode the data entry buttons have no function.
 
 #GATE
-
+<a name="gate">
 ## MIDI Note Gate Length
 Controls the gate length of the notes output by the sequencer - as proportion of the current note length. The highest setting means that one note is "tied" to the next (The note is not stopped until the next note is started, with the MIDI note off message being sent after the next MIDI note on)
 <img class="wide" src="img/gate.png">
 
 #INST
-
+<a name="inst">
 ## Arpeggiator Sequence Insert
 Extends the length of the arp sequence by repeating notes from the chord according to specific modes as defined below. This screen also has some options for inserting chords without a keyboard for demo purposes. The "Hold" switch must be enabled for this to work.
 <img class="wide" src="img/inst.png">
 
 #SYNC
-
+<a name="sync">
 ## Clock Source And Tempo Set
 This screen controls the arp MIDI SYNCH mode and internal metronome (BPM). When ARPIE is running on its internal clock, the data display LED's indicate the approximate BPM. Pressing one of the nine BPM buttons sets the tempo to a specific value.  
 <img class="wide" src="img/sync.png">
@@ -353,6 +368,7 @@ The internally generated BPM is approximate (but good enough for  most stuff). H
 <img class="wide" src="img/midi.png">
 
 #CHAN
+<a name="chan">
 
 ## MIDI Output Channel
 
@@ -365,52 +381,57 @@ OMNI mode is indicated by all the Data Display LEDs showing brightly. Pressing a
 <img class="wide" src="img/ichan.png">
 
 #TRAN
-
+<a name="tran">
 ## Chromatic Transpose
 Transpose the MIDI output. Buttons represent -3. -2, -1, 0, +1, +2 through to +12 semitones. The default (no shift) position is indicated with a brighter LED.
 <img class="wide" src="img/trans.png">
 
-#More About HOLD
-Here is everything you wanted to know about the hold button. And some more.
-HOLD  is OFF
-One or more keys are pressed and held
-Arpeggiation starts from beginning of pattern and plays immediately. Beat time is reset
+#HOLD
+<a name="hold">
 
-One or more keys are released from a chord but at least one key remains held
-Arpeggio is rebuilt but position in pattern and timing of next beat are unaffected
+## Normal Operation
 
-One or more additional keys are pressed while a chord is held
+Before we look at the HOLD function, lets look at how things happen when when the HOLD function is switched off:
 
+- ARPIE does not produce any output unless notes are currently active on the MIDI input (i.e. held down on the controller keyboard)
 
-Final key is released
-Arpeggiation stops
+- When the first note of a chord is played on the input, ARPIE starts to play immediately (there is no delay until the next beat). The rhythmic pattern also restarts from the first step.
 
-HOLD pressed while keys are held
-HOLD is ON using the current chord. Pattern position and next beat time are unaffected
-HOLD 
-is ON
-One or more keys are initially pressed 
-Arpeggiation starts from beginning of pattern. Next beat timing is unaffected so the first step plays according to the current beat time
+- Notes in a chord can be released, causing the arpeggio sequence to change. As long as at least one note remains held, playback will continue without interruption.
 
-Some keys are released from the chord
-No effect. The released keys remain in the arpeggio
+- When the last key of the chord is released, playback stops.
 
-Additional keys are pressed while at least one key of the  chord remains held
-Arpeggio is rebuilt but position in pattern and timing of next beat are unaffected
+## Hold Function
 
-All keys are released
-No effect
+The HOLD function can be activated by pressing the HOLD button, lighting the HOLD LED. When the HOLD function is enabled:
 
-One or more keys pressed after releasing all keys of the previous chord
-Arpeggio is replaced but position in pattern and timing of next beat are unaffected
+- Playback of the arpeggio will continue after the last note of the chord is released
 
-HOLD pressed while keys remain held
-All notes removed from the arpeggio except any that are still physically pressed on keyboard. HOLD is OFF
+- When the first key of a new chord is pressed, the held chord is cleared, but playback continues without any change to beat timing or position within the rhythmic pattern.
 
-HOLD pressed while no keys are held
-Arpeggiation stops. HOLD is OFF
+- Stop playback by turning HOLD off by pressing the button again.
 
+HOLD can be activated or deactivated while notes are already held.
 
+## Hold Button Secondary Function
+
+When the HOLD button is held for a few seconds, the HOLD LED starts to blink, indicating that the hold button secondary function is active. 
+
+There are two functions available and you can select between them from the performance options menu (long press <a href="mode">MODE</a>). These are described below.
+
+## MIDI Lock function
+
+This function can be used to "lock" the arpeggiator engine and start passing MIDI notes from input to output. This allows you to hold an arpeggio and then play over it. 
+
+MIDI lock can also be useful if you chain together multiple ARPIEs and want to play into a single one at a time while the others are playing sequences in hold mode. 
+
+Exit MIDI lock by pressing HOLD again. ARPIE will return to the previous hold mode.
+
+## MIDI Transpose function
+
+This function works a bit like MIDI lock, except that instead of passing input notes through to the output, a held arpeggio is transposed according to the interval between the note you play on the input and the lowest note in the arpeggiated chord.
+
+This function is designed to work with the HOLD feature. You can have great fun when using this with force-to-scale options.
 
 #More about synch
 SOURCE
@@ -476,5 +497,5 @@ Synch SEND setting
 MIDI input channel (or OMNI) setting
 MIDI output channel setting
 
-#Block Diagram
+#Clock/Message Routing 
 <a target="_new" href="img/schematic.png"><img class="full" src="img/schematic.png"></a>
