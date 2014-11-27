@@ -2,15 +2,14 @@
 layout: default
 ---
 # Introducing ARPIE
-ARPIE is a monophonic MIDI arpeggiator based around open-source software and hardware. The Arduino-based firmware enables simple code customisation and repurposing by users. The hardware is designed for easy DIY assembly and customisation.
+ARPIE is a MIDI arpeggiator based around open-source software and hardware. The Arduino-based firmware allows maximum hackability and the hardware is designed for easy DIY assembly and customisation.
 
-Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation and tempo synchronisation features, together with features to enable ARPIE to be used creatively without an attached MIDI keyboard.
+Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation, tempo synchronisation and standalone features to enable ARPIE to be used creatively without an attached MIDI keyboard.
 
 A distinctive feature of ARPIE is the minimal control surface. While this has only simple LEDs for visual feedback, it is simple to use once you get familiar with it.
-This manual is designed to provide a handy guide to using supplied ARPIE firmware and standard hardware. However it is not the full set of documentation available.
-For information on troubleshooting, building, customising etc., as well as firmware updates, source code and hardware files please see https://github.com/hotchk155/arpie 
 
 # Quick Start
+
 I know you just want to get started... So connect up your MIDI keyboard to MIDI in, and a sound module to MIDI out. Switch on the ARPIE.. after a short delay (1-2 seconds) the 16 blue data display LEDs should light and the CLK LED should start blinking. 
 
 Hold down a chord on the MIDI keyboard. The RX LED should blink as notes are received, and the TX LED should blink rapidly as notes are sent. Press the HOLD button once, the HOLD LED should illuminate. Now when you play a chord, the Arpeggiator continues to play after you have released the keys.
@@ -21,11 +20,11 @@ OK, now we've broken the tension lets move on :o)
 
 # Basic Operations
 
-When you play a chord into ARPIE, it takes the notes of that chord and forms them into a sequence of notes based on the selected arpeggio mode (MODE). 
+When you play a chord into ARPIE, it takes the notes of that chord and builds them into an "arpeggio" based on the selected arpeggio mode (MODE button). 
 
-The sequence is extended over multiple octaves, based on the selected octave span (SPAN), and transposed up or down by whole numbers of octaves selected by the octave shift (SHFT) setting, and by a number of notes based on the note transpose (TRAN) setting.
+The argeggio is extended over multiple octaves, based on the selected octave span (SPAN), and transposed up or down by whole numbers of octaves selected by the octave shift (SHFT) setting, and by a number of notes based on the note transpose (TRAN) setting.
 
-This sequence of notes is then extended based on the selected note insertion (INST) mode, for example by inserting the lowest note of the sequence between all other notes.
+This argeggio is then extended based on the selected note insertion (INST) mode, for example by inserting the lowest note of the sequence between all other notes.
 
 ARPIE plays the arpeggio sequence through the MIDI out port at a rate based on the tempo and synch settings (SYNCH) and the playback rate (RATE) setting. 
 
@@ -33,20 +32,53 @@ The output channel, volume and duration of the note are controlled by the MIDI c
 
 Notes in the arpeggio sequence can be selectively muted using the rhythmic pattern (PATN) which loops, independently of the arpeggio sequence, at a selectable rhythmic pattern length (PLEN). The interplay between the arpeggio and the pattern can create interesting variations and grooves.
 
-The notes of the arpeggio can be forced into a musical scale defined by a scale root note (Long press SHFT) and a musical mode (Long press SPAN) by sharpening or flattening notes which fall outside the scale. This is especially useful when transposing arpeggios.
+ARPIE has loads more features up it's sleeve such as accent and glide patterns,  polyphonic chord gating and force-to-scale. Read on to find out more!
 
-ARPIE has a number of fun other features up it's sleeve such as accent and glide patterns (Long press PATN) and chord gating (MODE). Read on to find out more.
+# The ARPIE Hardware
 
+## Control Surface
 
 <img class="wide" src="img/arpie_face.png">
+
+- Twelve **menu buttons** select different functions. Most buttons have different functions depending on whether you press and release the button, or hold it down for a number of seconds.
+
+- Sixteen **data leds** and adjacent **data buttons** have functions that depend on the selected menu function. These are described in the following seconds.
+
+- An additional **hold button** at the lower left controls how ARPIE responds when you release all keys on the controller keyboard. The button has additional functions that can be accessed by holding it for several seconds. The **hold led** indicates the selected function (off, steady or blinking)
+
+## Rear Panel Connections
+
+The rear panel of ARPIE is shown below:
+
 <img class="wide" src="img/arpie_back.png">
+
+- The **power** connector accepts a 2.1mm barrel connector of a 9-12V DC supply. The supply can be either polarity (centre positive or centre negative). When a plug is inserted, the internal battery is disconnected.
+
+- The **midi in** connector accepts MIDI input from a standard 5-pin DIN connector, generally from a controller keyboard. This input is opto-isolated.
+
+- The **aux midi synch** connector accepts MIDI clock messages (only) via a standard 5-pin DIN connector. This input can be used to synchronise ARPIE to a drum machine etc. when the MIDI in connector is in use. This input is opto-isolated.
+
+- The **midi out** connector accepts a standard 5-pin DIN connector and is generally connected to a synth or sound module.
+
+- The **reset button** performs a hard reset of ARPIE, equivalent to a power off/on cycle. This is typically most useful when loading new firmware.
+
+## Left Side
+
 <img class="wide" src="img/arpie_left.png">
+
+- The **on/off switch**. Well, it turns the power on and off...
+
+- ..leading us to the **power led** !
+
+- The **battery holder** accepts a 9V PP3 battery. Alkaline batteries recommended. To replace the battery you need to remove the four screws that secure the control surface and pull the control surface connector pins from their socket.
+
+## Right Side
+
+
 <img class="wide" src="img/arpie_right.png">
 <img class="wide" src="img/arpie_front.png">
 
 
-# Connections And Power
-The rear panel of ARPIE is shown below:
 
 
 The minimal requirements to make music with ARPIE are 
