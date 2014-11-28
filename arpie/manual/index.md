@@ -164,57 +164,51 @@ Click a menu button in the table below for more information on the menu function
 
 # PATN 
 <a name="patn">
-##Rhythmic Pattern Edit
 
-ARPIE's rhythmic pattern acts allows you to mute or play selected steps of the arpeggiated sequence. Press the data buttons to toggle the LEDs on and off. When the LED is on, the corresponding note of the arpeggio plays. When the LED is off the corresponding note is muted. 
+##Rhythmic Pattern 
+<img class="wide" src="img/patn.png">
 
-PATN allows you to groove up your arpeggios, rather than having to have a note at every step. This can be especially effective with the tied GATE mode.
+ARPIE's **rhythmic pattern** is a sequence of up to sixteen steps that can each be set to **play** or **mute**. This pattern loops alongside the arpeggio and plays an arpeggio note or rests for a step, adding a rhythmic groove to the argeggio.
 
-The pattern has up to 16 steps (you can use PLEN to select the pattern length), but the arpeggiate sequence may have more or less notes than this. While the arpeggio is playing, both the arpeggiated sequence and the pattern will restart when they reach their last step. The interplay of these two cycles can create interesting loops that reapeat less frequently than the basic arpeggio would.
+Depending on the arpeggiator settings and the <a href="#plen">PLEN</a> setting, rhythmic pattern can be longer or shorter than the arpeggio seqeuence, resulting in interesting rhythmic effects and interaction as the two loop at different points.
 
-PATN is the default function, and ARPIE returns to it when you don't press anything for a while (you can turn this off via the preferences menum)
+To edit the rhythmic pattern, press PLEN. Press the data buttons to toggle the LEDs on and off. When the LED is on, the corresponding note of the arpeggio plays. When the LED is off a rest is inserted. 
 
-You can also return by pressing the PATN button at any time. 
+The **skip on rest** option in in <a href="#mode2">performance options<a> allows you to decide whether to mute a given arpeggio step and skip over it, or just to insert a rest without missing any notes from the arpeggio sequence.
 
-##Accent Edit
+PATN allows you to groove up your arpeggio with rests, rather than having to play a note at every step. This can be especially effective with the tied GATE mode.
 
-Accent is a feature that plays specific steps of the arpeggio sequence at full MIDI velocity, regardless of the VELO setting. This is most effective when the basic VELO velocity setting is reduced.
+PATN is the default function, and ARPIE returns to it when you don't press anything for a while (you can turn this off via the preferences menum). You can also return by pressing the PATN button at any time. 
 
-Just like the rhythmic pattern, the accent pattern length is controlled by the PLEN setting and can loop with a different cycle length to the arpeggio sequence.
+<a name="patn2">
 
-To edit accent you need to do two things:
+##Accent And Glide
+<img class="wide" src="img/accgld.png">
 
-- You need to select Accent as the PATN secondary function in the performance options menu
+If you hold the PATN button for a few seconds, you will go to the **accent / glide edit** menu (usually accent is the default, but you can switch over to glide using the <a href="#mode2">performance options<a> menu to change PATN secondary function)
 
-- You need to press and hold PATN to access its "long press" function. You can then edit accent just like rhythmic pattern. 
+**Accent** is a feature that plays specific steps of the arpeggio sequence at full MIDI velocity, regardless of the VELO setting. This is most effective when the basic VELO velocity setting is reduced.
 
-If you do not press any key for a while ARPIE will revert back to the normal rhythmic pattern mode.
+**Glide** is a feature that plays specific steps of the arpeggio sequence at whole step length or tied to the next note, regardless of the GATE setting. This obviously works best if the basic GATE setting is reduced, so the "glide" notes contrast better.
 
-##Glide Edit
+You can select between Glide's two different modes from the **glide tie** option in the <a href="#mode2">performance options<a> menu.
 
-Glide is a feature that plays specific steps of the arpeggio sequence at whole step length or tied to the next note, regardless of the GATE setting. This obviously works best if the basic GATE setting is reduced, so the "glide" notes contrast better.
+Just like the rhythmic pattern, the accent pattern length is controlled by the <a href="#plen">PLEN</a> setting and can loop with a different cycle length to the arpeggio sequence.
 
-Just like the rhythmic pattern, the accent pattern length is controlled by the PLEN setting and can loop with a different cycle length to the arpeggio sequence.
+If you do not press any key for a while ARPIE will revert back to the normal PATN mode.
 
-To edit glide you need to:
+Note that accent and glide (and also the rhythmic pattern) are all active together - even though only either accent or glide can be edited at a time.
 
-- Select Glide as the PATN secondary function in the performance options menu
 
-- Select either Whole Note or Tied as the Glide mode in the performace options menu.
-
-- You need to press and hold PATN to access its "long press" function. You can then edit glide just like rhythmic pattern. 
-
-If you do not press any key for a while ARPIE will revert back to the normal rhythmic pattern mode.
-
-Note that accent, glide and rhythmic pattern are all active together - even though only either accent or glide can be edited at a time.
 
 # PLEN
 <a name="plen">
+
 ## Rhythmic Pattern Length
 
-Press the PLEN button to view and change the length of the rhythmic pattern (from 1-16 steps). The current pattern length is indicated with a brighter LED and can be changed by pressing the corresponding data button.
+Press the PLEN button to view and change the loop length of the rhythmic pattern (from 1-16 steps). The current pattern length is indicated with a brighter LED and can be changed by pressing the corresponding data button.
 
-The pattern restarts when it reaches the point defined by PLEN. This also defines the cycle point of the accent and glide patterns, if you have defined them. Setting a shorter PLEN does not clear the later steps in these patterns, so you can bring them back later.
+The rhythmic pattern (and accent/glide) loops for the number of steps defined by PLEN. Setting a shorter PLEN does not clear the later steps in these patterns, so you can bring them back later.
 
 <img class="wide" src="img/plen.png">
 
@@ -224,11 +218,9 @@ Press and hold PLEN to access the configuration preferences
 
 <img class="wide" src="img/prefs.png">
 
-The first eight LEDs control built-in functionality for the "hack header" (the small expansion header on the ARPIE base board). This is quite a big subject and has it's own section later in the manual!
+The first eight LEDs control built-in functionality for the <a href="#hh">hack header</a> (the small expansion header on the ARPIE base board). This is quite a big subject and has it's own section later in the manual!
 
-- **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the PATN button to get back!
-
-- **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the PATN button to get back!
+- **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the <a href="#patn">PATN</a> button to get back!
 
 - **Long Press Time** controls how long you need to hold one of ARPIE's menu buttons to access the second function of a menu button.
 
@@ -241,7 +233,6 @@ The first eight LEDs control built-in functionality for the "hack header" (the s
 <tr><td>ON</td><td>ON</td><td>0.25 seconds</td></tr>
 </table>
 </center>
-
 
 - **LED Profile** sets the how the 16 data LEDs are controlled. Different types of LEDs have different characteristics; some are much brighter than others and need to be driven at shorter "duty cycles" to get decent contrast between ARPIE's three different LED brightnesses (bright, medium, dim). The LED profile shown below are recommendations but your may prefer to use a different ones (don't worry, it won't damage the LEDs to use the "wrong" profile!)
 
@@ -260,112 +251,220 @@ All of these settings are saved in EEPROM. This means they are remembered when A
 
 # MODE
 <a name="mode">
+
 ## Arpeggio Mode
 
 <img class="wide" src="img/mode.png">
 
-This option allows you to select between ARPIE's basic arp modes
+This option allows you to select between ARPIE's basic arpeggiation modes:
 
 - **Up** mode plays notes of the chord in ascending order 
+
 - **Down** mode plays notes of the chord in descending order
+
 - **Alternate** plays notes of the chord in ascending then descending order. If the sequence spans multiple octaves, all octaves are spanned on the way "up" before returning "down". The highest note is not repeated.
-- **Random** plays the notes in a random order. 
-- **Manual** plays the notes of the chord in the order they were played on a controller keyboard.
-- **Poly Gate** plays all the notes of the chord at the same time. Thicken up with SPAN and Use with the rhythmic pattern editor to get dancey chord stabs!
+
+- **Random** plays the notes of a chord in a random order. 
+
+- **Manual** plays the notes of the chord in the order they were received on the MIDI input.
+
+- **Poly Gate** plays all the notes of the chord at the same time. Thicken up with <a href="#span">SPAN</a> and add some groove with <a href="#patn">PATN</a> to get dancey chord stabs!
 
 ## Pattern Fill
 
-The far right data entry buttons can be used to reset the rhythmic pattern information.
+The far right data entry buttons can be used to reset the <a href="#patn">PATN</a> and <a href="#plen">PLEN</a> information.
 
 - **Random** sets steps to a randomised combination of play and mute steps and sets PLEN to a random value.
+
 - **All Mute** sets all steps to mute (LED off) and sets PLEN to 16 steps
+
 - **All Play** sets all steps to play (LED on) and sets PLEN to 16 steps
 
 Accent and Glide patterns are not affected.
 
+<a name="mode2">
+
 ## Performance Options
+
 <img class="wide" src="img/opts.png">
+
+This menu contains some options that affect other ARPIE functions, changing ARPIE's musical performance.
+
+- **Hold Fn2** controls the long-press function of the <a href="#hold">HOLD</a> button. When this option in ON, the second function of HOLD is **MIDI lock**. When the option is OFF the second function is **transpose by MIDI input**. See <a href="#hold2">here</a> for more information.
+
+- **Skip Reset** controls what happens when there is a rest (LED off) at the current position in the <a href="#patn">PATN<a> sequence. If the option is OFF, the arpeggiator note at that position is skipped over and does not play. If the option is ON, the arpeggiator inserts a rest and plays the note at the next step.
+
+- **Glide Tie** controls the operation of the <a href="#patn2">glide</a> function. If the option is OFF, the arpeggiator note coinciding with a glide point is played for one whole step. If the option is ON, then the note is "tied" to the next playing note.
+
+- **Patn Fn2**  controls the long-press function of the <a href="#patn2">PATN</a> button. When this option in OFF, the second function of PATN is **accent**. When the option is ON the function is **glide**
 
 #SHFT 
 <a name="shft">
+
 ## Octave shift
 <img class="wide" src="img/shft.png">
-Transposes the arpeggiated sequence by whole octaves. 
-The default ?o shift?position is indicated by a slightly brighter LED.
 
-## Force To Scale: Type
+This function transposes the arpeggiated sequence up or down by up to three whole octaves. The default, no shift, position is indicated by a slightly brighter LED.
+
+<a name="shft2">
+
+## Force To Scale: Mode
+
 <img class="wide" src="img/fscale.png">
+
+The force to scale function makes sure that all notes output from ARPIE fits within a specific musical scale (or "key"). This can sound especially good when transposing held arpeggios, as the note intervals within the chord change to keep it in key.
+
+A musical key is made up of a root note (for example "C") and a set of note intervals which together give us a scale (e.g. "C minor"). 
+
+These sets of note intervals have wierd names derived from ancient Greek tribes! Don't let that put you off though - they are just the sequences of note intervals you get when you play along the white notes of a piano starting at different points
+
+For example if you play white notes C through C you play a Major scale, which happens to be the same as the "Ionian" mode. If you play white notes A through A you are playing a Minor scale, or "Aeolian" mode. The other modes are just the sets of intervals you get by playing sequences of white notes with different start points... simple! but each mode has a different "feel" and we can have fun playing with them!
+
+The **chromatic** scale includes all notes. Selecting this option turns off force-to-scale. This is the default setting.
+
+As well as changing  musical mode, force-to-scale lets us select the <a href="#span2">root note</a> (we need both a musical mode and a starting note to define a scale) and control how out of scale notes are corrected.
+
+## Force To Scale: Note Correction
+
+If you want to make an omelette you need to break a few eggs - and if you want to force a sequence of notes into a musical scale some of them might not fit!
+
+The options ot the right of the SHFT long press menu let us decide what to do with these outliers. Each option has a different musical feel, so have a play!
+
+- **Skip** out-of-scale notes are simply ignored and the next valid note is played. There is no rest introduced.
+
+- **Mute** out-of-scale notes are not played, but a rest of a single step is added instead.
+
+- **Flatten** out-of-scale notes are played, flattened by 1 semitone to bring them back into key.
+
+- **Sharpen** out-of-scale notes are played, sharpened by 1 semitone to bring them back into key.
+
+- **Alternate** out-of-scale notes are alternately sharpened and flattened. Each time the sequence is rebuilt, the action taken with the first corrected note toggles. You can hear the effect of this by pressing the Alternate button again when you have a sequence which is forced to scale.
+
 
 # SPAN 
 <a name="span">
+
 ## Octave Span
 <img class="wide" src="img/span.png">
-Determine the number of octaves the arpeggiated sequence will be extended over. 
+
+This option determines the number of octaves the arpeggiated sequence will be extended over. 
+
+<a name="span2">
 
 ## Force To Scale: Root Note
+
 <img class="wide" src="img/froot.png">
+
+This option works with <a href="shft2">force to scale type</a> to set the root note of the musical scale to which notes are being forced.
 
 #RATE
 <a name="rate">
+
 ## Time Division
-Determines the length of notes in the arpeggiated sequence, as a fraction of a beat (It does not alter the tempo/BPM)
+
+This option sets the length of notes in the arpeggiated sequence, as a fraction of a beat (It does not alter the tempo/BPM)
+
 <img class="wide" src="img/rate.png">
 
-The above labels can be interpreted as follows:
-NOTE TIME DIVISION
-1 full note
-2 half note
-4 quarter note (1 beat)
-8 eighth notec
-16 sixteenth note 
-32 thirty-second note
-SUFFIX
-D dotted time (one and a half times normal note duration)
-T triplet time (two thirds normal note duration)
-Whole time divisions (Without suffix) are shown on the display with brighter LEDs to assist interpreting the display.
+- **(dot)** or **(d)** represent "dotted time" (one and a half times normal note duration)
+
+- **(tr)** represents triplet time (two thirds normal note duration)
+
+The default is sixteenth notes (1 whole beat in 4/4 time)
 
 #VELO
 <a name="velo">
-## MIDI Velocity Override
-Controls the MIDI velocity of the notes output by the sequencer. 
+
+## MIDI Velocity
+
+This menu controls the MIDI velocity of the notes output by ARPIE. There are two velocity modes and you can toggle between them by pressing and holding the VELO button.
+
+## Select MIDI Velocity
+
 <img class="wide" src="img/velo.png">
 
-There are two velocity modes and you can toggle between them by pressing and holding the VELO button.
-Adjustable velocity mode allows you to override the velocity of all arpeggiated notes to one of 16 levels (including muted and full velocity) as indicated below
+This mode allows you to override the velocity of all arpeggiated notes to one of 16 levels (including muted and full velocity) as indicated above
 
 ## Original MIDI Velocity
-Original velocity mode plays each arpeggiated note using the velocity of the note as it was played in the chord on the input device. This mode can be identified by the right-most LED being on and all the others off. In this mode the data entry buttons have no function.
+
+Original velocity mode plays each arpeggiated note using the velocity of the note as it was played in the chord on the input device. This mode can be identified by the right-most LED being on and all the others off. 
+
 
 #GATE
 <a name="gate">
+
 ## MIDI Note Gate Length
-Controls the gate length of the notes output by the sequencer - as proportion of the current note length. The highest setting means that one note is "tied" to the next (The note is not stopped until the next note is started, with the MIDI note off message being sent after the next MIDI note on)
+
 <img class="wide" src="img/gate.png">
+
+Controls the gate length of the notes output by the sequencer as proportion of the current note length. 
+
+The highest setting means that one note is "tied" to the next (The note is not stopped until the next note is started, with the MIDI note off message being sent after the next MIDI note on)
+
+The GATE button has no long-press function
 
 #INST
 <a name="inst">
-## Arpeggiator Sequence Insert
-Extends the length of the arp sequence by repeating notes from the chord according to specific modes as defined below. This screen also has some options for inserting chords without a keyboard for demo purposes. The "Hold" switch must be enabled for this to work.
+
 <img class="wide" src="img/inst.png">
+
+## Arp Note Insert
+
+Extends the length of the arpeggiated sequence by repeating notes from the chord according to specific modes:
+
+- **None** just plays the arpeggio sequence without adding any extra notes to it. This is the default.
+ 
+- **Highest** inserts the highest note of the arpeggio sequence in between all the other notes
+
+- **Lowest** inserts the lowest note of the arpeggio sequence in between all the other notes
+
+- **3F, 1B** staggers the arpeggio sequence and introduces repetation of notes by playing forward three places then moving back one place and continuing.
+
+- **4F, 2B** staggers the arpeggio sequence by moving forward four places then back two.
+
+## Chord Insert
+
+To the right of the screen are some options for inserting chords without a keyboard. **The HOLD function must be on for this to work!**
+
+**Random** creates a chord from randomised notes. The other buttons insert minor, minor seventh, major seventh, seventh. minor, major chords. The root note is C but you can use the TRAN function to change this.
+
+
 
 #SYNC
 <a name="sync">
-## Clock Source And Tempo Set
-This screen controls the arp MIDI SYNCH mode and internal metronome (BPM). When ARPIE is running on its internal clock, the data display LED's indicate the approximate BPM. Pressing one of the nine BPM buttons sets the tempo to a specific value.  
+
+## Clock Source And BPM
 <img class="wide" src="img/sync.png">
-The SOURCE button controls the SYNCH clock source:
-ON Internal clock source 
-OFF External clock source via the MIDI IN or SYNCH IN sockets
-The SEND button controls whether ARPIE sends a MIDI beat clock to the MIDI OUT port. This button can also be used to start/stop and synchronise MIDI slave devices. More late rin the manual
-ON Send MIDI synch messages out of MIDI OUT port
-OFF Don't send MIDI synch messages 
-The BPM+ and BPM- buttons can be used to adjust the BPM by steps of 1. 
-Pressing the TAP button two or more times allows you to set the tempo interactively. 
-BPM defaults to 120 when ARPIE is switched on.
+
+This screen controls the arp MIDI SYNCH mode and internal metronome (BPM). When ARPIE is running on its internal clock, the data display LED's indicate the approximate BPM. 
+
+- The **Source** button controls the clock source. When the LED in ON, ARPIE runs off its own internal clock source. When the LED is OFF, ARPIE runs on external MIDI clock  via the MIDI IN or AUX SYNCH IN sockets
+
+- The **Send** button controls whether ARPIE sends a MIDI beat clock to the MIDI OUT port. The clock is sent when the option is ON. When this option is switched from OFF to ON, ARPIE also sends a "start" command to the OUT port, which can be used to synchronise MIDI slave devices. 
+
+- When ARPIE is running from it's internal clock source, the  **BPM** buttons can be used to set the tempo to a specific value. BPM defaults to 120 when ARPIE is switched on.
+
+- Pressing the **Tap Input** button two or more times allows you to set the tempo interactively. 
+
+- The **Slower** and **Faster** buttons can be used to adjust the BPM by steps of 1. 
+
 The internally generated BPM is approximate (but good enough for  most stuff). However, an external clock source is recommended if a precise BPM is needed.
 
-## MIDI Slave Synch And Thru Options
+## MIDI Routing Options
+
 <img class="wide" src="img/midi.png">
+
+These options give you control over how ARPIE internally routes MIDI information.
+
+- **Forward Channel Message** can be switched ON so that non-note channel messages (CC change, pitch bend etc) which are received on ARPIE's configured input channel, can be sent through to ARPIE's output channel. This lets these performance parameters be sent from your controller keyboard to your synth.
+
+- **Thru Note** - If you have ARPIE listening on a specific input channel (not omni mode) then this option controls whether note messages for other channels will be passed directly through to ARPIEs MIDI output.
+
+- **Thru Channel Message** - This option controls whether non-note channel messages (CC, bend etc) for other channels will be passed  through to ARPIEs MIDI output.
+
+- **IN Clock** - determines whether ARPIE will listen for external MIDI clock ticks on the MIDI IN port. Source must also be set to external for these to be used.
+
+- **SYNC Clock** - determines whether ARPIE will listen for external MIDI clock ticks on the AUX MIDI SYNC port. Source must also be set to external for these to be used.
 
 #CHAN
 <a name="chan">
@@ -373,17 +472,24 @@ The internally generated BPM is approximate (but good enough for  most stuff). H
 ## MIDI Output Channel
 
 When pressed, selects and displays the MIDI channel for output
+
 <img class="wide" src="img/chan.png">
-If the CHAN button is pressed and held for a couple of seconds, you can Select The MIDI Input Channel. By default ARPIE will accept input from any MIDI channel (OMNI mode) but you can also select a specific channel, which affects MIDI Thru behaviour (see below)
-OMNI mode is indicated by all the Data Display LEDs showing brightly. Pressing any single button will select an individual input channel. Pressing the same button again will restore OMNI mode.
 
 ## MIDI Input Channel
 <img class="wide" src="img/ichan.png">
 
+If the CHAN button is pressed and held for a couple of seconds, you can Select The MIDI Input Channel. By default ARPIE will accept input from any MIDI channel (OMNI mode) but you can also select a specific channel, which affects MIDI Thru behaviour (see below)
+
+OMNI mode is indicated by all the LEDs being ON. Pressing any single button will select an individual input channel. Pressing the same button again will restore OMNI mode.
+
+
 #TRAN
 <a name="tran">
+
 ## Chromatic Transpose
+
 Transpose the MIDI output. Buttons represent -3. -2, -1, 0, +1, +2 through to +12 semitones. The default (no shift) position is indicated with a brighter LED.
+
 <img class="wide" src="img/trans.png">
 
 #HOLD
@@ -412,6 +518,8 @@ The HOLD function can be activated by pressing the HOLD button, lighting the HOL
 - Stop playback by turning HOLD off by pressing the button again.
 
 HOLD can be activated or deactivated while notes are already held.
+
+<a name="hold2">
 
 ## Hold Button Secondary Function
 
@@ -490,12 +598,105 @@ Incoming MIDI beat clock messages are only passed to output if SYNCH SOURCE is E
 Other Realtime/SysEx are passed through
 
 MIDI thru is handed in ARPIEs firmware (there is no hardware thru) which can cause latency if the arpeggiator engine is busy - and possibly even dropped messages in situations of very high thru volume.
-Stored settings
-ARPIE stores the following settings in EEPROM, which means that they are remembered when the device is switched off, and used as defaults next time it is switched on
-Synch SOURCE setting
-Synch SEND setting
-MIDI input channel (or OMNI) setting
-MIDI output channel setting
 
-#Clock/Message Routing 
+#Stored settings
+
+ARPIE stores the following settings in EEPROM, which means that they are remembered when the device is switched off, and used as defaults next time it is switched on
+
+- Synch SOURCE setting
+- Synch SEND setting
+- MIDI input channel (or OMNI) setting
+- MIDI output channel setting
+
+#Clock/Message Routing
+
+This block diagram shows how data is routed around ARPIE
+
 <a target="_new" href="img/schematic.png"><img class="full" src="img/schematic.png"></a>
+
+
+#Hack Header Modes
+<a name="hh">
+
+##Control Pots
+
+You can connect up to three potentiometers (100kOhm - 1Mohm recommended) to ARPIE's hack header and have them control various internal or MIDI parameters.
+
+The following table shows how to configure hack header LEDs B7 - B0 on the system preference menu. 1 indicated LED is ON and 0 indicates OFF
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50"></td><td  width="250"></td></tr>
+<tr><td>0000....</td><td>PC5 Pot Disabled</td></tr>
+<tr><td>0001....</td><td>PC5 Pot MIDI Mod wheel</td></tr>
+<tr><td>0010....</td><td>PC5 Pot ARPIE Transpose</td></tr>
+<tr><td>0011....</td><td>PC5 Pot MIDI CC#</td></tr>
+
+<tr><td>00..00..</td><td>PC4 Pot Disabled</td></tr>
+<tr><td>00..01..</td><td>PC4 Pot ARPIE Velocity</td></tr>
+<tr><td>00..10..</td><td>PC4 Pot MIDI Pitch Bend</td></tr>
+<tr><td>00..11..</td><td>PC4 Pot MIDI CC#</td></tr>
+
+<tr><td>00....00</td><td>PC0 Pot Disabled</td></tr>
+<tr><td>00....01</td><td>PC0 Pot ARPIE BPM</td></tr>
+<tr><td>00....10</td><td>PC0 Pot ARPIE Gate Length</td></tr>
+<tr><td>00....11</td><td>PC0 Pot MIDI CC#</td></tr>
+</table>
+</center>
+
+##Turning it off
+
+The hack header should always be disabled, unless you specifically want to connect something to it. You may get odd things happening otherwise, if ARPIE reads random values from nonexistent pots... or maybe you want that!
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50"></td><td  width="250"></td></tr>
+<tr><td>00000000</td><td>Hack header disabled</td></tr>
+</table>
+</center>
+
+
+## Pulse clock
+
+Alternatively you can connect a 5V pulse clock to the header. To use pulse clock you need to set the hack header mode LEDs to the following
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50"></td><td  width="250"></td></tr>
+<tr><td>10000000</td><td>Pulse Clock</td></tr>
+</table>
+</center>
+
+The default settings are designed to work with 15ms high-pulse-per-step (e.g. Korg Volca) but you can edit and recompile the ARPIE source code to support other time formats.
+
+The pin assignments on the header in this mode are
+
+<center>
+<table class="data">
+<tr style="font-weight:bold"><td width="50"></td><td  width="250"></td></tr>
+<tr><td valign="top">PC5</td><td>Ignore pulse clock IN (active low)</td></tr>
+<tr><td valign="top">PC4</td><td>Pulse clock OUT</td></tr>
+<tr><td valign="top">PC0</td><td>Pulse clock IN</td></tr>
+<tr><td valign="top">PB3</td><td>Not used</td></tr>
+</table>
+</center>
+
+##Other Possibilities
+
+The hack header brings out 4 of the ATMEGA328 I/O pins. These pins can support some interesting functions that open up other possibilities for experimentation (as long as you are able to get your hands dirty in the code!). In future some of these might be implemented in the main firmware releases.
+
+- **PC5** this is Arduino analog input 5. It is also the clock line for I2C and is a general purpose digital input or output (Arduino digital pin 19) which can support interrupt on pin change (PCINT13)
+
+- **PC4** this is Arduino analog input 4. It is also the data line for I2C and is a general purpose digital input or output (Arduino digital pin 18) which can support interrupt on pin change (PCINT12)
+
+- **PC0** this is Arduino analog input 0. It is also a general purpose digital input or output (Arduino digital pin 14) which can support interrupt on pin change (PCINT8)
+
+- **PB3** this is Arduino digital pin 11, supporting a PWM (Arduino analogWrite) output and interrupt on pin change (PCINT3)
+
+- **VCC** and **GND** regulated +5V supply from internal LDO regulator. Do not draw more than a few tens of milliamps from this supply!
+
+Since the header breaks out the I2C bus, peripherals such as DACs, EEPROMs, Accelerometers etc could be supported with additional firmware code. 
+
+The presence of a PWM output allows generation of a control voltage that could be used to drive external equipment(although only 8 bit resolution is supported by Arduino analogOut)
+
+

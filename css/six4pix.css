@@ -2,9 +2,16 @@
 body {
     font-family: courier, monospace;
     font-size: 12px;
-    margin: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
     padding: 0px;
+	line-height: 1.5;
 }
+p {
+   margin-top: 15px;
+ }
 h1 {
     font-size: 48px;
 	color: white;
@@ -45,5 +52,5 @@ img.full {
 }
 
 table.data {
-	border: 1px
+	border: 1px solid black
 }
