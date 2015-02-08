@@ -466,6 +466,8 @@ These options give you control over how ARPIE internally routes MIDI information
 
 - **SYNC Clock** - determines whether ARPIE will listen for external MIDI clock ticks on the AUX MIDI SYNC port. Source must also be set to external for these to be used.
 
+- **Flt.Ch.Mode** - When ON, ARPIE will remove MIDI "Channel Mode Messages" (CC numbers 120 thru 127) from the data thru'd from input to output. Some controllers might send unwanted channel mode messages such as "all notes off" when releasing keys. ARPIE can filter these out if desired.
+
 #CHAN
 <a name="chan">
 
