@@ -168,38 +168,34 @@ Click a menu button in the table below for more information on the menu function
 ##Rhythmic Pattern 
 <img class="wide" src="img/patn.png">
 
-ARPIE's **rhythmic pattern** is a sequence of up to sixteen steps that can each be set to **play** or **mute**. This pattern loops alongside the arpeggio and plays an arpeggio note or rests for a step, adding a rhythmic groove to the argeggio.
+ARPIE's **rhythmic pattern** is a sequence of up to sixteen steps that can each be set to **play** or **rest**. This pattern loops alongside the arpeggio and plays an arpeggio note or rests for a step, adding a rhythmic groove to the argeggio.
 
-Depending on the arpeggiator settings and the <a href="#plen">PLEN</a> setting, rhythmic pattern can be longer or shorter than the arpeggio seqeuence, resulting in interesting rhythmic effects and interaction as the two loop at different points.
+Depending on the arpeggiator settings and the <a href="#plen">PLEN</a> setting, the rhythmic pattern can be longer or shorter than the arpeggio sequence, resulting in interesting rhythmic effects and shifting interactions as the two patterns repeat at different points.
 
 To edit the rhythmic pattern, press PLEN. Press the data buttons to toggle the LEDs on and off. When the LED is on, the corresponding note of the arpeggio plays. When the LED is off a rest is inserted. 
 
 The **skip on rest** option in in <a href="#mode2">performance options<a> allows you to decide whether to mute a given arpeggio step and skip over it, or just to insert a rest without missing any notes from the arpeggio sequence.
 
-PATN allows you to groove up your arpeggio with rests, rather than having to play a note at every step. This can be especially effective with the tied GATE mode.
+PATN allows you to groove up your arpeggio with rests, rather than having to play a note at every step. This can be especially effective when used with the tied <a href="#gate">GATE</a> mode.
 
-PATN is the default function, and ARPIE returns to it when you don't press anything for a while (you can turn this off via the preferences menum). You can also return by pressing the PATN button at any time. 
+PATN is the default function, and ARPIE returns to it when you don't press anything for a while (you can turn this off via the <a href="#plen2">preferences</a> menu). You can also return by pressing the PATN button at any time.
 
 <a name="patn2">
 
 ##Accent And Glide
 <img class="wide" src="img/accgld.png">
 
-If you hold the PATN button for a few seconds, you will go to the **accent / glide edit** menu (usually accent is the default, but you can switch over to glide using the <a href="#mode2">performance options<a> menu to change PATN secondary function)
+If you hold the PATN button for a few seconds, you will go to the **accent** or **glide** pattern edit mode (according to the setting of PATN secondary function in <a href="#mode2">performance options<a>)
 
-**Accent** is a feature that plays specific steps of the arpeggio sequence at full MIDI velocity, regardless of the VELO setting. This is most effective when the basic VELO velocity setting is reduced.
+Accent and glide are  are edited rather like the usual pattern of notes and rests and have a length determined by the <a href="#plen">PLEN</a> setting. The patterns start out blank and you press data buttons to enter accent or glide steps.
 
-**Glide** is a feature that plays specific steps of the arpeggio sequence at whole step length or tied to the next note, regardless of the GATE setting. This obviously works best if the basic GATE setting is reduced, so the "glide" notes contrast better.
+- **Accent** is a feature that plays specific steps of the arpeggio sequence at full MIDI velocity, regardless of the VELO setting. This is most effective when the basic VELO velocity setting is reduced.
 
-You can select between Glide's two different modes from the **glide tie** option in the <a href="#mode2">performance options<a> menu.
-
-Just like the rhythmic pattern, the accent pattern length is controlled by the <a href="#plen">PLEN</a> setting and can loop with a different cycle length to the arpeggio sequence.
+- **Glide** is a feature that plays specified active steps of the arpeggio sequence at whole step length or tied to the next note (As determined by the **glide tie** option in the <a href="#mode2">performance options<a> menu) regardless of the GATE setting. This feature works best if the basic GATE setting is reduced, so the "glide" notes contrast better.
 
 If you do not press any key for a while ARPIE will revert back to the normal PATN mode.
 
-Note that accent and glide (and also the rhythmic pattern) are all active together - even though only either accent or glide can be edited at a time.
-
-
+Note that the rhythmic, accent and glide patterns are all active together - even though only either accent or glide can be edited at a given time.
 
 # PLEN
 <a name="plen">
@@ -212,7 +208,10 @@ The rhythmic pattern (and accent/glide) loops for the number of steps defined by
 
 <img class="wide" src="img/plen.png">
 
+<a name="plen2">
+
 ## Preferences
+
 
 Press and hold PLEN to access the configuration preferences
 
@@ -222,15 +221,15 @@ The first eight LEDs control built-in functionality for the <a href="#hh">hack h
 
 - **Auto Revert** controls whether ARPIE will time out to the PATN menu when no buttons are pressed for a about 10 seconds. Turn this off if you prefer - you can always press the <a href="#patn">PATN</a> button to get back!
 
-- **Long Press Time** controls how long you need to hold one of ARPIE's menu buttons to access the second function of a menu button.
+- **Long Press Time** controls how long you need to hold down one of ARPIE's menu buttons to access it's second function.
 
 <center>
 <table class="data">
 <tr style="font-weight:bold"><td width="50">B1</td><td width="50">B0</td><td  width="150">Long Press Time</td></tr>
-<tr><td>OFF</td><td>OFF</td><td>1.5 seconds</td></tr>
+<tr><td>ON</td><td>ON</td><td>1.5 seconds</td></tr>
 <tr><td>OFF</td><td>ON</td><td>1 second</td></tr>
 <tr><td>ON</td><td>OFF</td><td>0.5 seconds</td></tr>
-<tr><td>ON</td><td>ON</td><td>0.25 seconds</td></tr>
+<tr><td>OFF</td><td>OFF</td><td>0.25 seconds</td></tr>
 </table>
 </center>
 
@@ -288,11 +287,11 @@ Accent and Glide patterns are not affected.
 
 <img class="wide" src="img/opts.png">
 
-This menu contains some options that affect other ARPIE functions, changing ARPIE's musical performance.
+Press and hold MODE to access the Performance Options. This menu contains settings that control other ARPIE functions, changing ARPIE's musical performance.
 
 - **Hold Fn2** controls the long-press function of the <a href="#hold">HOLD</a> button. When this option in ON, the second function of HOLD is **MIDI lock**. When the option is OFF the second function is **transpose by MIDI input**. See <a href="#hold2">here</a> for more information.
 
-- **Skip Reset** controls what happens when there is a rest (LED off) at the current position in the <a href="#patn">PATN<a> sequence. If the option is OFF, the arpeggiator note at that position is skipped over and does not play. If the option is ON, the arpeggiator inserts a rest and plays the note at the next step.
+- **Skip Rest** controls what happens when there is a rest (LED off) at the current position in the <a href="#patn">PATN<a> sequence. If the option is OFF, the arpeggiator note at that position is skipped over and does not play. If the option is ON, the arpeggiator inserts a rest and plays the note at the next step.
 
 - **Glide Tie** controls the operation of the <a href="#patn2">glide</a> function. If the option is OFF, the arpeggiator note coinciding with a glide point is played for one whole step. If the option is ON, then the note is "tied" to the next playing note.
 
