@@ -59,6 +59,16 @@ img.arpie_label {
 	margin-top: 150;
 	margin-bottom: 50;
 }
+
+img.small_pic {
+    width: 150px;
+	display: block;
+	margin-left: 0;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
+
 table.data {
 	border: 1px solid black
 }

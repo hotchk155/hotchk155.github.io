@@ -16,8 +16,8 @@ With over 25 years industrial coding experience in C/C++ on Windows platforms, S
 <tr>
 <td>
 <table>
-<tr><td><img src="img/arpie.jpg"></td>
-<td valign="top">Since 2013, we have designed, manufactured and marketed a growing series of electronic products and kits. These include a popular range of open-source kits for hobbyists and musicians</td>
+<tr><td><a href="products.html"><img src="img/arpie.jpg"></a></td>
+<td valign="top">Since 2013, we have designed, manufactured and marketed a growing series of <a href="products.html">electronic products and kits</a>. These include a popular range of open-source kits for hobbyists and musicians</td>
 </tr></table>
 </td>
 </tr>
