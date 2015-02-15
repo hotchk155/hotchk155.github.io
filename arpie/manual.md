@@ -1,25 +1,58 @@
 ---
 layout: default
 ---
-# Quick Start
 
-I know you just want to get started... So connect up your MIDI keyboard to MIDI in, and a sound module to MIDI out. Switch on the ARPIE.. after a short delay (1-2 seconds) the 16 blue data display LEDs should light and the CLK LED should start blinking. 
+# ARPIE USER GUIDE
+
+
+## Quick Function Index
+
+Click a menu button in the table below for more information on the menu functions available via that button.
+
+<table style="border:1px solid black; font-size:24pt; font-weight:bold" width="100%">
+<tr><td width="33%"></td><td width="33%"></td><td width="33%"></td></tr>
+<tr>
+<td>*&nbsp;<a href="#patn">PATN</a></td>
+<td>*&nbsp;<a href="#plen">PLEN</a></td>
+<td>*&nbsp;<a href="#mode">MODE</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#shft">SHFT</a></td>
+<td>*&nbsp;<a href="#span">SPAN</a></td>
+<td>*&nbsp;<a href="#rate">RATE</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#velo">VELO</a></td>
+<td>*&nbsp;<a href="#gate">GATE</a></td>
+<td>*&nbsp;<a href="#inst">INST</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#sync">SYNC</a></td>
+<td>*&nbsp;<a href="#chan">CHAN</a></td>
+<td>*&nbsp;<a href="#tran">TRAN</a></td>
+</tr>
+<tr>
+<td>*&nbsp;<a href="#hold">HOLD</a></td>
+<td></td><td></td></tr>
+</table>
+
+## Quick Start
+
+OK so I know you just want to get started... So connect up your MIDI keyboard to MIDI in, and a sound module to MIDI out. Switch on the ARPIE.. after a short delay (1-2 seconds) the 16 blue data display LEDs should light and the CLK LED should start blinking. 
 
 Hold down a chord on the MIDI keyboard. The RX LED should blink as notes are received, and the TX LED should blink rapidly as notes are sent. Press the HOLD button once, the HOLD LED should illuminate. Now when you play a chord, the Arpeggiator continues to play after you have released the keys.
 
 If you don't have a keyboard handy, turn on HOLD, press INST and then press the small button below the right-most blue LED. This should start playing a C major chord arpeggio.
 
-OK, now we've broken the tension lets move on :o)
+OK, now we've broken the tension lets move on!
 
-# Introducing ARPIE
-
-## What Is It?
+## Introducing ARPIE
 
 ARPIE is a MIDI arpeggiator based around open-source software and hardware. The Arduino-based firmware allows maximum hackability and the hardware is designed for easy DIY assembly and customisation.
 
-Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation, tempo synchronisation and standalone features to enable ARPIE to be used creatively without an attached MIDI keyboard.
+Despite its simple construction and appearance, ARPIE is full featured with various chord arpeggiation, tempo synchronisation and standalone features to enable ARPIE to be used creatively with or without an attached MIDI keyboard.
 
-A distinctive feature of ARPIE is the minimal control surface. While this has only simple LEDs for visual feedback, it is simple to use once you get familiar with it.
+A distinctive feature of ARPIE is the minimal control surface. While this has only simple LEDs for visual feedback, it is easy to use once you get familiar with it.
 
 ## Basic Operations
 
@@ -93,9 +126,7 @@ The rear panel of ARPIE is shown below:
 
 - **Control Surface Connector** electrically joins the control surface to the main board. When inserting the connector in the socket be careful to make sure all the pins are aligned correctly.
 
-#Using Arpie
-
-## General Points
+## General Use 
 
 - When you press one of the twelve main menu buttons, the function of the sixteen data entry buttons is changed according to the selected function.
 
@@ -106,60 +137,6 @@ The rear panel of ARPIE is shown below:
 - By default ARPIE returns to the pattern edit mode (PATN function) after a few seconds of inactivity. You can turn this off if you want.
 
 - Sections in the manual describe how the 16 data buttons are assigned in each mode. A yellow colour is used for primary menu function and a purple colour for secondary.
-
-## Keypad Buttons
-
-Click a menu button in the table below for more information on the menu functions available via that button.
-
-<table style="border:1px solid black; font-size:24pt; font-weight:bold" width="100%">
-<tr><td width="33%"></td><td width="33%"></td><td width="33%"></td></tr>
-<tr>
-<td>*&nbsp;<a href="#patn">PATN</a></td>
-<td>*&nbsp;<a href="#plen">PLEN</a></td>
-<td>*&nbsp;<a href="#mode">MODE</a></td>
-</tr>
-<tr>
-<td>*&nbsp;<a href="#shft">SHFT</a></td>
-<td>*&nbsp;<a href="#span">SPAN</a></td>
-<td>*&nbsp;<a href="#rate">RATE</a></td>
-</tr>
-<tr>
-<td>*&nbsp;<a href="#velo">VELO</a></td>
-<td>*&nbsp;<a href="#gate">GATE</a></td>
-<td>*&nbsp;<a href="#inst">INST</a></td>
-</tr>
-<tr>
-<td>*&nbsp;<a href="#sync">SYNC</a></td>
-<td>*&nbsp;<a href="#chan">CHAN</a></td>
-<td>*&nbsp;<a href="#tran">TRAN</a></td>
-</tr>
-<tr>
-<td>*&nbsp;<a href="#hold">HOLD</a></td>
-<td></td><td></td></tr>
-</table>
-
-## By Description
-- Edit Rhythmic Pattern
-- Edit Length of Rhythmic Pattern
-- Fill Rhythmic Pattern
-- Clear Rhythmic Pattern
-- Randomize Rhythmic Pattern
-- Arpeggiate a chord without a keyboard
-- Select arpeggio type
-- Select polyphonic gate mode
-- Select arpeggiator not insertion
-- Transpose arpeggio by whole octaves
-- Transpose arpeggio by semitones
-- Force arpeggio output to a musical scale
-- Change octave span of arpeggio
-- Change musical note division/rate
-- Change MIDI output note velocity
-- Change MIDI output note gate length
-- Change MIDI input channel
-- Change MIDI output channel
-- Change how MIDI input is passed to output
-- Select arpeggio to continue to play after releasing a chord
-- 
 
 
 # PATN 
@@ -565,32 +542,43 @@ This block diagram shows how data is routed around ARPIE
 #Hack Header Modes
 <a name="hh">
 
-##Control Pots
+##Control Pots / Switch
 
 You can connect up to three potentiometers (100kOhm - 1Mohm recommended) to ARPIE's hack header, configured as voltage dividers between 0 and 5V, and have them control various internal or MIDI parameters. You can also connect an active low switch to PB3 and have it trigger some predefined specific actions.
 
-The following table shows how to configure hack header LEDs B7 - B0 on the system preference menu. 1 indicated LED is ON and 0 indicates OFF
+The following table shows how to configure hack header LEDs B7 - B0 on the system preference menu. 1 indicated LED is ON and 0 indicates OFF. A dot means this LED is not relevant to this setting.
 
 <center>
 <table class="data">
 <tr style="font-weight:bold"><td width="50"></td><td  width="250"></td></tr>
-<tr><td>0.00....</td><td>PC5 Pot Disabled</td></tr>
-<tr><td>0.01....</td><td>PC5 Pot MIDI Mod wheel</td></tr>
-<tr><td>0.10....</td><td>PC5 Pot ARPIE Transpose</td></tr>
-<tr><td>0.11....</td><td>PC5 Pot MIDI CC#</td></tr>
+
+<tr><td>00......</td><td>PB3 Switch MUTE MIDI output</td></tr>
+<tr><td>01......</td><td>PB3 Switch Restart Bar</td></tr>
+
+<tr><td>0.00....</td><td>PC0 Pot Disabled</td></tr>
+<tr><td>0.01....</td><td>PC0 Pot ARPIE BPM</td></tr>
+<tr><td>0.10....</td><td>PC0 Pot ARPIE Gate Length</td></tr>
+<tr><td>0.11....</td><td>PC0 Pot MIDI CC#</td></tr>
 
 <tr><td>0...00..</td><td>PC4 Pot Disabled</td></tr>
 <tr><td>0...01..</td><td>PC4 Pot ARPIE Velocity</td></tr>
 <tr><td>0...10..</td><td>PC4 Pot MIDI Pitch Bend</td></tr>
 <tr><td>0...11..</td><td>PC4 Pot MIDI CC#</td></tr>
 
-<tr><td>0.....00</td><td>PC0 Pot Disabled</td></tr>
-<tr><td>0.....01</td><td>PC0 Pot ARPIE BPM</td></tr>
-<tr><td>0.....10</td><td>PC0 Pot ARPIE Gate Length</td></tr>
-<tr><td>0.....11</td><td>PC0 Pot MIDI CC#</td></tr>
+<tr><td>0.....00</td><td>PC5 Pot Disabled</td></tr>
+<tr><td>0.....01</td><td>PC5 Pot MIDI Mod wheel</td></tr>
+<tr><td>0.....10</td><td>PC5 Pot ARPIE Transpose</td></tr>
+<tr><td>0.....11</td><td>PC5 Pot MIDI CC#</td></tr>
+</table>
+</center>
 
-<tr><td>00......</td><td>PB3 Switch MUTE Midi</td></tr>
-<tr><td>01......</td><td>PB3 Switch Restart Bar</td></tr>
+The default MIDI CC numbers assigned to the three pots when in MIDI CC# mode are as follows
+
+<center>
+<table class="data">
+<tr><td>PC0 Pot</td><td>CC#16</td><td>General purpose</td></tr>
+<tr><td>PC4 Pot</td><td>CC#17</td><td>General purpose</td></tr>
+<tr><td>PC5 Pot</td><td>CC#18</td><td>General purpose</td></tr>
 </table>
 </center>
 
@@ -598,7 +586,7 @@ Of course if you are prepared to dirty your hands in the code, you can make it d
 
 ##Turning it off
 
-The hack header should always be disabled, unless you specifically want to connect something to it. Otherwise you may get random things happening if pots are not connected... or maybe you want that!
+The hack header should always be disabled, unless you specifically want to connect something to it. Otherwise you may get random things happening if pots are not connected ... or maybe you want that!
 
 <center>
 <table class="data">
