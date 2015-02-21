@@ -1,7 +1,10 @@
 ---
 layout: default
 ---
-### ARPIE Parts List
+
+# ARPIE Hardware Info
+
+###  Parts List
 
 * R1,R2, R3, R4, R18 - 220R carbon film resistor
 * R11, R12, R14, R15, R16, R17, R19, R20 - 1k carbon film resistor

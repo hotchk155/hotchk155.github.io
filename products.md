@@ -4,6 +4,8 @@ layout: default
 
 # PRODUCTS 
 
+The product pages are under construction, so please bear with us as we get them up to scratch!
+
 ## You can purchase these products from our <a href="https://www.tindie.com/stores/hotchk155/">Tindie Store</a>
 
 <table>

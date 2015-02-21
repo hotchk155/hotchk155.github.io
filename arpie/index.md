@@ -36,7 +36,7 @@ ARPIE is an open-source project, based on the popular Arduino platform and is de
 <tr>
 <td><a href="update.html"><img class="arpie_label" src="img/menu_upgr.gif"></a>How to upload new firmware using a USB-TTL programmer</td>
 <td><a href="hacks.html"><img class="arpie_label" src="img/menu_mods.gif"></a>A gallery of user hacks and mods to ARPIE</td>
-<td><a href="."><img class="arpie_label" src="img/menu_tabs.gif"></a>Add-ons for ARPIE's hack header</td>
+<td><a href="tabs.html"><img class="arpie_label" src="img/menu_tabs.gif"></a>Add-ons for ARPIE's hack header</td>
 </tr>
 
 <tr><td>&nbsp;</td></tr>
@@ -44,7 +44,7 @@ ARPIE is an open-source project, based on the popular Arduino platform and is de
 <tr>
 <td><a href="https://github.com/hotchk155/arpie"><img class="arpie_label" src="img/menu_srcs.gif"></a>Peruse the source code on GitHub</td>
 <td><a href="https://www.tindie.com/stores/hotchk155/"><img class="arpie_label" src="img/menu_shop.gif"></a>Visit our Tindie shop to buy your own ARPIE!</td>
-<td><a href="http://six4pix.com/"><img class="arpie_label" src="img/menu_back.gif">Back to home page</a></td>
+<td><a href="/products.html"><img class="arpie_label" src="img/menu_back.gif">Back to products and kits home page</a></td>
 </tr>
 
 </table>
@@ -56,4 +56,6 @@ ARPIE is an open-source project, based on the popular Arduino platform and is de
 <td>This work is licensed under CC-BY-NC-SA terms. If you would like a commercial license please contact us.</td>
 <tr>
 </table>
+<br>
+<br>
 

@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# ARPIE Build
+
 When soldering a PCB, it generally helps to solder lower height components first. This stops the taller components getting in the way while we are working, and it lets us hold components in place for soldering by turning the board upside down on a flat surface and letting gravity be our third hand!
 
 We will start with the base PCB (Printed Circuit Board), as shown below

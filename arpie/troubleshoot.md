@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# ARPIE Troubleshooting
+
 ### OK I built it - so what now? How do I know if its working?
 If you wish to run on a PP3 battery: Insert the battery and ensure nothing is connected to the DC input socket.
 

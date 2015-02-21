@@ -25,12 +25,12 @@ div {
     left: 50px;
 }
 img {
-    width: 300px;
+    width: 400px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 150;
-	margin-bottom: 50;
+	margin-top: 10pt;
+	margin-bottom: 5pt;
 }
 
 img.wide {
