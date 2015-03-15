@@ -4,10 +4,13 @@ layout: default
 
 # MIDI Switcher
 
+<img src="img/TSWITCHER.JPG"><br>
 
+Set your MIDI free!! MIDI switcher allows you to switch real-world devices using MIDI. It is ideal for building electric percussion or for augmenting MIDI performances using lamps, motors etc. The only limit is your imagination (and certain voltage and current constraints)
+
+* [Kit Contents](tkit.html)
 * [Build Instructions](tbuild.html)
-* [What's in the kit](tkit.html)
-* [User Manual](https://github.com/hotchk155/MIDI-Switcher/blob/master/docs/midi-switcher.pdf?raw=true)
+* [User Manual](manual.html)
 * [Java Configuration Application](https://github.com/hotchk155/MIDI-Switcher/blob/master/application/midi-switcher-config.jar?raw=true)
 * [Source Repository](https://github.com/hotchk155/MIDI-Switcher)
 

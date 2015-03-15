@@ -12,6 +12,10 @@ body {
 p {
    margin-top: 15px;
  }
+strong {
+   text-decoration: underline;
+   font-weight: bold;
+ }
 h1 {
     font-size: 48px;
 	color: white;
@@ -71,4 +75,7 @@ img.small_pic {
 
 table.data {
 	border: 1px solid black
+}
+td {
+    vertical-align: top;
 }
