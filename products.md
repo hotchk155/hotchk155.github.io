@@ -45,7 +45,7 @@ The product pages are under construction, so please bear with us as we get them 
 <tr>
 <td><a href="midiswitcher/index.html"><img class="small_pic" src="img/midiswitcher.jpg"></a></td>
 <td>&nbsp;&nbsp;</td>
-<td valign="top"><a href="midiswitcher/index.html">MIDI SWITCHER KIT</a> control low voltage DC loads such as lamps/solenoids/motors from a MIDI keyboard or sequencer. Eight low-side switching channels. Highly configurable over MIDI.</td>
+<td valign="top"><a href="switcher/index.html">MIDI SWITCHER KIT</a> control low voltage DC loads such as lamps/solenoids/motors from a MIDI keyboard or sequencer. Eight low-side switching channels. Highly configurable over MIDI.</td>
 </tr>
 
 <tr><td>&nbsp;&nbsp;</td></tr>
