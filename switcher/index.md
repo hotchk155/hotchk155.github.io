@@ -34,7 +34,7 @@ The following applies to both modules
 <tr>
 <td>
 <a href="config.html">Configuration</a><br>
-<a href="faq.html">FAQw</a><br>
+<a href="faq.html">FAQ</a><br>
 <a href="https://github.com/hotchk155/MIDI-Switcher/blob/master/application/midi-switcher-config.jar?raw=true">Download the Java Configuration App</a><br>
 <a href="https://github.com/hotchk155/MIDI-Switcher">Source Repository</a><br>
 </td>
