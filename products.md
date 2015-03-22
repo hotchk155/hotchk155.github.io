@@ -51,6 +51,14 @@ The product pages are under construction, so please bear with us as we get them 
 <tr><td>&nbsp;&nbsp;</td></tr>
 
 <tr>
+<td><a href="midiswitcher/index.html"><img class="small_pic" src="img/relayswitcher.jpg"></a></td>
+<td>&nbsp;&nbsp;</td>
+<td valign="top"><a href="switcher/index.html">RELAY SWITCHER KIT</a> MIDI Switcher module with eight high power relay outputs. Highly configurable over MIDI.</td>
+</tr>
+
+<tr><td>&nbsp;&nbsp;</td></tr>
+
+<tr>
 <td><a href="game/index.html"><img class="small_pic" src="img/game.jpg"></a></td>
 <td>&nbsp;&nbsp;</td>
 <td valign="top"><a href="game/index.html">SIXTY FOUR PIXELS GAME KIT</a> Play a selection of awesome games on a hand-held game console you built yourself (or write your own games using Arduino tools). All in glorious bi-colour!</td>

@@ -73,6 +73,15 @@ img.small_pic {
 	margin-bottom: 50;
 }
 
+img.med_pic {
+    width: 250px;
+	display: block;
+	margin-left: 0;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
+
 table.data {
 	border: 1px solid black
 }

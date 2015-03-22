@@ -81,6 +81,8 @@ Solder the MIDI socket. Make sure that resistor R12 is not touching the legs of 
 <img src="img/R020.JPG"><br>
 
 Connect the board to the contact strip of the relay board
+
+**Note** If you intend to <a href="rmanual.html#isolate">isolate</a> the Relay-Switcher power supply from the relay driver power supply you should completely remove the GND pin of the relay board before soldering.
 <img src="img/R021.JPG"><br>
 
 Solder the Relay Switcher board to the relay board

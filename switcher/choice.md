@@ -8,7 +8,7 @@ There are two different MIDI switchers available. They both have the same essent
 
 # Transistor Based
 
-The transistor-based MIDI-Switcher is the original. It is smaller and slicker. It is probably the default choice if you are looking at something like MIDI driven electric percussion.
+The transistor-based solid state MIDI-Switcher is the original. It is smaller and slicker. It is probably the default choice if you are looking at something like MIDI driven electric percussion.
 
 ## PROS
 
@@ -33,8 +33,9 @@ The transistor-based MIDI-Switcher is the original. It is smaller and slicker. I
 - Switches are electrically isolated from each other (this is probably the greatest advantage of using relays, as it allows a relay to arbitrarily replace any mechanical switch)
 - "Single pole, double throw" switching. Each relay has a "normally closed" switch path which opens additional applications (e.g. a MIDI controlled, switch based H-bridge for reversible control over motors)
 - Can switch AC power and signals
-- Possiblity to switch mains power, although you are on your own with this! The relays are 110V/220V mains-rated, but given the potentially lethal danger here I can only say I DO NOT RECOMMEND ATTACHING ANY MAINS POWER SUPPLY TO THIS PRODUCT UNLESS YOU ARE A QUALIFIED ELECTRICIAN!!! IF YOU DO SO IT IS AT YOUR OWN RISK!!! NOTHING TO DO WITH ME, MATE!!!
+- The relays are 110V/220V rated and could be used to switch mains
 
+**Disclaimer**: Given the potentially lethal danger with working with mains, I advise against this unless you are qualified to work with mains voltages. You do so at your own risk.
 
 ## CONS
 
@@ -44,23 +45,20 @@ The transistor-based MIDI-Switcher is the original. It is smaller and slicker. I
 
 # MY ADVICE
 
-Q: I want to make a small/medium sized solenoid-based physical drum machine?
-A: Transistors!
-
-Q: I want to drive switch pedals (like guitar amp channel select) via MIDI
-A: Relays!
-
-Q: I want to drive some really big continuous loads with this thing (say a big motor)
-A: Relays!
-
-Q: I want to switch 12VDC light bulbs and dim them and stuff
-A: Transistors!
-
-Q: I want to control a set of mains lamps by MIDI
-A: Be gone and don't darken my doorstep again!! (or contact me by email)
-
-I made those questions up. If you have some genuine ones I'll answer and feature them!
-
-# FAQ:
-Q: Why can't you give a more specific maximum continuous DC current rating for the board?
-A: I do not have, neither can afford, the facilities needed to safely test a PCB to destruction through over-current. The MIDI-Switcher PCB uses 2oz copper pour (i.e. double the standard copper track thickness) and load current is routed through both the top and bottom layer in parallel to increase handling. The maximum continuous current handling of the board is therefore probably greater than the 5A I quote, but I will not vouch for it and leave it up to you to find out for yourself - if you need to!
+Q: I want to make a small/medium sized solenoid-based physical drum machine?<br>
+A: Transistors!<br>
+<br>
+Q: I want to drive switch pedals (like guitar amp channel select) via MIDI<br>
+A: Relays!<br>
+<br>
+Q: I want to drive some really big continuous loads with this thing (say a big motor)<br>
+A: Relays!<br>
+<br>
+Q: I want to switch 12VDC light bulbs and dim them and stuff<br>
+A: Transistors!<br>
+<br>
+Q: I want to control a set of mains lamps by MIDI<br>
+A: Relays... but see disclaimer above.<br>
+<br>
+I made those questions up. If you have some genuine ones I'll answer and feature them!<br>
+<br>

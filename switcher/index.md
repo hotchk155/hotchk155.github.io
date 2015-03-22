@@ -4,15 +4,42 @@ layout: default
 
 # MIDI Switcher
 
-<img src="img/TSWITCHER.JPG"><br>
+Set your MIDI free!! MIDI switcher allows you to switch real-world devices using MIDI. It is ideal for building electric percussion or for augmenting MIDI performances using lamps, motors etc. The only limit is your imagination (well.. and certain voltage and current constraints)
 
-Set your MIDI free!! MIDI switcher allows you to switch real-world devices using MIDI. It is ideal for building electric percussion or for augmenting MIDI performances using lamps, motors etc. The only limit is your imagination (and certain voltage and current constraints)
+There are two flavours of MIDI Switcher available, shown below (<a href="choice.html">How to decide</a>):
 
-* [Kit Contents](tkit.html)
-* [Build Instructions](tbuild.html)
-* [User Manual](manual.html)
-* [Java Configuration Application](https://github.com/hotchk155/MIDI-Switcher/blob/master/application/midi-switcher-config.jar?raw=true)
-* [Source Repository](https://github.com/hotchk155/MIDI-Switcher)
+<table>
+<tr>
+<td>
+<h2>Transistor Based</h2>
+<img class="med_pic" src="img/TSWITCHER.JPG"><br>
+<a href="tkit.html">Kit Contents</a><br>
+<a href="tbuild.html">Build Instructions</a><br>
+<a href="tmanual.html">User Manual</a><br>
+</td>
+
+<td>
+<h2>Relay Based</h2>
+<img class="med_pic" src="img/RSWITCHER.JPG"><br>
+<a href="rkit.html">Kit Contents</a><br>
+<a href="rbuild.html">Build Instructions</a><br>
+<a href="rmanual.html">User Manual</a><br>
+</td>
+</tr>
+</table>
+
+The following applies to both modules
+
+<table>
+<tr>
+<td>
+<a href="config.html">Configuration</a><br>
+<a href="faq.html">FAQw</a><br>
+<a href="https://github.com/hotchk155/MIDI-Switcher/blob/master/application/midi-switcher-config.jar?raw=true">Download the Java Configuration App</a><br>
+<a href="https://github.com/hotchk155/MIDI-Switcher">Source Repository</a><br>
+</td>
+</tr>
+</table>
 
 <table>
 <tr>

@@ -41,6 +41,9 @@ layout: default
 * SPDT CONTACTS RATED 10A/30VDC, 10A/250VAC, 10A/125VAC
 * SCREW TERMINAL OUTPUTS
 
+<img src="img/RKIT1.JPG">
 <br>
+<img src="img/RKIT2.JPG">
 <br>
-<img src="img/RKIT.JPG">
+<img src="img/RKIT3.JPG">
+
