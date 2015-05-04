@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# Firmware Upload
+
 The Atmega328 microcontroller chip on the Brain board comes loaded with the Arduino bootloader. This allows firmware to be uploaded using a standard "FTDI-type" USB to TTL serial programming lead.
 
 If you already have an FTDI FT232 cable with RTS signal on pin 1, you can simply upload firmware from the Arduino environment and the cable will auto-reset the board. 
@@ -14,10 +17,12 @@ The programmer connects to the 6 pin programming header on the Brain board using
 <br>
 Connect pins as follows:
 <br>
+
 * Ground (GND on programmer, pin 5 on PCB header)
 * Serial Receive (RXD on programmer, pin 2 on PCB header)
 * Serial Transmit (TXD on programmer, pin 3 on PCB header)
 * Power (5V on programmer, pin 4 on PCB header) can be connected with wire but is not actually connected on the board. The board must be powered separately during uploads via the 4.5V and GND connections. This is to prevent voltage mismatch problems when the board is connected to the 4.5V battery supply.
+
 <br>
 <img src="img/prg1.JPG"><br>
 <img src="img/prg2.JPG"><br>
