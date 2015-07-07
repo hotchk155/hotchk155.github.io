@@ -27,6 +27,7 @@ Use your wire wool tip cleaner or sponge to keep the tip of the iron clean. Clea
 <img src="img/B303.JPG">
 
 Lets continue solder all the resistors that are fitted flat to the board. These are 
+
 * R1, R2, R3, R4 - 220 Ohm (red-red-brown code) resistor
 * R5, R6, R7, R8 - 1.5 kOhm (brown-green-red code) resistor
 * R9, R10 - 10 kOhm (brown-black-orange code ) resistor
@@ -35,8 +36,10 @@ Lets continue solder all the resistors that are fitted flat to the board. These 
 Your board should now look like this
 <img src="img/B304.JPG">
 
-Now lets add the 1N4148 small signal diodes, D1 and D2. These have tiny orange and black glass packages. There is a black stripe on the cathode end which aligns with the stripe shown on the diode symbol on the board.<br>
-Unlike resistors, diodes DO have a polarity and need to be soldered a specific way around. Both the diode and the symbol representing its location on the PCB show a thick line marking one end of the diode (the Cathode)<br>
+Now lets add the 1N4148 small signal diodes, D1 and D2. These have tiny orange and black glass packages. There is a black stripe on the cathode end which aligns with the stripe shown on the diode symbol on the board.
+
+Unlike resistors, diodes DO have a polarity and need to be soldered a specific way around. Both the diode and the symbol representing its location on the PCB show a thick line marking one end of the diode (the Cathode)
+
 Solder the diodes as you have resistors. Please note that diodes are a bit more heat sensitive than resistors - so don't cook them too long with the iron!
 <img src="img/B305.JPG">
 
