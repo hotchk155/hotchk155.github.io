@@ -33,6 +33,8 @@ Lets continue solder all the resistors that are fitted flat to the board. These 
 * R9, R10 - 10 kOhm (brown-black-orange code ) resistor
 * R11, R12, R19, R20 - 1 kOhm (brown-black-red code) resistor
 
+In the very latest PCB version there is an additional 1.5 kOhm resistor, R21. **Leave the R21 location empty** when you build the kit. Do not add R21 unless you experience problems with step LEDs flickering or lighting up dimly when they should be off (this is unlikely with the standard LEDs provided with the kit). It is very unusual that this extra resistor is needed - if in doubt just leave it off. Contact me if you need more explanation.
+
 Your board should now look like this
 <img src="img/B304.JPG">
 
