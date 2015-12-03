@@ -267,7 +267,7 @@ Accent and Glide patterns are not affected.
 
 Press and hold MODE to access the Performance Options. This menu contains settings that control other ARPIE functions, changing ARPIE's musical performance.
 
-- **Hold Fn2** controls the long-press function of the <a href="#hold">HOLD</a> button. When this option in ON, the second function of HOLD is **MIDI lock**. When the option is OFF the second function is **transpose by MIDI input**. See <a href="#hold2">here</a> for more information.
+- **Hold Fn2** controls the long-press function of the <a href="#hold">HOLD</a> button. When this option in OFF, the second function of HOLD is **MIDI lock**. When the option is ON the second function is **transpose by MIDI input**. See <a href="#hold2">here</a> for more information.
 
 - **Skip Rest** controls what happens when there is a rest (LED off) at the current position in the <a href="#patn">PATN<a> sequence. If the option is OFF, the arpeggiator note at that position is skipped over and does not play. If the option is ON, the arpeggiator inserts a rest and plays the note at the next step.
 
@@ -516,7 +516,7 @@ HOLD can be activated or deactivated while notes are already held.
 
 When the HOLD button is held for a few seconds, the HOLD LED starts to blink, indicating that the hold button secondary function is active. 
 
-There are two functions available and you can select between them from the performance options menu (long press <a href="mode">MODE</a>). These are described below.
+There are two functions available and you can select between them from the performance options menu (long press <a href="#mode">MODE</a>). These are described below.
 
 ## MIDI Lock function
 
