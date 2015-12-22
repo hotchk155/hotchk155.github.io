@@ -425,7 +425,7 @@ To the right of the screen are some options for inserting chords without a keybo
 
 This screen controls the ARPIE's MIDI synch mode and it's internal metronome (BPM). 
 
-- The **Source** button controls the clock source. When the LED in ON, ARPIE runs off its own internal clock source. When the LED is OFF, ARPIE runs on external MIDI clock  via the MIDI IN or AUX SYNCH IN sockets
+- The **Source** button controls the clock source. When the LED in OFF, ARPIE runs off its own internal clock source. When the LED is ON, ARPIE runs on external MIDI clock  via the MIDI IN or AUX SYNCH IN sockets
 
 - The **Send** button controls whether ARPIE sends a MIDI beat clock to the MIDI OUT port. The clock is sent when the option is ON. When this option is switched from OFF to ON, ARPIE also sends a "start" command to the OUT port, which can be used to synchronise MIDI slave devices. Conversely a MIDI "stop" command is sent when the Send function is switched off.
 
@@ -435,7 +435,7 @@ This screen controls the ARPIE's MIDI synch mode and it's internal metronome (BP
 
 - The **Slower** and **Faster** buttons can be used to adjust the BPM by steps of 1. 
 
-The internally generated BPM is approximate (but good enough for  most stuff). However, an external clock source is recommended if a precise BPM is needed.
+The internally generated BPM is approximate (but good enough for  most stuff). However, an external clock source is recommended if a precise BPM is needed or if you need to sync to other gear as a slave.
 
 ## MIDI Routing Options
 
