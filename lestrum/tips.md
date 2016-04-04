@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# Playing Tips
+
 LE STRUM is a MIDI controller that rewards experimentation. Try playing with dynamics (Envelope attack and release) and reverb/delay effects on your synth or sound module. 
 
 While it works great with seas of lush chordy goodness, you can also get some nice punchy or melodic stuff if you use the right sounds. LE STRUM generally sounds best with a bit of release so that the sounds are not cut too abruptly.

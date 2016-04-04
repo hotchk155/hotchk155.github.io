@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# How It Works
+
 The simple and boring answer is that its all done in code, and you can take a look at that right here on GitHub. However you probably want to know about the electronics right, what is all that stuff on the board? Hopefully this little description might help you turn your curiosity into understanding and might inspire you to make your own projects
 
 First of all, like I say, LE STRUM's functionality is done in code - its a computer program. So, where is the computer? Well... see IC1, the little black box next to the MIDI socket, thats a computer! No really, its a Microcontroller, which is a complete computer on a chip. With its 8 bit CPU running at 8MHz, 1K of RAM and 14K of flash memory its actually more powerful than a lot of 1980s home computers! This one happens to be a PIC16F1825 but there are literally thousands of different types of microcontrollers with different specifications running everything from Smartphones to Toasters

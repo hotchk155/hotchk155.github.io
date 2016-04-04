@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# Kit Contents
+
 Here is what is in the basic LE STRUM kit, when illuminated by a nuclear explosion (sorry .. went a bit mad with brightness/contrast)
 <img src="https://raw.github.com/hotchk155/Voici-Le-Strum/master/images/Dsc02290.jpg">
 

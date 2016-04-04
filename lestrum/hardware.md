@@ -1,7 +1,11 @@
 ---
 layout: default
 ---
+
+# Hardware Information
+
 Parts List
+
 * R1, R2 - 220R resistor (x2)
 * R4, R8 - 1K resistor (x2)
 * R3, R5, R6, R7 - 10K resistor (x4)

@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-# LE STRUM
+# Voici LE STRUM
 
 * [Kit Contents](kit.html)
 * [Build Instructions](build.html)

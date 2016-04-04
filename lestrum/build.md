@@ -1,7 +1,8 @@
 ---
 layout: default
 ---
-# Voici LE STRUM!
+# Build It!
+
 Welcome to LE STRUM! This is a pretty packed little board, but it should not take too long to make up (a couple of hours if you are new to soldering). Beware that some of the components we'll use are fussy about being soldered the right way round, others are not, but I will let you know as we go.<br>
 <br>
 OK, First lets get familiar with the PCB.. this is the top side<br>
