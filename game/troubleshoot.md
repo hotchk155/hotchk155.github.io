@@ -24,7 +24,7 @@ layout: default
 * Check the LED directly with a voltmeter on "diode check" setting. 
 * Replace the LED.
 
-##No Sound
+## No Sound
 * Make sure sound is turned on via the menu
 * Turn sound off and back on via menu
 * Check the soldering of the piezo buzzer and the lower right 100nF capacitor

@@ -2,9 +2,9 @@
 layout: default
 ---
 
-#Using synchtab
+# Using synchtab
 
-##Before You Start
+## Before You Start
 synchtab requires your ARPIE to have the following:
 
 - The "hack header" socket which was added to mainboard version 3 and above
@@ -13,7 +13,7 @@ synchtab requires your ARPIE to have the following:
 The firmware can be <a href="../arpie/update.html">upgraded</a> for free. However if you have an older ARPIE without the hack header socket you have a bit more of a problem. It IS possible to connect synchtab to an older ARPIE by soldering on some extra wires, but the result will not quite so neat. Let me know if you need information on this - I may also add it to FAQ.
 
 
-##The Basics
+## The Basics
 When you connect synchtab, you need to tell the ARPIE to use it. This is done by changing the "hack header" settings (see the appropriate section in the <a href="..\arpie\manual.html#hh">ARPIE manual)
 
 There are two 3.5mm jack sockets (mono wired) on synchtab:
@@ -29,7 +29,7 @@ When there is a cable connected to the CLOCK IN port, the CLOCK IN and CLOCK OUT
 
 When there is no cable connected to CLOCK IN, ARPIE's internal clock is sent to CLOCK OUT, so ARPIE can act as a pulse clock master to control other equipment. 
 
-##LED Indications
+## LED Indications
 There are two LED indicators on the synchtab, which sit just behind the pin header. Either of these will blink in time with the clock pulses and act as a useful diagnostic indicator if you are not sure if a clock is present. 
 
 - The INTERNAL CLOCK LED is the one closest to the jack sockets - this LED blinks in time with ARPIE's internal clock when there is no cable connected to CLOCK IN.
@@ -38,7 +38,7 @@ There are two LED indicators on the synchtab, which sit just behind the pin head
 
 The LEDs indicate actual electrical activity rather than the mode of the ARPIE firmware, so even if the LEDs are blinking correctly, remember you still need to reset ARPIE after attaching or detaching cables at CLOCK IN.
 
-##Clock Characteristics
+## Clock Characteristics
 The specifications of the pulse clock (in and out) are:
 
 - One pulse per quarter note (step)
@@ -46,7 +46,7 @@ The specifications of the pulse clock (in and out) are:
 
 The current firmware does not allow customisation of the clock pulses from the menu. To change the pulse clock characteristics, such as timing and polarity, require the firmware code to be modified and recompiled.
 
-##MIDI SYNCH Bridging
+## MIDI SYNCH Bridging
 ARPIE can be synched in one of the following modes:
 
 - Internal Synch using its own beat clock
@@ -57,7 +57,7 @@ In any of these modes it is possible to send MIDI clock to the MIDI OUT socket u
 
 Likewise the pulse clock output can be send for any synch mode, so you can use ARPIE + synchtab to bridge incoming MIDI synch to outgoing pulse clock
 
-##How does it work?
+## How does it work?
 The ARPIE firmware program deals with generating and consuming the pulse clock and sending it to the header, so strictly speaking the synchtab is not even needed! 
 
 However you will of course need jack sockets, so the most fundamental function of the synchtab is to provide those. synchtab also includes a "Schmitt Trigger" buffer chip - these are used to clean up electrical signals by having an output which turns ON when the input crosses a voltage threshold level, but only turns OFF again when a different threshold is crossed. The gap between these thresholds helps stops signals jittering about and gives nice clean, definite, pulse edges. 

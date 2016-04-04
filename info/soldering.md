@@ -84,7 +84,7 @@ After the joint has cooled, trim excess leads with side cutters. Try to push dow
 <br>
 
 
-##Do's and Don'ts
+## Do's and Don'ts
 
 <table width="100%">
 <tr>

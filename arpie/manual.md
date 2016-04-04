@@ -142,7 +142,7 @@ The rear panel of ARPIE is shown below:
 # PATN 
 <a name="patn">
 
-##Rhythmic Pattern 
+## Rhythmic Pattern 
 <img class="wide" src="img/patn.png">
 
 ARPIE's **rhythmic pattern** is a sequence of up to sixteen steps that can each be set to **play** or **rest**. This pattern loops alongside the arpeggio and plays an arpeggio note or rests for a step, adding a rhythmic groove to the argeggio.
@@ -159,7 +159,7 @@ PATN is the default function, and ARPIE returns to it when you don't press anyth
 
 <a name="patn2">
 
-##Accent And Glide
+## Accent And Glide
 <img class="wide" src="img/accgld.png">
 
 If you hold the PATN button for a few seconds, you will go to the **accent** or **glide** pattern edit mode (according to the setting of PATN secondary function in <a href="#mode2">performance options<a>)
@@ -275,7 +275,7 @@ Press and hold MODE to access the Performance Options. This menu contains settin
 
 - **Patn Fn2**  controls the long-press function of the <a href="#patn2">PATN</a> button. When this option in ON, the second function of PATN is **accent**. When the option is OFF the function is **glide**
 
-#SHFT 
+# SHFT 
 <a name="shft">
 
 ## Octave shift
@@ -343,7 +343,7 @@ This option is accessed by a long press to the SPAN menu. It lets you decide wha
 - **Alternate** out-of-scale notes are alternately sharpened and flattened. Each time the sequence is rebuilt, the action taken with the first corrected note toggles. You can hear the effect of this by pressing the Alternate button again when you have a sequence which is forced to scale.
 
 
-#RATE
+# RATE
 <a name="rate">
 
 ## Time Division
@@ -358,7 +358,7 @@ The default "normal" note time (at least in 4/4 time) is one sixteenth of a beat
 
 - **(tr)** represents triplet time (two thirds normal note duration)
 
-#VELO
+# VELO
 <a name="velo">
 
 ## MIDI Velocity
@@ -379,7 +379,7 @@ Original velocity mode plays each arpeggiated note using the velocity of the not
 
 To switch back to selected velocity mode, press any velocity button, including zero.
 
-#GATE
+# GATE
 <a name="gate">
 
 ## MIDI Note Gate Length
@@ -390,7 +390,7 @@ Controls the gate length of the MIDI notes played by ARPIE. You can select a pro
 
 - **Tie Notes** means that a note is not stopped until the next note is started, with the MIDI note off message being sent after the next MIDI note on. This allows notes to play right across rests in the rhythmic pattern allowing for some nice grooves!
 
-#INST
+# INST
 <a name="inst">
 
 <img class="wide" src="img/inst.png">
@@ -417,7 +417,7 @@ To the right of the screen are some options for inserting chords without a keybo
 
 - The other buttons insert minor, minor seventh, major seventh, seventh. minor, major chords. The root note is C but you can use the TRAN function to change this.
 
-#SYNC
+# SYNC
 <a name="sync">
 
 ## Clock Source And BPM
@@ -457,7 +457,7 @@ These options give you control over how ARPIE internally routes MIDI information
 
 Note that MIDI thru is handed in ARPIEs firmware (there is no hardware thru) which can cause latency if the arpeggiator engine is busy - and possibly even dropped messages in situations of very high thru volume.
 
-#CHAN
+# CHAN
 <a name="chan">
 
 ## MIDI Output Channel
@@ -474,7 +474,7 @@ If the CHAN button is pressed and held for a couple of seconds, you can Select T
 OMNI mode is indicated by all the LEDs being ON. Pressing any single button will select an individual input channel. Pressing the same button again will restore OMNI mode.
 
 
-#TRAN
+# TRAN
 <a name="tran">
 
 ## Chromatic Transpose
@@ -483,7 +483,7 @@ Transpose the MIDI output. Buttons represent -3. -2, -1, 0, +1, +2 through to +1
 
 <img class="wide" src="img/trans.png">
 
-#HOLD
+# HOLD
 <a name="hold">
 
 ## Normal Operation
@@ -532,17 +532,17 @@ This function works a bit like MIDI lock, except that instead of passing input n
 
 This function is designed to work with the HOLD feature. You can have great fun when using this with force-to-scale options.
 
-#Clock/Message Routing
+# Clock/Message Routing
 
 This block diagram shows how data is routed around ARPIE
 
 <a target="_new" href="img/schematic.png"><img class="full" src="img/schematic.png"></a>
 
 
-#Hack Header Modes
+# Hack Header Modes
 <a name="hh">
 
-##Control Pots / Switch
+## Control Pots / Switch
 
 You can connect up to three potentiometers (100kOhm - 1Mohm recommended) to ARPIE's hack header, configured as voltage dividers between 0 and 5V, and have them control various internal or MIDI parameters. You can also connect an active low switch to PB3 and have it trigger some predefined specific actions.
 
@@ -584,7 +584,7 @@ The default MIDI CC numbers assigned to the three pots when in MIDI CC# mode are
 
 Of course if you are prepared to dirty your hands in the code, you can make it do anything you like!
 
-##Turning it off
+## Turning it off
 
 The hack header should always be disabled, unless you specifically want to connect something to it. Otherwise you may get random things happening if pots are not connected ... or maybe you want that!
 
@@ -623,7 +623,7 @@ The pin assignments on the header in this mode are
 
 You'll need to restart ARPIE after changing the pulse clock settings
 
-##Other Possibilities
+## Other Possibilities
 
 The hack header brings out 4 of the ATMEGA328 I/O pins. These pins can support some interesting functions that open up other possibilities for experimentation (as long as you are able to get your hands dirty in the code!). In future some of these might be implemented in the main firmware releases.
 
