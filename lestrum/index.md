@@ -6,7 +6,7 @@ layout: default
 * [Kit Contents](kit.html)
 * [Build Instructions](build.html)
 * [Getting The Best From LE STRUM](tips.html)
-* [Quick Reference Card](https://github.com/hotchk155/Voici-Le-Strum/blob/master/docs/quick%20ref.pdf?raw=true)
+* [Quick Reference Card](https://github.com/hotchk155/Voici-Le-Strum/raw/master/docs/quick%20ref%20v4.pdf)
 * [Hardware Information](hardware.html)
 * [Hints for modding LE STRUM](mods.html)
 * [Hacks du Strum (User mods and hacks gallery)](gallery.html)

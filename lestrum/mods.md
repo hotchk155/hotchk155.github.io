@@ -1,6 +1,9 @@
 ---
 layout: default
 ---
+
+# Hack it!
+
 LE STRUM is a pretty small device, on account of keeping the PCB costs down. However, the components and control surfaces are quite packed on to the PCB and it may be rather fiddly for serious performance use.
 
 The good news is that LE STRUM is designed to be hackable - there are various ways in which you can add your own control surfaces or enhance the existing ones.  I have received several questions about adding new control surfaces to LE STRUM. If you transform your LE STRUM I'd love to see the result and will feature it on this wiki!
