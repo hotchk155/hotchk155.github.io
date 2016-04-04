@@ -13,7 +13,6 @@ layout: default
 * [How it works](explanation.html)
 * [Source Code and EAGLE PCB Files](https://github.com/hotchk155/Voici-Le-Strum)
 
-</table>
 <hr>
 <br>
 <table>
