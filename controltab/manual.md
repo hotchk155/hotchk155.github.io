@@ -2,7 +2,7 @@
 layout: default
 ---
 
-#Using synchtab
+# Using synchtab
 
 synchtab requires your ARPIE to have the following:
 
