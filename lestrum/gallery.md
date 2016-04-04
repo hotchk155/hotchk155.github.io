@@ -6,7 +6,6 @@ layout: default
 
 I love hearing about the amazing ways some people have modded their Le Strum kit or built it into instruments
 
-
 Jose Javier Castellanos blew me away with this amazing and beautiful "Guitarp" build. Check out the video clip.<br>
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=1-J8S7CeuVw
 " target="_blank"><img src="http://img.youtube.com/vi/1-J8S7CeuVw/0.jpg" 
@@ -25,16 +24,16 @@ More from Martin... Le Strums fitted inside old SNES game cartridges, Genius!!!
 <img src="./img/userpics6.jpg">
 <img src="./img/userpics7.jpg">
 
-Meng Qi (http://www.mengqimusic.com/) uses arcade buttons as the triggers in this beauty
+[Meng Qi](http://www.mengqimusic.com/) uses arcade buttons as the triggers in this beauty
 <img src="https://farm8.staticflickr.com/7411/15847740964_3e34ff2a31_o.jpg">
 
-A lovely zither style build by Marie Höreth (http://www.mariemusic.de/le-strum.html)
+A lovely zither style build by [Marie Höreth](http://www.mariemusic.de/le-strum.html)
 <img src="./img/userpics11.jpg">
 
 Another guitar style build, from Louis üdvözletét
 <img src="./img/userpics9.jpg">
 
-The Knödelschneider48.. A beautiful executed harp design from Jakub (cube48) (https://www.flickr.com/photos/laborant48/sets/72157659406242023/)
+The [Knödelschneider48](https://www.flickr.com/photos/laborant48/sets/72157659406242023/).. A beautiful executed harp design from Jakub (cube48) 
 <img src="./img/userpics10.jpg">
 
 And Darren Hesford's superb (but frankly terrifying) strummable mannequin leg!
