@@ -29,7 +29,7 @@ Snip the legs nice and short
 Add diode D3, being careful to solder it the correct way around as shown (the stripe is also shown on the symbol for the diode on the board). **Do not heat the diode for too long when soldering - they are more sensitive to heat than resistors**
 <img src="img/R007.JPG"><br>
 
-Add the three small 100nF ceramic capacitors C1, C2, C3. These are not polarised and can be soldered either way around
+Add the three small 100nF ceramic capacitors C2, C3, C4. These are not polarised and can be soldered either way around
 <img src="img/R008.JPG"><br>
 
 Now we will solder the two LEDs. Each LED must be soldered the correct way around. You can identify the Anode (+) and Cathode (-) based on the length of the LED leads as shown below.
