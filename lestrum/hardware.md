@@ -33,3 +33,5 @@ PCB Render (EAGLE)
 
 Schematic
 <img src="https://raw.github.com/hotchk155/Voici-Le-Strum/master/hardware/schematic_render.png">
+
+The EAGLE source files can be downloaded [from here](https://github.com/hotchk155/Voici-Le-Strum/tree/master/hardware)
