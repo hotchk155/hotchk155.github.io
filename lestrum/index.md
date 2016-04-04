@@ -2,7 +2,6 @@
 layout: default
 ---
 # LE STRUM
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
 
 * [Kit Contents](kit.html)
 * [Build Instructions](build.html)
@@ -13,3 +12,15 @@ layout: default
 * [Hacks du Strum (User mods and hacks gallery)](gallery.html)
 * [How it works](explanation.html)
 * [Source Code and EAGLE PCB Files](https://github.com/hotchk155/Voici-Le-Strum)
+
+</table>
+<hr>
+<br>
+<table>
+<tr>
+<td width="88"><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="arpie_label" src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a></td>
+<td>This work is licensed under CC-BY-NC-SA terms. If you would like a commercial license please contact us.</td>
+<tr>
+</table>
+<br>
+<br>
