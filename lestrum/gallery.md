@@ -25,19 +25,19 @@ More from Martin... Le Strums fitted inside old SNES game cartridges, Genius!!!
 <img src="./img/userpics6.jpg">
 <img src="./img/userpics7.jpg">
 
-Meng Qi http://www.mengqimusic.com/ uses arcade buttons as the triggers in this beauty
+Meng Qi (http://www.mengqimusic.com/) uses arcade buttons as the triggers in this beauty
 <img src="https://farm8.staticflickr.com/7411/15847740964_3e34ff2a31_o.jpg">
 
-A lovely zither style build by Marie Höreth http://www.mariemusic.de/le-strum.html
+A lovely zither style build by Marie Höreth (http://www.mariemusic.de/le-strum.html)
 <img src="./img/userpics11.jpg">
 
 Another guitar style build, from Louis üdvözletét
 <img src="./img/userpics9.jpg">
 
-The Knödelschneider48.. A beautiful executed harp design from Jakub (cube48) https://www.flickr.com/photos/laborant48/sets/72157659406242023/
+The Knödelschneider48.. A beautiful executed harp design from Jakub (cube48) (https://www.flickr.com/photos/laborant48/sets/72157659406242023/)
 <img src="./img/userpics10.jpg">
 
-And Darren Hesford's frankly terrifying strummable mannequin leg!
+And Darren Hesford's superb (but frankly terrifying) strummable mannequin leg!
 <img src="./img/userpics12.jpg">
 
 Drop me an email if you'd like me to add your build to the gallery!
