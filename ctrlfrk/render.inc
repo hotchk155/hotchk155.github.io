@@ -2,7 +2,7 @@
 
 ' =================================================================
 Function RenderChannel(o, bIncludeDefault)
-	Response.Write "<select name=""" & o.Key & ".chan"">"		
+	Response.Write "<select name=""" & o.Key & ".chan"" id=""" & o.Key & ".chan"">"		
 	If bIncludeDefault Then
 		Response.Write "<option value=""default"""
 		If o.ChanType = 2 Then Response.Write " selected"
@@ -26,25 +26,31 @@ End Function
 
 '====================================================================
 Function RenderMinNote(o)
-	response.Write "<select name=""" & o.Key & ".min_note"">"
+	response.Write "<select name=""" & o.Key & ".min_note"" id=""" & o.Key & ".min_note"">"
 	For i = 0 to 127	
+		strNote = mid(" CC# DD# E FF# GG# AA# B", 1 + 2 * (i mod 12), 2)
+		strNote = trim(strNote & (int(i/12)-1))	
+	
 		response.Write "<option value=""" & i & """"
 		if o.MinNote = i then Response.write " selected"
-		response.Write ">" & i & "</option>"
+		response.Write ">" & i & " " & strNote &  "</option>"	
 	next
 	Response.Write "</select>"
 end function
 
 '====================================================================
 Function RenderMaxNote(o)
-	response.Write "<select name=""" & o.Key & ".max_note"">"
+	response.Write "<select name=""" & o.Key & ".max_note"" id=""" & o.Key & ".max_note"">"
 	For i = 0 to 127	
+		strNote = mid(" CC# DD# E FF# GG# AA# B", 1 + 2 * (i mod 12), 2)
+		strNote = trim(strNote & (int(i/12)-1))	
+		
 		response.Write "<option value=""" & i & """"
 		if o.MaxNote = i then Response.write " selected"
 		if i = 0 then 
 			response.Write ">(single)</option>"
 		else
-			response.Write ">" & i & "</option>"
+			response.Write ">" & i & " " & strNote &  "</option>"	
 		end if
 	next
 	Response.Write "</select>"
@@ -52,7 +58,7 @@ end function
 
 '====================================================================
 Function RenderMinVel(o)
-	response.Write "<select name=""" & o.Key & ".min_vel"">"
+	response.Write "<select name=""" & o.Key & ".min_vel"" id=""" & o.Key & ".min_vel"">"
 	For i = 1 to 127	
 		response.Write "<option value=""" & i & """"
 		if o.MinVel = i then Response.write " selected"
@@ -67,7 +73,7 @@ end function
 
 '====================================================================
 Function RenderCC(o)
-	response.Write "<select name=""" & o.Key & ".cc"">"
+	response.Write "<select name=""" & o.Key & ".cc"" id=""" & o.Key & ".cc"">"
 	For i = 1 to 127	
 		response.Write "<option value=""" & i & """"
 		if o.CC = i then Response.write " selected"
@@ -82,7 +88,7 @@ end function
 
 '====================================================================
 Function RenderThreshold(o)
-	response.Write "<select name=""" & o.Key & ".thrs"">"
+	response.Write "<select name=""" & o.Key & ".thrs"" id=""" & o.Key & ".thrs"">"
 	For i = 1 to 127	
 		response.Write "<option value=""" & i & """"
 		if o.Threshold = i then Response.write " selected"
@@ -92,8 +98,44 @@ Function RenderThreshold(o)
 end function
 
 '====================================================================
+Function RenderClockOffset(o)
+	response.Write "<select name=""" & o.Key & ".ofs"" id=""" & o.Key & ".ofs"">"
+	For i = 0 to 127	
+		response.Write "<option value=""" & i & """"
+		if o.Offset = i then Response.write " selected"
+		if i = 0 then 
+			response.Write ">(none)</option>"
+		else
+			response.Write ">+" & i & "</option>"
+		end if
+	next
+	Response.Write "</select>"
+End Function
+
+'====================================================================
+Function RenderGateDuration(o, bIncludeDefault)
+	response.Write "<select name=""" & o.Key & ".dur"" id=""" & o.Key & ".dur"">"
+	If bIncludeDefault then
+
+		response.Write "<option value=""default"">(trigger)</option>"
+
+		response.Write "<option value=""inf"""
+		If o.DurationType = 0 then response.Write " selected"	
+		response.Write ">(gate)</option>"
+		
+	end if
+	
+	For i = 5 to 125 step 5
+		response.Write "<option value=""" & i & """"
+		if o.DurationType = 1 and o.Duration = i then Response.write " selected"
+		response.Write ">" & i & "ms</option>"
+	next
+	Response.Write "</select>"
+End Function
+
+'====================================================================
 Function RenderSelection(name, default, dict)
-	response.Write "<select name=""" & name & """>"
+	response.Write "<select name=""" & name & """ id=""" & name & """>"
 	arrKeys = dict.Keys
 	arrItems = dict.Items
 	For i = 0 to dict.Count - 1
@@ -204,18 +246,12 @@ end function
 '====================================================================
 Function RenderGateEvent(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "1", "Note 1 gate"
-	dict.add "2", "Note 2 gate"
-	dict.add "3", "Note 3 gate"
-	dict.add "4", "Note 4 gate"
-	dict.add "5", "Any note gate"
-	dict.add "0", "No notes gate"
-	dict.add "11", "Note 1 trigger"
-	dict.add "12", "Note 2 trigger"
-	dict.add "13", "Note 3 trigger"
-	dict.add "14", "Note 4 trigger"
-	dict.add "15", "Any note trigger"
-	dict.add "10", "No notes trigger"
+	dict.add "1", "1st priority note"
+	dict.add "2", "2nd priority note"
+	dict.add "3", "3rd priority note"
+	dict.add "4", "4th priority note"
+	dict.add "5", "Any note"
+	dict.add "0", "No notes"
 	RenderSelection o.Key & ".event", o.InputEvent, dict
 end function
 
@@ -238,43 +274,5 @@ Function RenderClockDivider(o)
 	dict.add "96", "1"
 	RenderSelection o.Key & ".div", o.Divider, dict	
 end function
-
-'====================================================================
-Function RenderClockOffset(o)
-	response.Write "<select name=""" & o.Key & ".ofs"">"
-	For i = 0 to 127	
-		response.Write "<option value=""" & i & """"
-		if o.Offset = i then Response.write " selected"
-		if i = 0 then 
-			response.Write ">(none)</option>"
-		else
-			response.Write ">+" & i & "</option>"
-		end if
-	next
-	Response.Write "</select>"
-End Function
-
-'====================================================================
-Function RenderGateDuration(o, bIncludeDefault)
-	response.Write "<select name=""" & o.Key & ".dur"">"
-	If bIncludeDefault then
-		response.Write "<option value=""default"">(default)</option>"
-	
-		response.Write "<option value=""inf"""
-		If o.DurationType = 0 then response.Write " selected"	
-		response.Write ">(gate)</option>"
-	end if
-	
-	For i = 5 to 125 step 5
-		response.Write "<option value=""" & i & """"
-		if o.DurationType = 1 and o.Duration = i then Response.write " selected"
-		if i = 0 then 
-			response.Write ">(gate)</option>"
-		else
-			response.Write ">" & i & "ms</option>"
-		end if
-	next
-	Response.Write "</select>"
-End Function
 
 %>

@@ -99,9 +99,26 @@ for count = 1 to 4
 	RenderMinVel o
 	Response.Write "</td><td>"
 	RenderBendRange o
-	Response.Write "</td></tr>"
+	Response.Write "</td></tr>"	
 next	
 %>
+<script language="javascript">
+var o_form = document.forms[1];
+function XAble_Input(id) {
+	var d = (document.getElementById("in" + id + ".src").value != "1");
+	document.getElementById("in" + id + ".chan").disabled = d;
+	document.getElementById("in" + id + ".prty").disabled = d;
+	document.getElementById("in" + id + ".min_note").disabled = d;
+	document.getElementById("in" + id + ".max_note").disabled = d;
+	document.getElementById("in" + id + ".min_vel").disabled = d;
+	document.getElementById("in" + id + ".bend").disabled = d;
+}
+<% For count = 1 to 4 %>
+document.getElementById("in<%=count%>.src").onchange=function(){XAble_Input(<%=count%>);}
+XAble_Input(<%=count%>);
+<% Next %>	
+</script>
+
 </table>
 
 <%
@@ -142,6 +159,23 @@ for count = 1 to 4
 	Response.Write "</td></tr>"
 next	
 %>
+<script language="javascript">
+var o_form = document.forms[1];
+function XAble_CVOutput(id) {
+	var val = (document.getElementById("cv" + id + ".src").value);
+	var d_ev = !(val == "11" || val == "12" || val == "13" || val == "14");
+	var d_cc = !(val == "2");
+	document.getElementById("cv" + id + ".event").disabled = d_ev;
+	document.getElementById("cv" + id + ".trans").disabled = d_ev;
+	document.getElementById("cv" + id + ".chan").disabled = d_cc;
+	document.getElementById("cv" + id + ".cc").disabled = d_cc;
+}
+<% For count = 1 to 4 %>
+document.getElementById("cv<%=count%>.src").onchange=function(){XAble_CVOutput(<%=count%>);}
+XAble_CVOutput(<%=count%>);
+<% Next %>	
+</script>
+
 </table>
 
 <%
@@ -207,6 +241,31 @@ for count = 1 to 12
 next	
 %>
 </table>
+<script language="javascript">
+var o_form = document.forms[1];
+function XAble_GateOutput(id) {
+	var val = (document.getElementById("gt" + id + ".src").value);	
+	var e_any = (val != "0");
+	var e_ev = (val == "11" || val == "12" || val == "13" || val == "14");
+	var e_note = (val == "1");
+	var e_cc = (val == "2");
+	var e_clk = (val == "20"||val == "21");
+	document.getElementById("gt" + id + ".event").disabled = !e_ev;
+	document.getElementById("gt" + id + ".chan").disabled =  !(e_cc||e_note);
+	document.getElementById("gt" + id + ".min_note").disabled = !e_note;
+	document.getElementById("gt" + id + ".max_note").disabled = !e_note;
+	document.getElementById("gt" + id + ".min_vel").disabled = !e_note;
+	document.getElementById("gt" + id + ".cc").disabled = !e_cc;
+	document.getElementById("gt" + id + ".thrs").disabled = !e_cc;
+	document.getElementById("gt" + id + ".div").disabled = !e_clk;
+	document.getElementById("gt" + id + ".ofs").disabled = !e_clk;
+	document.getElementById("gt" + id + ".dur").disabled = !e_any;
+}
+<% For count = 1 to 12 %>
+document.getElementById("gt<%=count%>.src").onchange=function(){XAble_GateOutput(<%=count%>);}
+XAble_GateOutput(<%=count%>);
+<% Next %>	
+</script>
 
 
 <hr>
