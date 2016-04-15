@@ -43,13 +43,13 @@ table {
 ' ================================================================================================
 %>
 <hr>
-<p><b>Globals</b></p>
+<p><b>Globals</b> (TIP: hover mouse over field names for a description)</p>
 <table>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Default Channel</td>
+<td title="Select the MIDI channel to use for all mapings that use MIDI channel '(default)'">Default Channel</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Default Trigger</td>
+<td title="Select the millsecond duration for gate outputs that are set as '(trig)'">Default Trigger</td>
 </tr>
 <%
 	Set o = dictMappings.item(1)
@@ -72,13 +72,13 @@ table {
 <table>
 <tr>
 <td></td>
-<td>Enable</td>
-<td>Input from</td>
-<td>Note Priority</td>
-<td>Min.Note</td>
-<td>Max.Note</td>
-<td>Min Vel.</td>
-<td>Pitch Bend</td>
+<td title="Select whether this note input is enabled and listening to MIDI.&#10;You should disable any inputs you don't need.">Enable</td>
+<td title="Select the MIDI channel that this note input will listen to">Channel</td>
+<td title="When multiple notes are held, this setting determines which of the notes should be be played on the output">Note Priority</td>
+<td title="You can limit the range of notes that this note input will play (for example to split the keyboard between two outputs)&#10;Select min note = 0 and max note = 127 to play any note on the selected MIDI channel">Min.Note</td>
+<td title="Maximum note of the range. If you select 'single' then only the single note selected in min note will play.">Max.Note</td>
+<td title="You can filter notes that will play on the input based on their MIDI note velocity.&#10;Only notes that are equal or higher in velocity can play.">Min Vel.</td>
+<td title="Select the pitch bend range for this note input.">Pitch Bend</td>
 </tr>
 <%
 for count = 1 to 4
@@ -131,13 +131,13 @@ XAble_Input(<%=count%>);
 <table>
 <tr>
 <td></td>
-<td>CV Source</td>
+<td title="Select the source of the note or voltage level that this CV output will play.">CV Source</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Note input</td>
-<td>Transpose</td>
+<td title="If you select a note input, this decides which note (or other parameter)&#10;from that note input will be mapped to the CV output">Note input</td>
+<td title="If you select a note input, you can transpose the output note CV.&#10;This only works for notes (not velocity, bend etc)">Transpose</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Chan</td>
-<td>CC#</td>
+<td title="If you select a MIDI CC as input, you specify the channel here">Chan</td>
+<td title="If you select a MIDI CC as input, you specify the CC number here">CC#</td>
 </tr>
 <%
 for count = 1 to 4
@@ -188,22 +188,22 @@ XAble_CVOutput(<%=count%>);
 <table>
 <tr>
 <td></td>
-<td>Source</td>
+<td title="Select the source of event that will activate this gate output">Source</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Note input event</td>
+<td title="If you select a note input, the gate can activate when&#10;a note is played from that input">Note input event</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Chan</td>
-<td>Min.Note</td>
-<td>Max.Note</td>
-<td>Min Vel.</td>
+<td title="If you select MIDI note or MIDI CC to activate the gate output&#10;then you can select the MIDI channel here">Chan</td>
+<td title="If you select MIDI note to activate the output, select the note value here">Min.Note</td>
+<td title="Select a single note, or upper limit of a range of notes to activate the output when received">Max.Note</td>
+<td title="The output can activate only when notes are received that are equal or higher than this velocity">Min Vel.</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>CC#</td>
-<td>Switch@</td>
+<td title="If you select MIDI CC to activate the output, select the CC number here">CC#</td>
+<td title="If you select MIDI CC to activate the output, select the switching threshold here">Switch@</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Ck.Rate</td>
-<td>Tk.Ofs</td>
+<td title="If you select MIDI clock to activate the output, select the clock rate (divider) here">Ck.Rate</td>
+<td title="You can also offset MIDI clock outputs so they activate 'late' by a number of ticks (There are 24 ticks per beat)">Tk.Ofs</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
-<td>Trig</td>
+<td title="Select (trig) to pulse output with the default trigger time or&#10;select (gate) to have the output switch on until the activating condition is over (e.g. note released)&#10;You can also set a specific trigger time for this output">Trig</td>
 </tr>
 <%
 for count = 1 to 12
