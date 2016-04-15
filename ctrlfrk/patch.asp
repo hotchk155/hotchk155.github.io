@@ -2,6 +2,10 @@
 <!--#include file ="render.inc"-->
 <head>
 <style>
+body {
+    font-family: arial;
+}
+
 table {
     font-family: arial;
     font-size: 12px;
