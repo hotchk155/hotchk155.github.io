@@ -157,15 +157,15 @@ end function
 '====================================================================
 Function RenderPriority(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "0", "(Single Note)"
-	dict.add "1", "Most recently played"
-	dict.add "2", "Lowest pitch"
-	dict.add "3", "Lowest pitch (spread)"
-	dict.add "4", "Highest pitch"
-	dict.add "5", "Highest pitch (spread)"
-	dict.add "6", "Oldest note"
-	dict.add "7", "Randomised"
-	dict.add "8", "All recently played"
+	dict.add "0", "Most recently played"
+	dict.add "1", "Lowest pitch"
+	dict.add "2", "Lowest pitch (spread)"
+	dict.add "3", "Highest pitch"
+	dict.add "4", "Highest pitch (spread)"
+	dict.add "5", "Single note"
+	dict.add "6", "2 note cycle"
+	dict.add "7", "3 note cycle"
+	dict.add "8", "4 note cycle"
 	RenderSelection o.Key & ".prty", o.Priority, dict
 end function
 
