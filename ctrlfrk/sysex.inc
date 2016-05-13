@@ -5,33 +5,101 @@ Const MANUF_ID_0 = &H00
 Const MANUF_ID_1 = &H7F 
 Const MANUF_ID_2 = &H12 		
 
+Const NRPNH_GLOBAL 	= 1
+Const NRPNH_STACK1 	= 11
+Const NRPNH_STACK2 	= 12
+Const NRPNH_STACK3 	= 13
+Const NRPNH_STACK4 	= 14
+Const NRPNH_CV1		= 21
+Const NRPNH_CV2		= 22
+Const NRPNH_CV3		= 23
+Const NRPNH_CV4		= 24
+Const NRPNH_GATE1 	= 31
+Const NRPNH_GATE2 	= 32
+Const NRPNH_GATE3 	= 33
+Const NRPNH_GATE4 	= 34
+Const NRPNH_GATE5 	= 35
+Const NRPNH_GATE6 	= 36
+Const NRPNH_GATE7 	= 37
+Const NRPNH_GATE8 	= 38
+Const NRPNH_GATE9 	= 39
+Const NRPNH_GATE10	= 40
+Const NRPNH_GATE11	= 41
+Const NRPNH_GATE12	= 42
 
+Const NRPNL_SRC			= 1
+Const NRPNL_CHAN		= 2
+Const NRPNL_NOTE_MIN  	= 3
+Const NRPNL_NOTE		= 3
+Const NRPNL_NOTE_MAX  	= 4
+Const NRPNL_VEL_MIN  	= 5
+Const NRPNL_PB_RANGE	= 7
+Const NRPNL_PRIORITY	= 8	
+Const NRPNL_SPLIT  		= 9
+Const NRPNL_TICK_OFS	= 11
+Const NRPNL_GATE_DUR	= 12
+Const NRPNL_THRESHOLD	= 13
+Const NRPNL_TRANSPOSE	= 14
+Const NRPNL_VOLTS		= 15
+Const NRPNL_CV_OFFSET	= 126
+Const NRPNL_CV_GAIN		= 127
+	
+Const NRPVH_SRC_DISABLE		= 0
+Const NRPVH_SRC_MIDINOTE	= 1
+Const NRPVH_SRC_MIDICC		= 2
+Const NRPVH_SRC_MIDIBEND	= 3
+Const NRPVH_SRC_STACK1		= 11
+Const NRPVH_SRC_STACK2		= 12
+Const NRPVH_SRC_STACK3		= 13
+Const NRPVH_SRC_STACK4		= 14
+Const NRPVH_SRC_MIDITICK	= 20
+Const NRPVH_SRC_MIDITICKRUN	= 21
+Const NRPVH_SRC_MIDIRUN		= 22
+Const NRPVH_SRC_MIDISTART	= 23
+Const NRPVH_SRC_MIDICONT	= 24
+Const NRPVH_SRC_MIDISTOP	= 25
+Const NRPVH_SRC_TESTVOLTAGE0= 119
+Const NRPVH_SRC_TESTVOLTAGE1= 120
+Const NRPVH_SRC_TESTVOLTAGE2= 121
+Const NRPVH_SRC_TESTVOLTAGE3= 122
+Const NRPVH_SRC_TESTVOLTAGE4= 123
+Const NRPVH_SRC_TESTVOLTAGE5= 124
+Const NRPVH_SRC_TESTVOLTAGE6= 125
+Const NRPVH_SRC_TESTVOLTAGE7= 126
+Const NRPVH_SRC_TESTVOLTAGE8= 127
+Const NRPVH_CHAN_SPECIFIC	= 0
+Const NRPVH_CHAN_OMNI		= 1
+Const NRPVH_CHAN_GLOBAL		= 2
+Const NRPVH_DUR_INF			= 0
+Const NRPVH_DUR_MS			= 1
+Const NRPVH_DUR_GLOBAL		= 2
+	
 Dim dictMappings
 
 
 ' =================================================================
 Function ReadChan(o)
 	If Request.Form(o.Key & ".chan") = "omni" then
-		o.ChanType = 1
+		o.ChanType = NRPVH_CHAN_OMNI
 		o.ChanNumber = 0
 	elseif Request.Form(o.Key & ".chan") = "default" then
-		o.ChanType = 2
+		o.ChanType = NRPVH_CHAN_GLOBAL
 		o.ChanNumber = 0
 	else
-		o.ChanType = 0
+		o.ChanType = NRPVH_CHAN_SPECIFIC
 		o.ChanNumber = CLng(Request.Form(o.Key & ".chan"))
 	end if
 end function 
 ' =================================================================
 Function ReadDuration(o)
 	If request.form(o.Key & ".dur") = "inf" then
-		o.DurationType = 0
+		o.DurationType = NRPVH_DUR_INF
 		o.Duration = 0
 	elseIf request.form(o.Key & ".dur") = "default" then
-		o.DurationType = 2
+		o.DurationType = NRPVH_DUR_GLOBAL
 		o.Duration = 0
 	else
-		o.DurationType = 1
+		o.DurationType = NRPVH_DUR_MS
 		o.Duration = CByte(Request.Form(o.Key & ".dur"))
 	end if	
 End Function 
@@ -103,9 +171,9 @@ Class Globals
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""	
-		ChanType = 0 'specific
+		ChanType = NRPVH_CHAN_SPECIFIC	
 		ChanNumber = 1
-		DurationType = 1 'ms
+		DurationType = NRPVH_DUR_MS			
 		Duration = 15
 	End Sub
 	'--------------------------
@@ -115,16 +183,16 @@ Class Globals
 	End Sub	
 	'--------------------------
 	Public Sub WriteSysex(id)
-		WriteParam id, 2, Me.ChanType, Me.ChanNumber
-		WriteParam id, 9, Me.DurationType, Me.Duration
+		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+		WriteParam id, NRPNL_GATE_DUR, Me.DurationType, Me.Duration
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2
-			case 2
+			case NRPNL_CHAN
 				Me.ChanType = v1
 				Me.ChanNumber = v2
-			case 9
+			case NRPNL_GATE_DUR
 				Me.DurationType = v1
 				Me.Duration = v2
 		end select
@@ -147,8 +215,8 @@ Class NoteInput
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""	
-		Source = 0
-		ChanType = 2 'default
+		Source = NRPVH_SRC_DISABLE
+		ChanType = NRPVH_CHAN_GLOBAL
 		ChanNumber = 0	
 		Priority = 1
 		MinNote = 0
@@ -168,31 +236,31 @@ Class NoteInput
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)
-		WriteParam id, 1, Me.Source, 0
-		WriteParam id, 2, Me.ChanType, Me.ChanNumber
-		WriteParam id, 3, 0, Me.MinNote
-		WriteParam id, 4, 0, Me.MaxNote
-		WriteParam id, 5, 0, Me.MinVel
-		WriteParam id, 7, 0, Me.BendRange
-		WriteParam id, 8, 0, Me.Priority
+		WriteParam id, NRPNL_SRC, Me.Source, 0
+		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+		WriteParam id, NRPNL_NOTE_MIN, 0, Me.MinNote
+		WriteParam id, NRPNL_NOTE_MAX, 0, Me.MaxNote
+		WriteParam id, NRPNL_VEL_MIN, 0, Me.MinVel
+		WriteParam id, NRPNL_PB_RANGE, 0, Me.BendRange
+		WriteParam id, NRPNL_PRIORITY, 0, Me.Priority
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2
-			case 1
+			case NRPNL_SRC
 				Me.Source = v1
-			case 2
+			case NRPNL_CHAN
 				Me.ChanType = v1
 				Me.ChanNumber = v2
-			case 3
+			case NRPNL_NOTE_MIN
 				Me.MinNote = v2
-			case 4
+			case NRPNL_NOTE_MAX
 				Me.MaxNote = v2
-			case 5
+			case NRPNL_VEL_MIN
 				Me.MinVel = v2
-			case 7
+			case NRPNL_PB_RANGE
 				Me.BendRange = v2
-			case 8
+			case NRPNL_PRIORITY
 				Me.Priority = v2
 		end select
 	End Sub
@@ -212,7 +280,7 @@ Class CVOutput
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""
-		Source = 0
+		Source = NRPVH_SRC_DISABLE
 		InputEvent = 0
 		Transpose = 64
 		ChanType = 2 'default
@@ -230,34 +298,34 @@ Class CVOutput
 	'--------------------------		
 	Public Sub WriteSysex(id)
 		Select Case Me.Source
-			Case 11,12,13,14
-				WriteParam id, 1, Me.Source, Me.InputEvent
-			Case 2
-				WriteParam id, 1, Me.Source, Me.CC
+			Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
+				WriteParam id, NRPNL_SRC, Me.Source, Me.InputEvent
+			Case NRPVH_SRC_MIDICC
+				WriteParam id, NRPNL_SRC, Me.Source, Me.CC
 			case else
-				WriteParam id, 1, Me.Source, 0
+				WriteParam id, NRPNL_SRC, Me.Source, 0
 		End select
-		WriteParam id, 2, Me.ChanType, Me.ChanNumber
-		WriteParam id, 12, 0, Me.Transpose
+		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+		WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2
 			case 1
 				select case v1
-					case 11,12,13,14
+					Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
 						Me.Source = v1
 						Me.InputEvent = v2
-					case 2
+					case NRPVH_SRC_MIDICC
 						Me.Source = v1
 						Me.CC = v2
 					case else 
 						Me.Source = v1
 				end select					
-			case 2
+			case NRPVH_SRC_MIDICC
 				Me.ChanType = v1
 				Me.ChanNumber = v2
-			case 12
+			case NRPNL_TRANSPOSE
 				Me.Transpose = v2
 		end select
 	End Sub
@@ -286,7 +354,7 @@ Class GateOutput
 		Key  = ""
 		Source = 0
 		InputEvent = 0
-		ChanType = 2 'default
+		ChanType = NRPVH_CHAN_GLOBAL
 		ChanNumber = 0	
 		MinNote = 0
 		MaxNote = 127
@@ -295,7 +363,7 @@ Class GateOutput
 		Threshold = 64
 		Divider = 6
 		Offset = 0
-		DurationType = 2 'default
+		DurationType = NRPVH_DUR_GLOBAL
 		Duration = 0
 	End Sub
 	'--------------------------
@@ -315,58 +383,58 @@ Class GateOutput
 	'--------------------------		
 	Public Sub WriteSysex(id)
 		Select Case Me.Source
-			Case 11,12,13,14
-				WriteParam id, 1, Me.Source, Me.InputEvent
-			Case 1
-				WriteParam id, 1, Me.Source, Me.MinNote
-				WriteParam id, 2, Me.ChanType, Me.ChanNumber
-				WriteParam id, 4, 0, Me.MaxNote
-				WriteParam id, 5, 0, Me.MinVel
-			Case 2
-				WriteParam id, 1, Me.Source, Me.CC
-				WriteParam id, 2, Me.ChanType, Me.ChanNumber
-				WriteParam id, 13, 0, Me.Threshold
-			Case 20, 21
-				WriteParam id, 1, Me.Source, Me.Divider
-				WriteParam id, 11, 0, Me.Offset			
+			Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
+				WriteParam id, NRPNL_SRC, Me.Source, Me.InputEvent
+			Case NRPVH_SRC_MIDINOTE
+				WriteParam id, NRPNL_SRC, NRPVH_SRC_MIDINOTE, Me.MinNote
+				WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+				WriteParam id, NRPNL_NOTE_MAX, 0, Me.MaxNote
+				WriteParam id, NRPNL_VEL_MIN, 0, Me.MinVel
+			Case NRPVH_SRC_MIDICC
+				WriteParam id, NRPNL_SRC, NRPVH_SRC_MIDICC, Me.CC
+				WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+				WriteParam id, NRPNL_THRESHOLD, 0, Me.Threshold
+			Case NRPVH_SRC_MIDITICK, NRPVH_SRC_MIDITICKRUN
+				WriteParam id, NRPNL_SRC, Me.Source, Me.Divider
+				WriteParam id, NRPNL_TICK_OFS, 0, Me.Offset			
 			case else
-				WriteParam id, 1, Me.Source, 0
+				WriteParam id, NRPNL_SRC, Me.Source, 0
 		End select
-		WriteParam id, 9, Me.DurationType, Me.Duration
+		WriteParam id, NRPNL_GATE_DUR, Me.DurationType, Me.Duration
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2
-			case 1
+			case NRPNL_SRC
 				select case v1
-					case 11,12,13,14
+					Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
 						Me.Source = v1
 						Me.InputEvent = v2
-					case 1
+					case NRPVH_SRC_MIDINOTE
 						Me.Source = v1
 						Me.MinNote = v2
-					case 2
+					case NRPVH_SRC_MIDICC
 						Me.Source = v1
 						Me.CC = v2
-					case 20, 21
+					Case NRPVH_SRC_MIDITICK, NRPVH_SRC_MIDITICKRUN
 						Me.Source = v1
 						Me.Divider = v2					
 					case else 
 						Me.Source = v1
 				end select					
-			case 2
+			case NRPNL_CHAN
 				Me.ChanType = v1
 				Me.ChanNumber = v2
-			case 4
+			case NRPNL_NOTE_MAX
 				Me.MaxNote = v2
-			case 5
+			case NRPNL_VEL_MIN
 				Me.MinVel = v2
-			case 9
+			case NRPNL_GATE_DUR
 				Me.DurationType = v1
 				Me.Duration = v2
-			case 11
+			case NRPNL_TICK_OFS
 				Me.Offset = v2
-			case 13
+			case NRPNL_THRESHOLD
 				Me.Threshold = v2
 		end select
 	End Sub
