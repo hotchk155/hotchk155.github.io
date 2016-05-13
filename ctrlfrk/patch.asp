@@ -19,7 +19,7 @@ table {
 </style>
 </head>
 <body>
-<h1>CTRLFRK SysEx Builder</h1>
+<h1>CV.OCD SysEx Builder</h1>
 <%
 	InitMappings
 	
@@ -33,11 +33,11 @@ table {
 <hr>
 <table width=800><tr><td>
 <center>
-<img width=600 src="ctrlfrkcase.gif">
+<img width=600 src="cvocd.gif">
 </center>
 <hr>
 <form name="sysex_file" action="patch.asp?file=true" enctype="multipart/form-data" method="post">
-<p>You can load an existing CtrlFrk sysex into this form, or create a new one from scratch <input type="file" name="file" value="File">
+<p>You can load an existing CV.OCD sysex into this form, or create a new one from scratch <input type="file" name="file" value="File">
 <input type="submit" value="Load SysEx Into Form"></p>
 </form>
 <form name="sysex" action="get_sysex.asp" method="post">
