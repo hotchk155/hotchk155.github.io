@@ -37,7 +37,7 @@ CV.OCD has three LED indicators:
 
 CV.OCD has the following connections
 
-* A socket for a 2.1mm barrel connector with a negative pin (as commonly used for guitar effect pedals). This socket accepts a DC voltage of between 9 and 12V.
+* A socket for a 2.1mm barrel connector with a negative pin (as commonly used for guitar effect pedals). This socket accepts a DC voltage of between 9 and 12V. The device will not power up if a plug of the wrong polarity is inserted (although it will not be damaged)
 * A standard 5-pin MIDI input socket
 * A 3.5mm stereo jack socket for MIDI input. Using a stereo jack cable you can connect a device which uses a 3.5mm jack MIDI output (such as Novation Circuit or Arturia Beatstep Pro). This is an alternative to using the 5-pin socket. You **should not** try to use both inputs at the same time. They are parallel connections and will not merge MIDI data. Trying to use both at the same time may even damage your sending device.
 * Four 3.5mm jack sockets, labelled A through D, which output analog control voltage signals
@@ -49,8 +49,9 @@ CV.OCD is very configurable, but all configuration changes must be made over MID
 
 If you press and release the button, this will cause a reset, which will
 
-* clear all held notes
-* turn off all gates
+* clear all held MIDI notes
+* turn off all gates (see note)
+* set all CV outputs to zero (see note)
 * reset note cycle modes
 * reset clock dividers
 
@@ -59,6 +60,8 @@ The yellow LED blinks once when the reset is registered.
 If you press and hold the button for about 2 second, this will save the current configuration. The configuration will be restored next time CV.OCD is switched on. The yellow LED blinks a seccond time once the save takes place.
 
 This is the only way that a configuration is saved, so if you download a new SYSEX configuration file you need to remember to save it by holding the button, otherwise it will be lost when the power is switched off.
+
+Note: a CV mapped to a pitch bend will go to it half-voltage position (no bend) on reset. A CV mapped to a fixed voltage will not reset. An "all notes off" gate will be triggered.
 
 ## The Configuration Page
 
@@ -119,6 +122,16 @@ However we can, if we like, output the next three lower priority notes (i.e. nex
 in the configuration tool it would look like this
 
 <img src="img/config2.gif">
+
+## Pitch Bend
+
+MIDI pitch bend is applied automatically to notes that are mapped via a Note Input. You can use the configurator to specify the pitch bend range used by a given note input, for example
+
+<img src="img/config17.gif">
+
+If applying pitch bend would take a note outside of the range of a CV output, the output will "plateau" at the highest or lowest allowable value.
+
+You can also use pitch bend directly to control a CV output. This is explained further below.
 
 ## Note Priority Modes
 
@@ -202,16 +215,18 @@ CV.OCD's four analog CV outputs can output signals other than musical note pitch
 
 Some of these modes require additional parameters to be specified:
 
-To output a **MIDI CC Value** on CV output, we need to tell CV.OCD which CC we are interested in
+To output a **MIDI CC Value** on CV output, we need to tell CV.OCD which CC we are interested in, and what the maximum voltage range of the resulting CV output should be.
 
 <img src="img/config3.gif">
 
-To output **Pitch Bend** or **Channel Aftertouch** on a CV output, we need to tell CV.OCD which MIDI channel to watch
+To output **Pitch Bend** or **Channel Aftertouch** on a CV output, we need to tell CV.OCD which MIDI channel to watch, and provide the voltage range.
 
 <img src="img/config4.gif">
 <img src="img/config5.gif">
 
-**Clock BPM** or **Fixed Voltages** can be selected directly without any additional parameters
+**BPM To CV** just requires a voltage range.
+
+**Fixed Voltages** can be selected directly without any additional parameters.
 
 <img src="img/config6.gif">
 
@@ -242,9 +257,14 @@ Depending how a gate output is mapped, it will switch ON and OFF when a correspo
 <tr><td>Clock Tick AND Running</td><td>Tick received when running</td><td>Stop received</td></tr>
 </table>
 
-Rather than waiting for a "deactivate" event, a gate output can be automatically switched off after a short period of time, resulting in a "pulse" or trigger signal.
+Rather than waiting for a "deactivate" event, a gate output can be automatically switched off after a short period of time, resulting in a timed pulse or "trigger" signal. Trigger pulses can be set with a pulse duration between approx 1ms to approx 0.1 second
 
-Gate outputs can be set to operate in trigger mode with a pulse duration between approx 1ms to approx 0.1 second
+A third mode is "retrig". This is similar to gate mode, but when an additional gate event occurs, the gate is turned OFF for a very short time and then back ON again. This is typically useful when you are triggering an envelope which needs a "rising edge" (e.g. OFF to ON) to trigger the attack slope, but you also want control over the sustain time.
+
+These three modes are summarised with the picture below, which shows how three incomning note events would trigger the gate output in each case.
+
+<img class="wide" src="img/trigs.gif">
+
 
 ## Note Based Triggers
 
@@ -257,6 +277,16 @@ In these cases, where we are not worried about creating a pitch-based CV but rat
 We can assign a single note or a range of notes to a gate output. We can also specify a velocity threshold so that the gate fires only when the MIDI note is above that velocity. This can be useful for bringing in additional gates for harder hits, or maybe for adding an accent trigger which fires when any individual drum trigger is above a certain velocity threshold. For example
 
 <img src="img/config8.gif">
+
+## Legato Playing
+
+"Legato" playing means that you play a run of notes where each note flows smoothly into the next. In MIDI terms it means that the next note starts before the previous one ends, so the notes overlap. In CV terms it would mean that the gate signal remains HIGH without going back to LOW between notes.
+
+CV.OCD plays legato when a gate output is in Gate Mode. If you want to retrigger the gate output with every new note, you should can use Retrig or Trigger mode. 
+
+You can of course assign multiple gate outputs to the same note if you want to have both gate and trigger signals for it. The example below shows how to get gate and trigger for the same note.
+
+<img class="wide" src="img/config18.gif">
 
 ## CC Based Gates
 
@@ -418,9 +448,10 @@ Of course you can always give a specific MIDI channel or gate duration for a set
 <tr><td></td><td>[3] Note Range From</td><td>[0..127]</td><td>x</td></tr>
 <tr><td></td><td>[4] Note Range To</td><td>[0..127]</td><td>x</td></tr>
 <tr><td></td><td>[5] Min Velocity</td><td>[0..127]</td><td>x</td></tr>
-<tr><td></td><td>[9] Trigger duration</td><td>[0] Gate Mode</td><td>x</td></tr>
-<tr><td></td><td></td><td>[1] Milliseconds</td><td>[1..127] ms</td></tr>
-<tr><td></td><td></td><td>[2] Use Global</td><td>x</td></tr>
+<tr><td></td><td>[9] Trigger duration</td><td>[0] Gate</td><td>x</td></tr>
+<tr><td></td><td></td><td>[1] Trig Dur</td><td>[1..127] ms</td></tr>
+<tr><td></td><td></td><td>[2] Trig Global Dur</td><td>x</td></tr>
+<tr><td></td><td></td><td>[3] Retrig</td><td>x</td></tr>
 <tr><td></td><td>[11] CC threshold</td><td>[1..127] CC Value</td><td>x</td></tr>
 
 </table>
