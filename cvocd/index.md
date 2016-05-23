@@ -7,7 +7,7 @@ layout: default
 Coming soon... a MIDI to CV box on acid... if you can hallucinate it, CTRLFRK can probably do it*...
 <br>
 
-<img src="cvocd.gif">
+<img src="img/cvocd.gif">
 
 <br>
 4 CV outputs, 12 assignable gates, and your twisted imagination... this could get dangerous...

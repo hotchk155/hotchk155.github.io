@@ -1,3 +1,4 @@
 _site
 *.md.new
-**/*.jbf
+pspbrwse.jbf
+.picasa.ini

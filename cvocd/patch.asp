@@ -33,7 +33,7 @@ table {
 <hr>
 <table width=800><tr><td>
 <center>
-<img width=600 src="cvocd.gif">
+<img width=600 src="img/cvocd.gif">
 </center>
 <hr>
 <form name="sysex_file" action="patch.asp?file=true" enctype="multipart/form-data" method="post">

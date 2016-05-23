@@ -55,6 +55,15 @@ img.full {
 	margin-bottom: 50;
 }
 
+img.auto {
+    width: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150;
+	margin-bottom: 50;
+}
+
 img.arpie_label {
     width: 150px;
 	display: block;
@@ -84,6 +93,13 @@ img.med_pic {
 
 table.data {
 	border: 1px solid black
+}
+tr.grid , td.grid , th.grid  {
+	border: 1px solid black
+}
+table.full {
+	border: 1px solid black;
+    width: 640px;
 }
 td {
     vertical-align: top;
