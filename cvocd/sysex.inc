@@ -41,13 +41,16 @@ Const NRPNL_GATE_DUR	= 12
 Const NRPNL_THRESHOLD	= 13
 Const NRPNL_TRANSPOSE	= 14
 Const NRPNL_VOLTS		= 15
+Const NRPNL_SAVE		= 100
 Const NRPNL_CV_OFFSET	= 126
 Const NRPNL_CV_GAIN		= 127
 	
 Const NRPVH_SRC_DISABLE		= 0
 Const NRPVH_SRC_MIDINOTE	= 1
 Const NRPVH_SRC_MIDICC		= 2
-Const NRPVH_SRC_MIDIBEND	= 3
+Const NRPVH_SRC_MIDICC_NEG	= 3
+Const NRPVH_SRC_MIDIBEND	= 4
+Const NRPVH_SRC_MIDITOUCH	= 5
 Const NRPVH_SRC_STACK1		= 11
 Const NRPVH_SRC_STACK2		= 12
 Const NRPVH_SRC_STACK3		= 13
@@ -56,23 +59,16 @@ Const NRPVH_SRC_MIDITICK	= 20
 Const NRPVH_SRC_MIDITICKRUN	= 21
 Const NRPVH_SRC_MIDIRUN		= 22
 Const NRPVH_SRC_MIDISTART	= 23
-Const NRPVH_SRC_MIDICONT	= 24
+//Const NRPVH_SRC_MIDICONT	= 24
 Const NRPVH_SRC_MIDISTOP	= 25
-Const NRPVH_SRC_TESTVOLTAGE0= 119
-Const NRPVH_SRC_TESTVOLTAGE1= 120
-Const NRPVH_SRC_TESTVOLTAGE2= 121
-Const NRPVH_SRC_TESTVOLTAGE3= 122
-Const NRPVH_SRC_TESTVOLTAGE4= 123
-Const NRPVH_SRC_TESTVOLTAGE5= 124
-Const NRPVH_SRC_TESTVOLTAGE6= 125
-Const NRPVH_SRC_TESTVOLTAGE7= 126
-Const NRPVH_SRC_TESTVOLTAGE8= 127
+Const NRPVH_SRC_TESTVOLTAGE = 127
 Const NRPVH_CHAN_SPECIFIC	= 0
 Const NRPVH_CHAN_OMNI		= 1
 Const NRPVH_CHAN_GLOBAL		= 2
 Const NRPVH_DUR_INF			= 0
 Const NRPVH_DUR_MS			= 1
 Const NRPVH_DUR_GLOBAL		= 2
+Const NRPVH_DUR_RETRIG		= 3
 	
 Dim dictMappings
 
@@ -97,6 +93,9 @@ Function ReadDuration(o)
 		o.Duration = 0
 	elseIf request.form(o.Key & ".dur") = "default" then
 		o.DurationType = NRPVH_DUR_GLOBAL
+		o.Duration = 0
+	elseIf request.form(o.Key & ".dur") = "retrig" then
+		o.DurationType = NRPVH_DUR_RETRIG
 		o.Duration = 0
 	else
 		o.DurationType = NRPVH_DUR_MS
@@ -153,6 +152,14 @@ Function ReadOffset(o)
 	o.Offset = CByte(Request.Form(o.Key & ".ofs"))
 End Function 
 ' =================================================================
+Function ReadVolts(o)
+	o.Volts = CByte(Request.Form(o.Key & ".volts"))
+End Function 
+' =================================================================
+Function ReadAutoSave(o)
+	o.AutoSave = CByte(Request.Form(o.Key & ".autosave"))
+End Function 
+' =================================================================
 Function WriteParam(a,b,c,d)
 '	Response.Write a & ", " & b & ", " & c & ", " & d & "<br>"
 	Response.BinaryWrite ChrB(a) & ChrB(b) & ChrB(c) & ChrB(d) 
@@ -168,6 +175,7 @@ Class Globals
 	Public ChanNumber
 	Public DurationType
 	Public Duration
+	Public AutoSave
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""	
@@ -175,16 +183,19 @@ Class Globals
 		ChanNumber = 1
 		DurationType = NRPVH_DUR_MS			
 		Duration = 15
+		AutoSave = 1
 	End Sub
 	'--------------------------
 	Public Sub ReadForm
 		ReadChan Me
 		ReadDuration Me
+		ReadAutoSave Me
 	End Sub	
 	'--------------------------
 	Public Sub WriteSysex(id)
 		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
 		WriteParam id, NRPNL_GATE_DUR, Me.DurationType, Me.Duration
+		WriteParam id, NRPNL_SAVE, 0, Me.AutoSave
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
@@ -195,6 +206,8 @@ Class Globals
 			case NRPNL_GATE_DUR
 				Me.DurationType = v1
 				Me.Duration = v2
+			case NRPNL_SAVE
+				Me.AutoSave = v2
 		end select
 	End Sub
 End Class
@@ -218,7 +231,7 @@ Class NoteInput
 		Source = NRPVH_SRC_DISABLE
 		ChanType = NRPVH_CHAN_GLOBAL
 		ChanNumber = 0	
-		Priority = 1
+		Priority = 3
 		MinNote = 0
 		MaxNote = 127
 		MinVel = 0
@@ -277,6 +290,7 @@ Class CVOutput
 	Public ChanType
 	Public ChanNumber
 	Public CC
+	Public Volts
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""
@@ -286,6 +300,7 @@ Class CVOutput
 		ChanType = 2 'default
 		ChanNumber = 0	
 		CC = 1
+		Volts = 5
 	End Sub	
 	'--------------------------
 	Public Sub ReadForm
@@ -294,18 +309,20 @@ Class CVOutput
 		ReadTranspose Me
 		ReadChan Me
 		ReadCC Me		
+		ReadVolts Me		
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)
 		Select Case Me.Source
 			Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
 				WriteParam id, NRPNL_SRC, Me.Source, Me.InputEvent
-			Case NRPVH_SRC_MIDICC
+			Case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
 				WriteParam id, NRPNL_SRC, Me.Source, Me.CC
 			case else
 				WriteParam id, NRPNL_SRC, Me.Source, 0
 		End select
 		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+		WriteParam id, NRPNL_VOLTS, 0, Me.Volts
 		WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
 	End Sub
 	'--------------------------
@@ -316,15 +333,17 @@ Class CVOutput
 					Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
 						Me.Source = v1
 						Me.InputEvent = v2
-					case NRPVH_SRC_MIDICC
+					case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
 						Me.Source = v1
 						Me.CC = v2
 					case else 
 						Me.Source = v1
 				end select					
-			case NRPVH_SRC_MIDICC
+			case NRPNL_CHAN
 				Me.ChanType = v1
 				Me.ChanNumber = v2
+			case NRPNL_VOLTS
+				Me.Volts = v2
 			case NRPNL_TRANSPOSE
 				Me.Transpose = v2
 		end select
@@ -353,7 +372,7 @@ Class GateOutput
 	Public Sub Class_Initialize
 		Key  = ""
 		Source = 0
-		InputEvent = 0
+		InputEvent = 1
 		ChanType = NRPVH_CHAN_GLOBAL
 		ChanNumber = 0	
 		MinNote = 0
@@ -390,8 +409,8 @@ Class GateOutput
 				WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
 				WriteParam id, NRPNL_NOTE_MAX, 0, Me.MaxNote
 				WriteParam id, NRPNL_VEL_MIN, 0, Me.MinVel
-			Case NRPVH_SRC_MIDICC
-				WriteParam id, NRPNL_SRC, NRPVH_SRC_MIDICC, Me.CC
+			Case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
+				WriteParam id, NRPNL_SRC, Me.Source, Me.CC
 				WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
 				WriteParam id, NRPNL_THRESHOLD, 0, Me.Threshold
 			Case NRPVH_SRC_MIDITICK, NRPVH_SRC_MIDITICKRUN
@@ -413,7 +432,7 @@ Class GateOutput
 					case NRPVH_SRC_MIDINOTE
 						Me.Source = v1
 						Me.MinNote = v2
-					case NRPVH_SRC_MIDICC
+					case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
 						Me.Source = v1
 						Me.CC = v2
 					Case NRPVH_SRC_MIDITICK, NRPVH_SRC_MIDITICKRUN

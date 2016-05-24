@@ -54,6 +54,8 @@ table {
 <td title="Select the MIDI channel to use for all mapings that use MIDI channel '(default)'">Default Channel</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
 <td title="Select the millsecond duration for gate outputs that are set as '(trig)'">Default Trigger</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+<td title="Whether uploaded patch is automatically saved to device EEPROM">Auto Save</td>
 </tr>
 <%
 	Set o = dictMappings.item(1)
@@ -63,6 +65,9 @@ table {
 	Response.Write "</td><td>"
 	Response.Write "</td><td>"
 	RenderGateDuration o, False
+	Response.Write "</td><td>"
+	Response.Write "</td><td>"
+	RenderAutoSave o
 	Response.Write "</td><tr>"
 %>
 </table>
@@ -142,6 +147,7 @@ XAble_Input(<%=count%>);
 <td>&nbsp;&nbsp;&nbsp;</td>
 <td title="If you select a MIDI CC as input, you specify the channel here">Chan</td>
 <td title="If you select a MIDI CC as input, you specify the CC number here">CC#</td>
+<td title="For non-musical note CV this is the full voltage range">Range</td>
 </tr>
 <%
 for count = 1 to 4
@@ -160,6 +166,8 @@ for count = 1 to 4
 	RenderChannel o, True
 	Response.Write "</td><td>"
 	RenderCC o
+	Response.Write "</td><td>"
+	RenderVolts o
 	Response.Write "</td></tr>"
 next	
 %>
@@ -167,15 +175,20 @@ next
 var o_form = document.forms[1];
 function XAble_CVOutput(id) {
 	var val = (document.getElementById("cv" + id + ".src").value);
+	var val2 = (document.getElementById("cv" + id + ".event").value);
 	var d_ev = !(val == "11" || val == "12" || val == "13" || val == "14");
+	var d_ch = !(val == "2" || val=="3" || val=="4" || val == "5");
 	var d_cc = !(val == "2");
+	var d_volts = !(val == "2" || val=="4" || val == "5" || val == "20" || val=="127" || (!d_ev && val2=="20"));
 	document.getElementById("cv" + id + ".event").disabled = d_ev;
 	document.getElementById("cv" + id + ".trans").disabled = d_ev;
-	document.getElementById("cv" + id + ".chan").disabled = d_cc;
+	document.getElementById("cv" + id + ".chan").disabled = d_ch;
 	document.getElementById("cv" + id + ".cc").disabled = d_cc;
+	document.getElementById("cv" + id + ".volts").disabled = d_volts;
 }
 <% For count = 1 to 4 %>
 document.getElementById("cv<%=count%>.src").onchange=function(){XAble_CVOutput(<%=count%>);}
+document.getElementById("cv<%=count%>.event").onchange=function(){XAble_CVOutput(<%=count%>);}
 XAble_CVOutput(<%=count%>);
 <% Next %>	
 </script>
@@ -252,7 +265,7 @@ function XAble_GateOutput(id) {
 	var e_any = (val != "0");
 	var e_ev = (val == "11" || val == "12" || val == "13" || val == "14");
 	var e_note = (val == "1");
-	var e_cc = (val == "2");
+	var e_cc = (val == "2"||val == "3");
 	var e_clk = (val == "20"||val == "21");
 	document.getElementById("gt" + id + ".event").disabled = !e_ev;
 	document.getElementById("gt" + id + ".chan").disabled =  !(e_cc||e_note);

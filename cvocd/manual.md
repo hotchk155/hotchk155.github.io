@@ -57,9 +57,9 @@ If you press and release the button, this will cause a reset, which will
 
 The yellow LED blinks once when the reset is registered.
 
-If you press and hold the button for about 2 second, this will save the current configuration. The configuration will be restored next time CV.OCD is switched on. The yellow LED blinks a seccond time once the save takes place.
+If you press and hold the button for about 2 second, this will save the current configuration. The configuration will be restored next time CV.OCD is switched on. The yellow LED blinks a second time once the save takes place.
 
-This is the only way that a configuration is saved, so if you download a new SYSEX configuration file you need to remember to save it by holding the button, otherwise it will be lost when the power is switched off.
+The saved configuration can be overwritten by an incoming SYSEX patch depending on the Auto Save setting. If this is Off then you must use the button to save the configuration (so it is is stored when power is off).
 
 Note: a CV mapped to a pitch bend will go to it half-voltage position (no bend) on reset. A CV mapped to a fixed voltage will not reset. An "all notes off" gate will be triggered.
 
@@ -224,11 +224,12 @@ To output **Pitch Bend** or **Channel Aftertouch** on a CV output, we need to te
 <img src="img/config4.gif">
 <img src="img/config5.gif">
 
-**BPM To CV** just requires a voltage range.
-
-**Fixed Voltages** can be selected directly without any additional parameters.
+**BPM To CV** just requires a voltage range. A BPM of approx 0-250 BPM is mapped over the full voltage range. The output is updated once per beat, so updates are slow at low BPM and rapid changes in BPM will result in a "stepping" of the CV. If the MIDI clock stops, this does not reset the CV.
 
 <img src="img/config6.gif">
+
+A **Fixed Voltage** can be output by selecting the required voltage in the Range drop-down. The ability to output a fixed voltage can be useful for calibrating the pitch CV input of a synth.
+
 
 ## All About Gates
 
@@ -250,8 +251,8 @@ Depending how a gate output is mapped, it will switch ON and OFF when a correspo
 <tr><td>All Notes Off</td><td>All notes released</td><td>Any note pressed</td></tr>
 <tr><td>CC above threshold</td><td>CC value goes from below to at/above threshold</td><td>CC value goes from at/above to below threshold</td></tr>
 <tr><td>CC below threshold</td><td>CC value goes from at/above to below threshold</td><td>CC value goes from below to at/above threshold</td></tr>
-<tr><td>Transport Start</td><td>Start received</td><td>Stop received</td></tr>
-<tr><td>Transport Start/Continue</td><td>Start or continue received (i.e. clock is running)</td><td>Stop received</td></tr>
+<tr><td>Transport Restart</td><td>Start received</td><td>Stop received</td></tr>
+<tr><td>Transport Running</td><td>Start or continue received (i.e. clock is running)</td><td>Stop received</td></tr>
 <tr><td>Transport Stop</td><td>Stop received</td><td>Start or continue received</td></tr>
 <tr><td>Clock Tick</td><td>Tick received</td><td>Indefinite</td></tr>
 <tr><td>Clock Tick AND Running</td><td>Tick received when running</td><td>Stop received</td></tr>
@@ -306,13 +307,13 @@ MIDI has the concept of a "play" mode (or "transport"). When the transport is ru
 
 MIDI controls playback with three messages:
 
-* **START** - This message is usually sent by a master controller device when a slave device should reset its play position to the beginning of a sequence and should start playing in time with MIDI clock ticks.
-* **CONTINUE** - This message is usually sent by a master controller device when a slave sequencer pick up playing from its current position.
-* **STOP** - This message stops playback at the current position.
+* **START** - This message is usually sent by a master controller device when a slave device should reset its play position to the beginning of a sequence and should start playing in time with MIDI clock ticks. When this message is received, CV.OCV triggers any gate with a "Transport restart" or "Transport running" condition.
+* **CONTINUE** - This message is usually sent by a master controller device when a slave sequencer pick up playing from its current position. When this message is received, CV.OCV triggers any gate with a "Transport running" condition.
+* **STOP** - This message stops playback at the current position. When this message is received, CV.OCV triggers any gate with a "Transport stop" condition.
 
 It should be noted that the MIDI clock tick messages (which define the BPM) continue to be sent by the master device even when the transport is stopped.
 
-CV.OCD lets you activate gate outputs when these messages are received. 
+
 
 ## Clock Outputs
 
@@ -373,6 +374,7 @@ Of course you can always give a specific MIDI channel or gate duration for a set
 
 <tr><td>[1] Global</td><td>[2] Midi Channel</td><td>[0] Specific</td><td>[1...16]</td></tr>
 <tr><td></td><td>[9] Gate Duration</td><td>[1] Milliseconds</td><td>[0...127]</td></tr>
+<tr><td></td><td>[100] Auto Save</td><td>[0]</td><td>[0...1]</td></tr>
 
 <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
 
@@ -434,9 +436,8 @@ Of course you can always give a specific MIDI channel or gate duration for a set
 
 <tr><td></td><td></td><td>[20] Clock tick</td><td>[1..127] divider</td></tr>
 <tr><td></td><td></td><td>[21] Clock tick AND Running</td><td>[1..127] divider</td></tr>
-<tr><td></td><td></td><td>[22] Clock running</td><td>x</td></tr>
-<tr><td></td><td></td><td>[23] Transport start</td><td>x</td></tr>
-<tr><td></td><td></td><td>[24] Start/continue</td><td>x</td></tr>
+<tr><td></td><td></td><td>[22] Transport running</td><td>x</td></tr>
+<tr><td></td><td></td><td>[23] Transport restart</td><td>x</td></tr>
 <tr><td></td><td></td><td>[25] Transport stop</td><td>x</td></tr>
 
 <tr><td></td><td>[2] MIDI Channel</td><td>[0] Specific</td><td>[1..16] Channel</td></tr>

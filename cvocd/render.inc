@@ -114,15 +114,24 @@ End Function
 
 '====================================================================
 Function RenderGateDuration(o, bIncludeDefault)
+
 	response.Write "<select name=""" & o.Key & ".dur"" id=""" & o.Key & ".dur"">"
+
+
+
 	If bIncludeDefault then
-
-		response.Write "<option value=""default"">(trigger)</option>"
-
+	
 		response.Write "<option value=""inf"""
 		If o.DurationType = 0 then response.Write " selected"	
 		response.Write ">(gate)</option>"
-		
+
+		response.Write "<option value=""retrig"""
+		If o.DurationType = 3 then response.Write " selected"	
+		response.Write ">(retrig)</option>"
+
+		response.Write "<option value=""default"""
+		If o.DurationType = 2 then response.Write " selected"	
+		response.Write ">(trigger)</option>"		
 	end if
 	
 	For i = 5 to 125 step 5
@@ -187,9 +196,10 @@ Function RenderCVSource(o)
 	dict.add "13", "Note input #3"
 	dict.add "14", "Note input #4"
 	dict.add "2", "MIDI CC"
+	dict.add "4", "Pitch Bend"
+	dict.add "5", "Channel Aftertouch"
 	dict.add "20", "BPM to CV"
-	dict.add "120", "Calibration +1V"
-	dict.add "123", "Calibration +4V"
+	dict.add "127", "Fixed Voltage"
 	RenderSelection o.Key & ".src", o.Source, dict
 end function
 
@@ -201,7 +211,6 @@ Function RenderCVEvent(o)
 	dict.add "3", "3rd Priority Note"
 	dict.add "4", "4th Priority Note"
 	dict.add "20", "Velocity to CV"
-	dict.add "21", "Pitch Bend to CV"
 	RenderSelection o.Key & ".event", o.InputEvent, dict
 end function
 
@@ -233,13 +242,13 @@ Function RenderGateSource(o)
 	dict.add "13", "Note input #3"
 	dict.add "14", "Note input #4"
 	dict.add "1", "MIDI note"
-	dict.add "2", "MIDI CC"
+	dict.add "2", "CC above threshold"
+	dict.add "3", "CC below threshold"
 	dict.add "20", "Clock Tick"
 	dict.add "21", "Clock Tick+Run"
-	dict.add "22", "Clock Running"
-	dict.add "23", "Clock Start"
-	dict.add "24", "Clock Continue"
-	dict.add "25", "Clock Stop"
+	dict.add "22", "Transport Run"
+	dict.add "23", "Transport Restart"
+	dict.add "25", "Transport Stop"
 	RenderSelection o.Key & ".src", o.Source, dict
 end function
 
@@ -273,6 +282,28 @@ Function RenderClockDivider(o)
 	dict.add "72", "1/2D"
 	dict.add "96", "1"
 	RenderSelection o.Key & ".div", o.Divider, dict	
+end function
+
+'====================================================================
+Function RenderVolts(o)
+	Set dict = Server.CreateObject("Scripting.Dictionary")
+	dict.add "1", "1V"
+	dict.add "2", "2V"
+	dict.add "3", "3V"
+	dict.add "4", "4V"
+	dict.add "5", "5V"
+	dict.add "6", "6V"
+	dict.add "7", "7V"
+	dict.add "8", "8V"
+	RenderSelection o.Key & ".volts", o.Volts, dict
+end function
+
+'====================================================================
+Function RenderAutoSave(o)
+	Set dict = Server.CreateObject("Scripting.Dictionary")
+	dict.add "0", "Off"
+	dict.add "1", "On"
+	RenderSelection o.Key & ".autosave", o.AutoSave, dict
 end function
 
 %>
