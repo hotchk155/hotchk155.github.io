@@ -457,7 +457,12 @@ Of course you can always give a specific MIDI channel or gate duration for a set
 
 </table>
 
-The CV.OCD can be configured my sending NRPN messages using the above values. A SYSEX file can also be generated which collates a list of these messages. The format of the patch SYSEX is as follows
+The CV.OCD can be configured my sending NRPN messages using the above values. 
+
+x means that a value is not important, however it still needs to be sent (send a zero), since CV.OCD updates the parameter only when the low byte of the value is received.
+
+
+A SYSEX file can also be generated which collates a list of these messages. The format of the patch SYSEX is as follows
 
 
 <table>
@@ -474,3 +479,8 @@ The CV.OCD can be configured my sending NRPN messages using the above values. A 
 <td class="grid">#F7</td>
 </tr>
 </table>
+
+<br>
+<br>
+<br>
+End
