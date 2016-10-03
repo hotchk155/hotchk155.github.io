@@ -54,8 +54,6 @@ table {
 <td title="Select the MIDI channel to use for all mapings that use MIDI channel '(default)'">Default Channel</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
 <td title="Select the millsecond duration for gate outputs that are set as '(trig)'">Default Trigger</td>
-<td>&nbsp;&nbsp;&nbsp;</td>
-<td title="Whether uploaded patch is automatically saved to device EEPROM">Auto Save</td>
 </tr>
 <%
 	Set o = dictMappings.item(1)
@@ -65,9 +63,6 @@ table {
 	Response.Write "</td><td>"
 	Response.Write "</td><td>"
 	RenderGateDuration o, False
-	Response.Write "</td><td>"
-	Response.Write "</td><td>"
-	RenderAutoSave o
 	Response.Write "</td><tr>"
 %>
 </table>

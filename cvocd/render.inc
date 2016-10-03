@@ -298,12 +298,4 @@ Function RenderVolts(o)
 	RenderSelection o.Key & ".volts", o.Volts, dict
 end function
 
-'====================================================================
-Function RenderAutoSave(o)
-	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "0", "Off"
-	dict.add "1", "On"
-	RenderSelection o.Key & ".autosave", o.AutoSave, dict
-end function
-
 %>

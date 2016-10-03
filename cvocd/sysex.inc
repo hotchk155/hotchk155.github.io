@@ -3,7 +3,7 @@
 
 Const MANUF_ID_0 = &H00
 Const MANUF_ID_1 = &H7F 
-Const MANUF_ID_2 = &H12 		
+Const MANUF_ID_2 = &H15		
 
 Const NRPNH_GLOBAL 	= 1
 Const NRPNH_STACK1 	= 11
@@ -175,7 +175,7 @@ Class Globals
 	Public ChanNumber
 	Public DurationType
 	Public Duration
-	Public AutoSave
+	
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""	
@@ -188,14 +188,12 @@ Class Globals
 	'--------------------------
 	Public Sub ReadForm
 		ReadChan Me
-		ReadDuration Me
-		ReadAutoSave Me
+		ReadDuration Me		
 	End Sub	
 	'--------------------------
 	Public Sub WriteSysex(id)
 		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
 		WriteParam id, NRPNL_GATE_DUR, Me.DurationType, Me.Duration
-		WriteParam id, NRPNL_SAVE, 0, Me.AutoSave
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
@@ -206,8 +204,6 @@ Class Globals
 			case NRPNL_GATE_DUR
 				Me.DurationType = v1
 				Me.Duration = v2
-			case NRPNL_SAVE
-				Me.AutoSave = v2
 		end select
 	End Sub
 End Class
@@ -523,7 +519,8 @@ function ReadSysEx
 	if index = 0 then
 		exit function 
 	end if
-    if midb(data,index,4) <> (ChrB(&HF0) & ChrB(MANUF_ID_0) & ChrB(MANUF_ID_1) & ChrB(MANUF_ID_2)) then
+    if (midb(data,index,4) <> (ChrB(&HF0) & ChrB(MANUF_ID_0) & ChrB(MANUF_ID_1) & ChrB(&H12))) and _   
+		(midb(data,index,4) <> (ChrB(&HF0) & ChrB(MANUF_ID_0) & ChrB(MANUF_ID_1) & ChrB(MANUF_ID_2))) then
 		exit function 
 	end if
 	index = index + 4
