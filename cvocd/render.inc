@@ -272,7 +272,7 @@ Function RenderClockDivider(o)
 	dict.add "6", "1/16"
 	dict.add "8", "1/8T"
 	dict.add "9", "1/16D"
-	dict.add "1", "1/8"
+	dict.add "12", "1/8"
 	dict.add "16", "1/4T"
 	dict.add "18", "1/8D"
 	dict.add "24", "1/4"
