@@ -15,10 +15,12 @@ Function RenderChannel(o, bIncludeDefault)
 		If o.ChanType = 0 And o.ChanNumber = i Then Response.Write " selected"
 		Response.Write ">Chan." & i & "</option>"
 	Next
-		
-	Response.Write "<option value=""omni"""
-	If o.ChanType = 1 Then Response.Write " selected"
-	Response.Write ">(OMNI)</option>"
+	
+	If bIncludeDefault Then	
+		Response.Write "<option value=""omni"""
+		If o.ChanType = 1 Then Response.Write " selected"
+		Response.Write ">(OMNI)</option>"	
+	End If
 
 	Response.Write "</select>"
 	
@@ -41,7 +43,7 @@ end function
 '====================================================================
 Function RenderMaxNote(o)
 	response.Write "<select name=""" & o.Key & ".max_note"" id=""" & o.Key & ".max_note"">"
-	For i = 0 to 127	
+	For i = 1 to 127	
 		strNote = mid(" CC# DD# E FF# GG# AA# B", 1 + 2 * (i mod 12), 2)
 		strNote = trim(strNote & (int(i/12)-1))	
 		
@@ -134,11 +136,13 @@ Function RenderGateDuration(o, bIncludeDefault)
 		response.Write ">(trigger)</option>"		
 	end if
 	
-	For i = 5 to 125 step 5
+	i = 1
+	while i < 125
 		response.Write "<option value=""" & i & """"
 		if o.DurationType = 1 and o.Duration = i then Response.write " selected"
 		response.Write ">" & i & "ms</option>"
-	next
+		if i<15 then i=i+1 else i=i + 5					
+	wend
 	Response.Write "</select>"
 End Function
 
