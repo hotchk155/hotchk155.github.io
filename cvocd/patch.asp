@@ -78,7 +78,7 @@ table {
 <td></td>
 <td title="Select whether this note input is enabled and listening to MIDI.&#10;You should disable any inputs you don't need.">Enable</td>
 <td title="Select the MIDI channel that this note input will listen to">Channel</td>
-<td title="When multiple notes are held, this setting determines which of the notes should be be played on the output">Note Priority</td>
+<td title="When multiple notes are held, this setting determines which of the notes should be be played on the outputs">Mode</td>
 <td title="You can limit the range of notes that this note input will play (for example to split the keyboard between two outputs)&#10;Select min note = 0 and max note = 127 to play any note on the selected MIDI channel">Min.Note</td>
 <td title="Maximum note of the range. If you select 'single' then only the single note selected in min note will play.">Max.Note</td>
 <td title="You can filter notes that will play on the input based on their MIDI note velocity.&#10;Only notes that are equal or higher in velocity can play.">Min Vel.</td>
