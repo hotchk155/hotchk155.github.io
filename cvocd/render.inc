@@ -166,15 +166,15 @@ end function
 '====================================================================
 Function RenderPriority(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "0", "Most recently played"
-	dict.add "1", "Lowest pitch"
-	dict.add "2", "Lowest pitch (spread)"
-	dict.add "3", "Highest pitch"
-	dict.add "4", "Highest pitch (spread)"
-	dict.add "5", "Single note"
+	dict.add "0", "Last note priority"
+	dict.add "1", "Lowest note priority"
+	dict.add "3", "Highest note priority"
 	dict.add "6", "2 note cycle"
 	dict.add "7", "3 note cycle"
 	dict.add "8", "4 note cycle"
+	dict.add "9", "2 note chord"
+	dict.add "10", "3 note chord"
+	dict.add "11", "4 note chord"
 	RenderSelection o.Key & ".prty", o.Priority, dict
 end function
 
@@ -206,11 +206,11 @@ end function
 '====================================================================
 Function RenderCVEvent(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "1", "1st Priority Note"
-	dict.add "2", "2nd Priority Note"
-	dict.add "3", "3rd Priority Note"
-	dict.add "4", "4th Priority Note"
-	dict.add "20", "Velocity to CV"
+	dict.add "1", "First note pitch"
+	dict.add "2", "Second note pitch"
+	dict.add "3", "Third note pitch"
+	dict.add "4", "Fourth note pitch"
+	dict.add "20", "Most recent note velocity"
 	RenderSelection o.Key & ".event", o.InputEvent, dict
 end function
 
@@ -255,12 +255,12 @@ end function
 '====================================================================
 Function RenderGateEvent(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
-	dict.add "1", "1st priority note"
-	dict.add "2", "2nd priority note"
-	dict.add "3", "3rd priority note"
-	dict.add "4", "4th priority note"
-	dict.add "5", "Any note"
-	dict.add "0", "No notes"
+	dict.add "1", "First note on"
+	dict.add "2", "Second note on"
+	dict.add "3", "Third note on"
+	dict.add "4", "Fourth note on"
+	dict.add "5", "Any note on"
+	dict.add "0", "All notes off"
 	RenderSelection o.Key & ".event", o.InputEvent, dict
 end function
 
