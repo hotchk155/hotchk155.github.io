@@ -281,6 +281,7 @@ Function RenderClockDivider(o)
 	dict.add "48", "1/2"
 	dict.add "72", "1/2D"
 	dict.add "96", "1"
+	dict.add "1", "24ppqn"
 	RenderSelection o.Key & ".div", o.Divider, dict	
 end function
 
