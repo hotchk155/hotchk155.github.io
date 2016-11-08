@@ -4,7 +4,7 @@ layout: default
 
 # ORANGE SQUEEZE
 
-<img src="img/squeeze.gif">
+<img src="img/squeeze.png">
 
 **Orange Squeeze is a MIDI merge device with four MIDI inputs and one MIDI output** 
 
