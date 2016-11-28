@@ -6,6 +6,7 @@ layout: default
 Six-way MIDI thru box.
 
 * [User Guide](manual.html)
+* [MIDI Power Mod](midipowermod.html)
 * [Schematic](img/bsplit.png)
 * [Firmware Source Code](https://github.com/hotchk155/mini-MIDI-Splitter/tree/master/firmware)
 * [EAGLE PCB Files](https://github.com/hotchk155/mini-MIDI-Splitter/tree/master/hardware)
