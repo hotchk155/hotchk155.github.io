@@ -41,6 +41,7 @@ Const NRPNL_GATE_DUR	= 12
 Const NRPNL_THRESHOLD	= 13
 Const NRPNL_TRANSPOSE	= 14
 Const NRPNL_VOLTS		= 15
+Const NRPNL_PITCHSCHEME		= 16
 Const NRPNL_SAVE		= 100
 Const NRPNL_CV_OFFSET	= 126
 Const NRPNL_CV_GAIN		= 127
@@ -61,6 +62,7 @@ Const NRPVH_SRC_MIDIRUN		= 22
 Const NRPVH_SRC_MIDISTART	= 23
 //Const NRPVH_SRC_MIDICONT	= 24
 Const NRPVH_SRC_MIDISTOP	= 25
+Const NRPVH_SRC_MIDISTARTSTOP	= 26
 Const NRPVH_SRC_TESTVOLTAGE = 127
 Const NRPVH_CHAN_SPECIFIC	= 0
 Const NRPVH_CHAN_OMNI		= 1
@@ -150,6 +152,10 @@ End Function
 ' =================================================================
 Function ReadOffset(o)
 	o.Offset = CByte(Request.Form(o.Key & ".ofs"))
+End Function 
+' =================================================================
+Function ReadPitchScheme(o)
+	o.PitchScheme = CByte(Request.Form(o.Key & ".scheme"))
 End Function 
 ' =================================================================
 Function ReadVolts(o)
@@ -287,6 +293,7 @@ Class CVOutput
 	Public ChanNumber
 	Public CC
 	Public Volts
+	Public PitchScheme
 	'--------------------------
 	Public Sub Class_Initialize
 		Key = ""
@@ -297,6 +304,7 @@ Class CVOutput
 		ChanNumber = 0	
 		CC = 1
 		Volts = 5
+		PitchScheme = 0
 	End Sub	
 	'--------------------------
 	Public Sub ReadForm
@@ -305,6 +313,7 @@ Class CVOutput
 		ReadTranspose Me
 		ReadChan Me
 		ReadCC Me		
+		ReadPitchScheme Me		
 		ReadVolts Me		
 	End Sub	
 	'--------------------------		
@@ -319,6 +328,7 @@ Class CVOutput
 		End select
 		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
 		WriteParam id, NRPNL_VOLTS, 0, Me.Volts
+		WriteParam id, NRPNL_PITCHSCHEME, 0, Me.PitchScheme
 		WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
 	End Sub
 	'--------------------------
@@ -340,6 +350,8 @@ Class CVOutput
 				Me.ChanNumber = v2
 			case NRPNL_VOLTS
 				Me.Volts = v2
+			case NRPNL_PITCHSCHEME
+				Me.PitchScheme = v2
 			case NRPNL_TRANSPOSE
 				Me.Transpose = v2
 		end select

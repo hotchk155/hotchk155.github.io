@@ -253,6 +253,7 @@ Function RenderGateSource(o)
 	dict.add "22", "Transport Run"
 	dict.add "23", "Transport Restart"
 	dict.add "25", "Transport Stop"
+	dict.add "26", "Trans. Start/Stop &dagger;"
 	RenderSelection o.Key & ".src", o.Source, dict
 end function
 
@@ -302,5 +303,14 @@ Function RenderVolts(o)
 	dict.add "8", "8V"
 	RenderSelection o.Key & ".volts", o.Volts, dict
 end function
+
+'====================================================================
+Function RenderPitchScheme(o)
+	Set dict = Server.CreateObject("Scripting.Dictionary")
+	dict.add "0", "V/Oct"
+	dict.add "1", "Hz/V &dagger;"
+	RenderSelection o.Key & ".scheme", o.PitchScheme, dict
+end function
+
 
 %>

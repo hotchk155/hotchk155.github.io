@@ -139,6 +139,7 @@ XAble_Input(<%=count%>);
 <td>&nbsp;&nbsp;&nbsp;</td>
 <td title="If you select a note input, this decides which note (or other parameter)&#10;from that note input will be mapped to the CV output">Note input</td>
 <td title="If you select a note input, you can transpose the output note CV.&#10;This only works for notes (not velocity, bend etc)">Transpose</td>
+<td title="For note pitch CV this is the voltage scaling scheme">Scheme</td>
 <td>&nbsp;&nbsp;&nbsp;</td>
 <td title="If you select a MIDI CC as input, you specify the channel here">Chan</td>
 <td title="If you select a MIDI CC as input, you specify the CC number here">CC#</td>
@@ -156,6 +157,8 @@ for count = 1 to 4
 	RenderCVEvent o
 	Response.Write "</td><td>"
 	RenderTranspose o
+	Response.Write "</td><td>"
+	RenderPitchScheme o
 	Response.Write "</td><td>"
 	Response.Write "</td><td>"
 	RenderChannel o, True
@@ -177,6 +180,7 @@ function XAble_CVOutput(id) {
 	var d_volts = !(val == "2" || val=="4" || val == "5" || val == "20" || val=="127" || (!d_ev && val2=="20"));
 	document.getElementById("cv" + id + ".event").disabled = d_ev;
 	document.getElementById("cv" + id + ".trans").disabled = d_ev;
+	document.getElementById("cv" + id + ".scheme").disabled = d_ev;
 	document.getElementById("cv" + id + ".chan").disabled = d_ch;
 	document.getElementById("cv" + id + ".cc").disabled = d_cc;
 	document.getElementById("cv" + id + ".volts").disabled = d_volts;
@@ -189,10 +193,10 @@ XAble_CVOutput(<%=count%>);
 </script>
 
 </table>
-
+<p>&dagger;&nbsp;Some settings have specific firmware requirements. Make sure you have an <a href="firmwares.html">appropriate firmware version</a> to use settings marked with the &dagger; symbol</p>
 <%
 ' ================================================================================================
-' CV OUTPUTS
+' GATE OUTPUTS
 ' ================================================================================================
 %>
 <hr>
@@ -278,10 +282,11 @@ document.getElementById("gt<%=count%>.src").onchange=function(){XAble_GateOutput
 XAble_GateOutput(<%=count%>);
 <% Next %>	
 </script>
-
+<p>&dagger;&nbsp;Some settings have specific firmware requirements. Make sure you have an <a href="firmwares.html">appropriate firmware version</a> to use settings marked with the &dagger; symbol</p>
 
 <hr>
 <input type="submit" value="I WANT YOUR SYSEX!">
+
 
 </td></tr></table>
 
