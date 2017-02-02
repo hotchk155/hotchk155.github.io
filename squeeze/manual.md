@@ -33,9 +33,6 @@ There are a couple of things that Orange Squeeze does need to enforce, however
 
 These points are described in the next sections
 
-
-
-
 ## Realtime Messages
 
 Orange Squeeze has special handling for the following MIDI real-time messages:
@@ -61,39 +58,16 @@ These messages can be large but cannot be merged with any other type of MIDI mes
 
 The one exception to this rule is real-time messages that come in through the Main input. These can be sent immediately, even when a SysEx is being passed from an input A, B, C
 
-Because SysEx 
-
-This also allows 
-
-
-Other real-time messages (Start, Stop, Continue) which are received by the master input can "jump the queue" just like clock ticks. However Start/Stop/Continue messages that are received from any slave input are also merged into the output, even though ticks are not. This allows multiple inputs to control the transport, though not the tempo. Transport messages received at a slave inputs cannot "jump the queue" however and are processed along with other MIDI data in the order it is received.
-
-Other real-time messages (Active Sensing, Reset) from any input are queued and merged to the output in order.
-
-
-
-When a Sysex message is being received from an input, it is vital that no data is merged within it, or the Sysex message will become corrupted. This means that when Orange Squeeze is processing a Sysex from any input it will suspend all the other inputs until the Sysex message is complete. During this time, any MIDI data coming into those suspended inputs will back up and some data might even get dropped.
-
-This is probably only going to be a problem if you have a lot of MIDI activity going on while you are sending large Sysex messages - so this situation is best avoided if you can!
-Small Sysex messages, which might be transmitted by some controllers, should not pose the same issue.
-
-
-
-
 ## LED Indications
 
-Orange Squeeze has the following LED indicators
+There are fur red LEDs, one for each MIDI input. 
 
-Four red LEDs, one for each MIDI input. 
 - These LEDs blink in response to MIDI input activity
-- If the LED is lit solidly this indicates that the input buffer is oveflowing due to too much MIDI data. The yellow status LED will also be lit.
+- If the LED is lit solidly this and the yellow status LED is on, this indicates that the input buffer is oveflowing due to too much MIDI data at that input.
 - When the device is first switched on, each input LED gives a single blink. This indicates that the input is working, and that slave inputs are communicating successfully with the master. If there is no blink at power on, this might indicate a problem with the input.
 
 The BLUE led blinks when there is output activity. The brightness of the LED indicates the level of activity. When the LED is lit solidly, this indicates that backlogging is occurring at the output. This may result in backlogging at one or more inputs that might cause data to be dropped (indicated by the yellow LED)
 
-The yellow LED indicates that a data overflow is occurring. This may indicate that one or more of the inputs is receiving more MIDI data than can be serviced by the master, or that that total combined MIDI data throughput is more than can be transmitted on the output. 
+The YELLOW LED indicates that a data overflow is occurring. This may indicate that one or more of the inputs is receiving more MIDI data than can be serviced by the master, or that that total combined MIDI data throughput is more than can be transmitted on the output. 
 
-If the yellow LED lights, this indicates that the device is overloaded and that data is getting lost. If you see the yellow LED lighting, you need to reduce the amount of MIDI you are trying to merge via the Orange Squeeze!
-
-
-
+If you see the yellow LED lighting, you need to reduce the amount of MIDI you are trying to merge via the Orange Squeeze!

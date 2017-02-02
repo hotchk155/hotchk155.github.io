@@ -13,7 +13,7 @@ This page is under construction
 
 ## Hardware Questions
 
-* **Is Hz/Volt Supported?** Currently CV.OCD supports only 1V/Octave scaling, however Hz/V support is in development.
+* **Is Hz/Volt Supported?** Yes - but you may need to [upgrade your firmware](firmwares.html)
 * **What is the gate voltage level** CV.OCD twelve gates are 5V (On) and 0V (Off) similar to Eurorack.
 * **What is the CV voltage range** CV.OCD's four CV outputs can output from 0 to around 8 Volts.
 * **What is the CV voltage accuracy** CV.OCD's four CV outputs have 12-bit DACs (Digital to Analog converters). The 12 bits are scaled over output range 0 - 8.192V giving a mininum voltage step of 0.002V. At 1V/Octave this corresponds to 2.4 cents.

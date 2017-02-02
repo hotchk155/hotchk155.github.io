@@ -16,6 +16,10 @@ The firmware can be <a href="../arpie/update.html">upgraded</a> for free. Howeve
 ## The Basics
 When you connect synchtab, you need to tell the ARPIE to use it. This is done by changing the "hack header" settings (see the appropriate section in the <a href="..\arpie\manual.html#hh">ARPIE manual)
 
+To use the Synctab you need "Pulse Clock Mode". If you hold the PLEN button to access the second function you can select this mode by setting the LEDs to the following (so of the first 8 LEDs, only the first one is on)
+<br>
+<img src="img/setting.gif">
+<br>
 There are two 3.5mm jack sockets (mono wired) on synchtab:
 
 - The socket furthest to the rear of the ARPIE is the CLOCK IN socket where ARPIE can receive clock signals from other devices and "slave" to them.
