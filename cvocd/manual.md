@@ -66,7 +66,7 @@ Note: a CV mapped to a pitch bend will go to it half-voltage position (no bend) 
 ## The Configuration Page
 
 You'll notice examples below that show screen shots of a web page containing lots of drop down lists and the like. This is the CV.OCD SYSEX configurator. You can find it at
-<a href="http://six4pix.com/cvocd/patch.asp">six4pix.com/cvocd/patch.asp</a>
+<a href="patch.asp">six4pix.com/cvocd/patch.asp</a>
 
 This page lets you create a CV.OCD patch by makng selecitons in the drop-down lists. You can then press the submit button at the bottom of the page and download a SYSEX file containing your settings. 
 

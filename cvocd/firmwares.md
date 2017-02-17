@@ -10,6 +10,10 @@ on to the device using a SYSEX librarian or MIDI tool (See the CV.OCD manual for
 BETA releases are new and have been tested but are not yet pre-installed in new devices. However
 feel free to try them out and let me know if you see any issues.
 
+## Version 1.3 BETA (12 Feb 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev1.3beta.syx)
+
+- Fixes a bug where a CC assigned to a CV output would always listen on the global default MIDI channel rather than the specific channel defined for the CV output.
+
 ## Version 1.2 BETA (28 January 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev1.2beta.syx)
 
 - Adds Hz per Volt handling, up to maximum of 8 volts (for C5, MIDI note 72). Pitch bend is handled, but fractional (bent) note CV is interpolated linearly, so resulting pitch glide between whole notes will not be quite linear in Hz/V mode.
