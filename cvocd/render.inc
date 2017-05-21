@@ -309,6 +309,7 @@ Function RenderPitchScheme(o)
 	Set dict = Server.CreateObject("Scripting.Dictionary")
 	dict.add "0", "V/Oct"
 	dict.add "1", "Hz/V &dagger;"
+	dict.add "2", "1.2V/Oct &dagger;"
 	RenderSelection o.Key & ".scheme", o.PitchScheme, dict
 end function
 
