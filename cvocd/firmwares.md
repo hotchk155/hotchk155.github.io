@@ -13,15 +13,15 @@ feel free to try them out and let me know if you see any issues.
 After loading any new firmware, **please reload your current CV.OCD patch via SYSEX** since some firmware updates 
 will invalidate the patch stored in the CV.OCD memory.
 
-## Version 2.2 (20 May 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.2.syx)
+## Version 2.2 BETA (20 May 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.2.syx)
 
 - Added 1.2V/OCT support
 
-## Version 2.1 (20 May 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.1.syx)
+## Version 2.1 BETA (20 May 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.1.syx)
 
 - Fixed a bug where negative pitch transpose did not work (could cause output at maximum CV instead)
 
-## Version 2 (1 Apr 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.0.syx)
+## CURRENT RELEASE Version 2 (1 Apr 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Current/cvocd_rev2.0.syx)
 
 - Same as 1.3 Beta - Renamed for general release
 
