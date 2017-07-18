@@ -6,6 +6,8 @@ layout: default
 
 **Please Note: The ARPIE kit comes with the current firmware already loaded on the microcontrollers** The information here is only needed if you want to reprogram it later with new firmware, or experiment with the firmware yourself!
 
+Click here to see available [firmware versions](firmwares.html)<br>
+
 The information on this page relates to the Silicon Labs CP2102 adaptor which I am selling on Tindie, however similar steps apply to other programmers (e.g. FTDI 5V USB2TTL Programming Cable). The information assumes you are already familiar with using the Arduino environment. If not please check [http://arduino.cc](http://arduino.cc) to download the free Arduino development environment and to view the setup instructions<br>
 <br>
 <img src="img/prog1.JPG">
