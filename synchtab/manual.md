@@ -45,9 +45,10 @@ The LEDs indicate actual electrical activity rather than the mode of the ARPIE f
 ## Clock Characteristics
 The specifications of the pulse clock (in and out) are:
 
-- One pulse per quarter note (step)
+- One pulse per eighth note 
 - Indicated with a positive going 5V pulse (approx 10-15ms long for output, input pulses can be longer)
 
+These settings are intended to work well with Korg Volcas/Monotribe and should also work with Pocket Operators in SY2 mode. 
 The current firmware does not allow customisation of the clock pulses from the menu. To change the pulse clock characteristics, such as timing and polarity, require the firmware code to be modified and recompiled.
 
 ## MIDI SYNCH Bridging
