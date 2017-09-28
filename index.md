@@ -39,6 +39,9 @@ With over 25 years industrial coding experience in C/C++ on Windows platforms, S
 <td><img src="img/playpad.png"></td>
 <td valign="top">We build on our coding expertise with solid experience of embedded coding, electronic circuit design and manufacturing. If you need some advice on where to get started with your project or product, we can help!<br>
 <br>
+Contact:
+<img class="small_pic" src="img/email.gif">
+<br>
 </td>
 </tr></table>
 </td>
