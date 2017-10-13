@@ -321,15 +321,15 @@ Class CVOutput
 		Select Case Me.Source
 			Case NRPVH_SRC_STACK1, NRPVH_SRC_STACK2, NRPVH_SRC_STACK3, NRPVH_SRC_STACK4
 				WriteParam id, NRPNL_SRC, Me.Source, Me.InputEvent
+				WriteParam id, NRPNL_PITCHSCHEME, 0, Me.PitchScheme
+				WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
 			Case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
 				WriteParam id, NRPNL_SRC, Me.Source, Me.CC
+				WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
+				WriteParam id, NRPNL_VOLTS, 0, Me.Volts
 			case else
 				WriteParam id, NRPNL_SRC, Me.Source, 0
 		End select
-		WriteParam id, NRPNL_CHAN, Me.ChanType, Me.ChanNumber
-		WriteParam id, NRPNL_VOLTS, 0, Me.Volts
-		WriteParam id, NRPNL_PITCHSCHEME, 0, Me.PitchScheme
-		WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
