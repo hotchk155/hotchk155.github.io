@@ -175,12 +175,13 @@ function XAble_CVOutput(id) {
 	var val = (document.getElementById("cv" + id + ".src").value);
 	var val2 = (document.getElementById("cv" + id + ".event").value);
 	var d_ev = !(val == "11" || val == "12" || val == "13" || val == "14");
+	var d_vel = (val2 == "20");
 	var d_ch = !(val == "2" || val=="3" || val=="4" || val == "5");
 	var d_cc = !(val == "2");
 	var d_volts = !(val == "2" || val=="4" || val == "5" || val == "20" || val=="127" || (!d_ev && val2=="20"));
 	document.getElementById("cv" + id + ".event").disabled = d_ev;
-	document.getElementById("cv" + id + ".trans").disabled = d_ev;
-	document.getElementById("cv" + id + ".scheme").disabled = d_ev;
+	document.getElementById("cv" + id + ".trans").disabled = d_ev||d_vel;
+	document.getElementById("cv" + id + ".scheme").disabled = d_ev||d_vel;
 	document.getElementById("cv" + id + ".chan").disabled = d_ch;
 	document.getElementById("cv" + id + ".cc").disabled = d_cc;
 	document.getElementById("cv" + id + ".volts").disabled = d_volts;

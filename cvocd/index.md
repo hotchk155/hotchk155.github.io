@@ -9,7 +9,7 @@ layout: default
 <br>
 
 * [The Quick Overview](about.html)
-* [The User Guide](https://github.com/hotchk155/cvocd.a/raw/master/docs/CV.OCD%20user%20guide%20v1.pdf)
+* [The User Guide](manual.pdf)
 * [The Configuration Page](patch.asp)
 * [Troubleshooting and FAQ](faq.html)
 * [Firmwares](firmwares.html)
