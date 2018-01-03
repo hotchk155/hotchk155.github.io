@@ -114,6 +114,7 @@ Function RenderClockOffset(o)
 	Response.Write "</select>"
 End Function
 
+
 '====================================================================
 Function RenderGateDuration(o, bIncludeDefault)
 
@@ -313,5 +314,37 @@ Function RenderPitchScheme(o)
 	RenderSelection o.Key & ".scheme", o.PitchScheme, dict
 end function
 
+'====================================================================
+Function RenderCVScale(o)
+	Set dict = Server.CreateObject("Scripting.Dictionary")
+	for i=63 to -63 step -1
+		if i>0 then
+			dict.add CStr(i+64), "+" & CStr(i)
+		else
+			dict.add CStr(i+64), CStr(i)
+		end if
+	next 
+	RenderSelection o.Key & ".cvscale", o.CVScale, dict
+End Function
+
+'====================================================================
+Function RenderCVOfs(o)
+	Set dict = Server.CreateObject("Scripting.Dictionary")
+	for i=63 to -63 step -1
+		if i>0 then
+			dict.add CStr(i+64), "+" & CStr(i)
+		else
+			dict.add CStr(i+64), CStr(i)
+		end if
+	next 
+	RenderSelection o.Key & ".cvofs", o.CVOfs, dict
+End Function
+
+'====================================================================
+Function RenderCVCal(o)
+	response.Write "<input type=""checkbox"""
+	If o.CVCal Then response.Write " checked "
+	response.Write " name=""" & o.Key & ".cvcal"" id=""" & o.Key & ".cvcal"">"
+End Function
 
 %>

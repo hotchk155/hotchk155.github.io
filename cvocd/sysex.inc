@@ -41,10 +41,10 @@ Const NRPNL_GATE_DUR	= 12
 Const NRPNL_THRESHOLD	= 13
 Const NRPNL_TRANSPOSE	= 14
 Const NRPNL_VOLTS		= 15
-Const NRPNL_PITCHSCHEME		= 16
+Const NRPNL_PITCHSCHEME	= 16
+Const NRPNL_CAL_SCALE  	= 98
+Const NRPNL_CAL_OFS  	= 99
 Const NRPNL_SAVE		= 100
-Const NRPNL_CV_OFFSET	= 126
-Const NRPNL_CV_GAIN		= 127
 	
 Const NRPVH_SRC_DISABLE		= 0
 Const NRPVH_SRC_MIDINOTE	= 1
@@ -160,6 +160,18 @@ End Function
 ' =================================================================
 Function ReadVolts(o)
 	o.Volts = CByte(Request.Form(o.Key & ".volts"))
+End Function 
+' =================================================================
+Function ReadCVScale(o)
+	o.CVScale = CByte(Request.Form(o.Key & ".cvscale"))
+End Function 
+' =================================================================
+Function ReadCVOfs(o)
+	o.CVOfs = CByte(Request.Form(o.Key & ".cvofs"))
+End Function 
+' =================================================================
+Function ReadCVCal(o)
+	o.CVCal = (Request.Form(o.Key & ".cvcal") = "on")
 End Function 
 ' =================================================================
 Function ReadAutoSave(o)
@@ -362,6 +374,47 @@ Class CVOutput
 End Class
 
 ' =================================================================
+' CV CALIBRATION
+' =================================================================
+Class CVCalibration
+	Public Key 
+	Public CVCal
+	Public CVScale
+	Public CVOfs
+	'--------------------------
+	Public Sub Class_Initialize
+		Key = ""
+		CVScale = 64
+		CVOfs = 64
+		CVCal = False
+	End Sub	
+	'--------------------------
+	Public Sub ReadForm
+		ReadCVCal Me		
+		ReadCVScale Me		
+		ReadCVOfs Me		
+	End Sub	
+	'--------------------------		
+	Public Sub WriteSysex(id)
+		If Me.CVCal Then
+			WriteParam id, NRPNL_CAL_SCALE, 0, Me.CVScale
+			WriteParam id, NRPNL_CAL_OFS, 0, Me.CVOfs			
+		End If
+	End Sub
+	'--------------------------
+	Public Sub ReadSysex(p1, p2, v1, v2)
+		select case p2
+			case NRPNL_CAL_SCALE
+				Me.CVScale = v2
+				Me.CVCal = True
+			case NRPNL_CAL_OFS
+				Me.CVOfs = v2
+				Me.CVCal = True
+		end select
+	End Sub
+End Class
+
+' =================================================================
 ' GATE OUTPUT
 ' =================================================================
 Class GateOutput
@@ -497,6 +550,15 @@ Function InitMappings
 		o.Key = "gt" & i
 		dictMappings.Add 30 + i, o
 	Next	
+End Function
+
+Function InitMappingsCal
+	Set dictMappings = Server.CreateObject("Scripting.Dictionary")
+	For i = 1 to 4
+		Set o = New CVCalibration
+		o.Key = "cv" & i
+		dictMappings.Add 20 + i, o
+	Next
 End Function
 
 Function ReadForm
