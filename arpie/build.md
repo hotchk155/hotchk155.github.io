@@ -100,7 +100,9 @@ The symbol on the PCB aligns with the D-shape package. Make sure you align it co
 The transistor will stand a few mm above the board when soldered. Avoid overheating the transistor when soldering it.
 <img src="img/B314.JPG">
 
-Add the 6 pin programming header. Again it helps to invert the board and let its weight hold the strip in place while you solder one pin, ensure it is straight, then solder the others.
+Add the 6 pin serial programming header (You may need to separate this from the 6-pin socket in the kit). This is placed in the set of holes marked "Serial Prog" near LED1 - please ensure you place it in the correct location as it will be difficult to move it later!) 
+
+Again it helps to invert the board and let its weight hold the strip in place while you solder one pin, ensure it is straight, then solder the others.
 <img src="img/B315.JPG">
 
 
@@ -113,7 +115,7 @@ Next up, its the two electrolytic capacitors (C7 and C8). These have a specific 
 The symbol on the board indicates the anode hole with a + symbol.
 <img src="img/Dsc01878.jpg">
 
-Next we'll solder the 20 way and 6 way sockets. Again it helps to use gravity to hold the parts in place while soldering. 
+Next we'll solder the 20 way socket (you may need to separate this from the 20 pin header in the kit) and the 6 way socket. Again it helps to use gravity to hold the parts in place while soldering. Note that the 6 way socket is placed in the socket beside TR1, labelled "GND/PC5/PC4..." 
 <img src="img/B318.JPG">
 
 Now solder the four 1N4001 rectifier diodes D3, D4, D5, D6. Bend these like we did with the vertically mounted resistors. To match the photograph, locate the silver anode stripe on the body of the diode, then bend the leg on the opposite end, so we can mount the stripe flush against the board as shown below. All four diodes have the same orientation and they **must** be soldered the correct way around. **WARNING: You can damage your kit and/or DC power supply if you solder any of these four diodes the wrong way around!**<br>
