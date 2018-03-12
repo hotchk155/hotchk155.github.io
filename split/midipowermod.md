@@ -11,9 +11,9 @@ Since a receiver of MIDI is supposed to be electrically isolated from the sender
 
 ## Does Banana Split Support MIDI Power?
 
-I have been asked a few times about whether the Banana Split can provide power over MIDI to other devices that can be powered over MIDI... 
+**Banana splits sold from the start of 2017 are able to provide MIDI bus power** (This version has  a small picture of a banana on the back of the PCB which you might be able to see through the bottom of the case)
 
-**As sold, current versions of the Banana Split thru-box DO NOT provide power over MIDI** This is because the GROUND pins of the outputs are not connected. 
+Older versions of the Banana Split thru-box DO NOT provide power over MIDI. This is because the GROUND pins of the outputs are not connected. 
 
 However I will show how here they can be connected so that Banana Split can provide MIDI power to other bus-powered devices. **This mod will require a soldering iron**
 
@@ -73,7 +73,3 @@ When putting it back together don't forget the clear plastic beam that is placed
 Also please, please **do not** over tighten the screws which hold on the yellow fascia. The fascia can be cracked if screws are too tight.
 
 <img class="full" src="img/midipwr8.JPG">
-
-## Sooooo - Why Doesn't Banana Split Provide MIDI Power Out of the Box?
-
-Yeah it would have been good if it did, but I didn't think about it at the time I designed it. This is why it's great to get feedback from customers... some things can always be improved on. Any future version of the Banana Split will included grounded sockets as sold!
