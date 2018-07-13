@@ -13,7 +13,13 @@ feel free to try them out and let me know if you see any issues.
 After loading any new firmware, **please reload your current CV.OCD patch via SYSEX** since some firmware updates 
 will invalidate the patch stored in the CV.OCD memory.
 
-## CURRENT RELEASE Version 3 (1 Oct 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev3.0.syx)
+## CURRENT RELEASE Version 4 (12 May 2018, previously 3.1beta) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev4.0.syx)
+
+- Added CV output calibration features
+
+- Tempo to BPM feature removed (to free up program memory space for calibration code)
+
+## Version 3 (1 Oct 2017) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev3.0.syx)
 
 - Same as 2.2 Beta - Renamed for general release
 

@@ -19,7 +19,6 @@ Each of the FOUR analog CV outputs have 0-8V output level and 12-bit resolution 
 - Controllers (CC)
 - Pitch bend
 - Channel aftertouch
-- Tempo
 - Fixed voltage
 
 Each of the TWELVE gate outputs has 5V output level and can be assigned to any of

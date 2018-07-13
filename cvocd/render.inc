@@ -43,14 +43,14 @@ end function
 '====================================================================
 Function RenderMaxNote(o)
 	response.Write "<select name=""" & o.Key & ".max_note"" id=""" & o.Key & ".max_note"">"
-	For i = 1 to 127	
+	For i = 0 to 127	
 		strNote = mid(" CC# DD# E FF# GG# AA# B", 1 + 2 * (i mod 12), 2)
 		strNote = trim(strNote & (int(i/12)-1))	
 		
 		response.Write "<option value=""" & i & """"
 		if o.MaxNote = i then Response.write " selected"
 		if i = 0 then 
-			response.Write ">(single)</option>"
+			response.Write ">(exact)</option>"
 		else
 			response.Write ">" & i & " " & strNote &  "</option>"	
 		end if

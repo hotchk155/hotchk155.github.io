@@ -37,8 +37,15 @@ table {
 </center>
 <hr>
 <form name="sysex_file" action="patch.asp?file=true" enctype="multipart/form-data" method="post">
-<p>You can load an existing CV.OCD sysex into this form, or create a new one from scratch <input type="file" name="file" value="File">
-<input type="submit" value="Load SysEx Into Form"></p>
+<table>
+<tr><td>You can load an existing CV.OCD sysex into this form, or create a new one from scratch<br>
+Click <a href="https://github.com/hotchk155/cvocd.a/blob/master/patches/cvocd_default.syx?raw=true">here</a> to download the default patch (as loaded on a new CV.OCD)
+</td>
+<td>:</td>
+<td><input type="file" name="file" value="File"></td>
+<td><input type="submit" value="Load SysEx Into Form"></td>
+<tr>
+</table>
 </form>
 <form name="sysex" action="get_sysex.asp" method="post">
 <%

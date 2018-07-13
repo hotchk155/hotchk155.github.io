@@ -337,6 +337,8 @@ Class CVOutput
 					Case "1", "2", "3", "4"
 						WriteParam id, NRPNL_PITCHSCHEME, 0, Me.PitchScheme
 						WriteParam id, NRPNL_TRANSPOSE, 0, Me.Transpose
+					Case "20"
+						WriteParam id, NRPNL_VOLTS, 0, Me.Volts
 				End Select
 			Case NRPVH_SRC_MIDICC, NRPVH_SRC_MIDICC_NEG
 				WriteParam id, NRPNL_SRC, Me.Source, Me.CC
