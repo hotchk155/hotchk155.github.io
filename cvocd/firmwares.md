@@ -13,6 +13,14 @@ feel free to try them out and let me know if you see any issues.
 After loading any new firmware, **please reload your current CV.OCD patch via SYSEX** since some firmware updates 
 will invalidate the patch stored in the CV.OCD memory.
 
+## Version 4.2 BETA (10 Sep 2018) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev4.2beta.syx)
+
+- Corrected a problem where gates listening to specific MIDI notes might trigger on the wrong note when an active note input shares the same MIDI channel
+
+## Version 4.1 BETA (24 May 2018) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev4.1beta.syx)
+
+- Corrected a problem skipping MTC and SPP messages which could result in message misinterpretation and random outputs
+
 ## CURRENT RELEASE Version 4 (12 May 2018, previously 3.1beta) [download](https://github.com/hotchk155/cvocd.a/raw/master/firmware/Release/Archive/cvocd_rev4.0.syx)
 
 - Added CV output calibration features
