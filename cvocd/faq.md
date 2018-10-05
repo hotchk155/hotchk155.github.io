@@ -11,6 +11,9 @@ This page is under construction
 * **Output triggers on wrong MIDI note (For example you program CV.OCD to trip a gate in response to a D1 but you find it responds to D0 instead)** Octave numbering of notes is not actually standard, for example middle C (MIDI note number 60) can be named C3 or C4 in different devices/programs. CV.OCD uses C4 for middle C - most notably, Ableton Live uses C3. In Live you'll need to remember to sequence notes an octave higher. The actual MIDI note numbers however are always reliable, so think in terms of them if you can.
 * **Yellow LED is not in sync with the beat** MIDI clock signals are just "ticks" and do not contain any count information. Since there are 24 MIDI clock ticks for every beat, a reference point is needed so that a slave can be put in "phase" with the master (they should always be running at the same "rate"). CV.OCD needs to see a MIDI "clock start" message to get its phase synched up. Usually just stopping and starting the transport on the master is enough (as long as the master is sending MIDI transport messages). In many cases it does not actually matter if the phase is out - the exception would be if you are sending clock outputs from the CV.OCD.
 
+* **Weird behaviour when controlling via CC** There are four CCs which cannot be used for general control of CV/gates on the CV.OCD. These are; NRPN MSB (CC#99), NRPN LSB (CC#98), Data Entry MSB (CC#6), Data Entry LSB(CC#38). These cannot be used to control the CV.OCD and in some cases might actually cause issues by accidentally changing patch mappings. Avoid them ... all other CC's are up for grabs!
+
+
 ## Hardware Questions
 
 * **Is Hz/Volt Supported?** Yes - but you may need to [upgrade your firmware](firmwares.html)
@@ -26,6 +29,9 @@ This page is under construction
 * **Sysex load of patch fails** Sysex transmission can be interrupted by any MIDI "status message" such as note on/note off/CC etc. Usually a single sending device or piece of software (e.g. a DAW) will synchronise MIDI output to avoid interruption to Sysex transmissions. However if you are using multiple pieces of software (e.g. a Sysex manager running outside of a DAW) then no synchronisation is likely taking place between the programs and Sysex transmissions might get interrupted by other MIDI activity. Avoid this by stopping playback from a DAW while uploading Sysex to CV.OCD.
 
 Also make sure you are not trying to use the firmware update mode! When you load a patch you DO NOT need to use the button. Powering up with the button held is only for firmware uploads. You send a patch to the CV.OCD in the normal play mode. 
+
+* **Incomplete or incorrect patch function** I've seen some USB MIDI cables/interfaces which truncate sysex blocks which can mean part of the settings contained within a patch are not sent to the CV.OCD. The CV.OCD LED indications might even show a success indication (blue and yellow LEDs on for 1 second). This can be resolved by reducing the buffer sizes for sending Sysex. In MIDI-OX you need to go to Sysex Configuration and set Low Level Output Buffers size to 64 bytes, and similar for input buffers.
+
 
 
 

@@ -79,11 +79,21 @@ Function RenderCC(o)
 	For i = 1 to 127	
 		response.Write "<option value=""" & i & """"
 		if o.CC = i then Response.write " selected"
-		if i = 1 then 
-			response.Write ">Mod Wheel</option>"
-		else
-			response.Write ">cc#" & i & "</option>"
-		end if
+		
+		Select Case i
+			Case 1 
+				response.Write ">Mod Wheel</option>"
+			Case 6 
+				response.Write " disabled>Data Entry MSB</option>"
+			Case 38 
+				response.Write " disabled>Data Entry LSB</option>"
+			Case 98 
+				response.Write " disabled>NRPN LSB</option>"
+			Case 99		
+				response.Write " disabled>NRPN MSB</option>"
+			Case Else
+				response.Write ">cc#" & i & "</option>"
+		End Select
 	next
 	Response.Write "</select>"
 end function
