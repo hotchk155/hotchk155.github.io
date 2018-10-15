@@ -32,36 +32,3 @@ Connect the other end of the wire to the hole above the SENS and DECAY terminals
 Solder it from the back and trim the solder joint. Done!
 <img src="img/D75.JPG">
 
-## VCO Waveform Mix CV
-
-This mod lets you mix the VCO square and triangle waveforms together when a gate voltage is applied. The square wave is louder and harsher than the triangle wave and in short pulses, when VCO wave switch is set to triangle wave, can give an effect like a burst of noise on top of the mellow triangle wave. While not quite a snare sound, it is a useful and fun mod!
-
-This is a slightly more complex mod, requiring an additional transistor and making use of the protoyping area on the circuit board. Here is the extra circuit we'll build. The idea is that the square wave output from the VCO is used to switch the transistor. When no CV is present there is nothing to pull up the output voltage, so no output signal is present. However when the collector of the transistor is pulled up to a sufficient voltage level by the CV input, switching the transistor on (by a pulse from the square wave) will pull the output voltage up through the transistor. When the transistor is not switched, the 4.7k resistor pulls the output down. Therefore a signal is present at the output only when a sufficient CV is present. 
-<img src="img/D85.JPG">
-
-Start by soldering a 4.7k resistor to the prototyping area as shown
-<img src="img/D76.JPG">
-
-Solder a 2N3904 transistor as shown (making sure the case is the right way round!). The legs go in column 5 rows G,H,I. 
-<img src="img/D77.JPG">
-
-Add a 1N4148 diode between I2 and I4, with the anode facing away from the transistor
-<img src="img/D78.JPG">
-
-Add a 10k resistor between locations H3 and H4
-<img src="img/D79.JPG">
-
-The circuit layout should look like so 
-<img src="img/D80.JPG">
-
-Attach wires to the middle and bottom pins of the VCO wave form switch
-<img src="img/D81.JPG">
-
-Attach another wire to the top pin of an unused CV socket and bundle the three wires together (e.g. with a loose plait)
-<img src="img/D82.JPG">
-
-Attach the wires to the rear of the PCB as shown
-<img src="img/D83.JPG">
-
-Connect the wire from bottom of VCO wave form switch to point H1. Connect the wire from middle pin of switch to point I1. Connect the wire from the socket to G6
-<img src="img/D84.JPG">
