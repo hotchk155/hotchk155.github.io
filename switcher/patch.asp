@@ -30,7 +30,6 @@ table {
 	End If
 %>
 
-<hr>
 <table width=800><tr><td>
 <center>
 <!-- <img width=600 src="img/cvocd.gif"> -->
@@ -49,6 +48,63 @@ table {
 <form name="sysex" action="get_sysex.asp" method="post">
 <%
 ' ================================================================================================
+' DEFAULT
+' ================================================================================================
+%>
+<hr>
+<p><b>Defaults</b></p>
+
+<table>
+<%
+	Dim o, i, count	
+	Set o = dictMappings.item(PARAMH_PORT_DEFAULT)
+
+	response.write "<tr><td>Default MIDI channel for note and CC triggers</td><td>"
+	RenderChan o.Key & TrigChanTag, o.TrigChan, false
+	response.write "</td>"
+	response.write "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>"	
+	response.write "<td>MIDI channel for program changes</td><td>"
+	RenderChan o.Key & PgmChanTag, o.PgmChan, false
+	response.write "</td></tr>"
+
+%>
+</table>
+<br>
+<table>
+<tr>
+<td></td>
+<td>Envelope</td>
+<td>Time</td>
+<td>Vel.Mod</td>
+<td>CC.Mod</td>
+<td>CC.Chan</td>
+<td>CC#</td>
+<td>&gamma;.cor</td>
+</tr>
+<%	
+	Response.Write "<tr><td>"
+	Response.Write "Defaults for modulation settings"
+	Response.Write "</td><td>"
+	RenderEnvType o.Key & EnvTypeTag, o.EnvType
+	Response.Write "</td><td>"
+	RenderEnvHoldTime o.Key & EnvHoldTimeTag, o.EnvHoldTime
+	Response.Write "</td><td>"
+	RenderModDest o.Key & ModVelDestTag, o.ModVelDest
+	Response.Write "</td><td>"
+	RenderModDest o.Key & ModCCDestTag, o.ModCCDest
+	Response.Write "</td><td>"
+	RenderChan o.Key & ModCCChanTag, o.ModCCChan, true
+	Response.Write "</td><td>"
+	RenderCC o.Key & ModCCTag, o.ModCC
+	Response.Write "</td><td>"
+	RenderCheckBox o.Key & GammaTag, o.Gamma
+	Response.Write "</td></tr>"	
+%>
+</table>
+
+
+<%
+' ================================================================================================
 ' SWITCHES
 ' ================================================================================================
 %>
@@ -58,19 +114,19 @@ table {
 <tr>
 <td></td>
 <td>Trigger</td>
-<td>Chan</td>
-<td>Note</td>
-<td>Min.Vel</td>
-<td>Max.Vel</td>
-<td>CC</td>
+<td>Channel</td>
+<td>Note(Vel)</td>
+<td>CC#</td>
 <td>Min.Val</td>
 <td>Max.Val</td>
-<td>Duration</td>
-<td>Sustain</td>
-<td>Hold.Mod</td>
-<td>CC</td>
-<td>Duty.Mod</td>
-<td>CC</td>
+<td>...</td>
+<td>Envelope</td>
+<td>Time</td>
+<td>Vel.Mod</td>
+<td>CC.Mod</td>
+<td>CC.Chan</td>
+<td>CC#</td>
+<td>&gamma;.cor</td>
 </tr>
 <%
 for count = 1 to 8
@@ -78,33 +134,33 @@ for count = 1 to 8
 	Response.Write "<tr><td>"
 	Response.Write "Port." & Chr(64+count)
 	Response.Write "</td><td>"
-	RenderTrigType o
+	RenderTrigType o.Key & TrigTypeTag, o.TrigType
 	Response.Write "</td><td>"
-	RenderTrigChan o
+	RenderChan o.Key & TrigChanTag, o.TrigChan, true
 	Response.Write "</td><td>"
-	RenderTrigNote o
+	RenderNote o.Key & TrigNoteTag, o.TrigNote
 	Response.Write "</td><td>"
-	RenderTrigNoteMinVel o
+	RenderCC o.Key & TrigCCTag, o.TrigCC
 	Response.Write "</td><td>"
-	RenderTrigNoteMaxVel o
+	RenderValue o.Key & TrigMinValueTag, o.TrigMinValue
 	Response.Write "</td><td>"
-	RenderTrigCC o
+	RenderValue o.Key & TrigMaxValueTag, o.TrigMaxValue
 	Response.Write "</td><td>"
-	RenderTrigCCMinValue o
+	RenderCheckbox o.Key & ChangeDefaultTag, o.ChangeDefault
 	Response.Write "</td><td>"
-	RenderTrigCCMaxValue o
+	RenderEnvType o.Key & EnvTypeTag, o.EnvType
 	Response.Write "</td><td>"
-	RenderEnvHoldTime o
+	RenderEnvHoldTime o.Key & EnvHoldTimeTag, o.EnvHoldTime
 	Response.Write "</td><td>"
-	RenderEnvSustain o
+	RenderModDest o.Key & ModVelDestTag, o.ModVelDest
 	Response.Write "</td><td>"
-	RenderDurModType o
+	RenderModDest o.Key & ModCCDestTag, o.ModCCDest
 	Response.Write "</td><td>"
-	RenderDurModCC o
+	RenderChan o.Key & ModCCChanTag, o.ModCCChan, true
 	Response.Write "</td><td>"
-	RenderPwmModType o
+	RenderCC o.Key & ModCCTag, o.ModCC
 	Response.Write "</td><td>"
-	RenderPwmModCC o
+	RenderCheckBox o.Key & GammaTag, o.Gamma
 	Response.Write "</td></tr>"	
 next	
 %>
@@ -153,21 +209,80 @@ XAble_SwitchOutput(<%=count%>);
 <table>
 <tr>
 <td></td>
-<td>Chan</td>
 <td>PGM#</td>
-<td>Output&nbsp;Ports</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td></td>
+<td>PGM#</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+
 </tr>
 <%
-for count = 1 to 16
-	Set o = dictMappings.item(10 + count)
+dim slot
+for count = 1 to 8
+
+	slot = count
+	Set o = dictMappings.item(10+slot)
 	Response.Write "<tr><td>"
-	Response.Write "Slot." & count
+	Response.Write "Slot." & slot
 	Response.Write "</td><td>"
-	RenderPgmChan o
+	RenderPgm o.Key & PgmTag, o.Pgm
 	Response.Write "</td><td>"
-	RenderPgmNo o
+	RenderCheckbox o.Key & Out1Tag, o.Out1
 	Response.Write "</td><td>"
-	RenderOutputs o
+	RenderCheckbox o.Key & Out2Tag, o.Out2
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out3Tag, o.Out3
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out4Tag, o.Out4
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out5Tag, o.Out5
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out6Tag, o.Out6
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out7Tag, o.Out7
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out8Tag, o.Out8
+	Response.Write "</td><td>"
+	
+	Response.Write "</td><td>"
+
+	slot = 8 + count
+	Set o = dictMappings.item(10+slot)
+	Response.Write "Slot." & slot
+	Response.Write "</td><td>"
+	RenderPgm o.Key & PgmTag, o.Pgm
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out1Tag, o.Out1
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out2Tag, o.Out2
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out3Tag, o.Out3
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out4Tag, o.Out4
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out5Tag, o.Out5
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out6Tag, o.Out6
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out7Tag, o.Out7
+	Response.Write "</td><td>"
+	RenderCheckbox o.Key & Out8Tag, o.Out8
+	
 	Response.Write "</td></tr>"	
 next	
 %>

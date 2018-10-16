@@ -1,5 +1,7 @@
 <%
 
+Option Explicit
+
 // Sysex ID
 Const MANUF_ID_0	= &H00
 Const MANUF_ID_1	= &H7f
@@ -14,25 +16,25 @@ Const PARAMH_PORTE = 5
 Const PARAMH_PORTF = 6
 Const PARAMH_PORTG = 7
 Const PARAMH_PORTH = 8
+Const PARAMH_PORT_DEFAULT = 100
 
 Const PARAML_TRIG_NONE = 0
 Const PARAML_TRIG_NOTE = 1
 Const PARAML_TRIG_CC = 2
 Const PARAML_TRIG_PGM = 3
 
-Const PARAML_TRIG2_VELOCITY	= 4
-Const PARAML_TRIG2_VALUE = 5
+Const PARAML_TRIG2_CHAN			= 10
+Const PARAML_TRIG2_VALUE_MIN	= 11
+Const PARAML_TRIG2_VALUE_MAX	= 12
 
-Const PARAML_ENV_SUSTAIN = 50
-Const PARAML_ENV_HOLD = 51
-
-Const PARAML_DUR_MOD_NONE	= 100
-Const PARAML_DUR_MOD_VELOCITY = 101
-Const PARAML_DUR_MOD_CC	= 102
-
-Const PARAML_PWM_MOD_NONE = 110
-Const PARAML_PWM_MOD_VELOCITY =111
-Const PARAML_PWM_MOD_CC	= 112
+Const PARAML_ENV_SET = 50
+Const PARAML_ENV_TYPE = 51
+Const PARAML_ENV_HOLD = 52
+Const PARAML_GAMMA = 60
+Const PARAML_VEL_MOD_DEST = 70
+Const PARAML_CC_MOD_DEST = 71
+Const PARAML_CC_MOD_CHAN = 72
+Const PARAML_CC_MOD_CC = 73
 
 Const PARAMH_PGM_ALL 	= 10
 Const PARAMH_PGM_SLOT1 	= 11
@@ -52,18 +54,132 @@ Const PARAMH_PGM_SLOT14 = 24
 Const PARAMH_PGM_SLOT15 = 25
 Const PARAMH_PGM_SLOT16 = 26
 
-Const PARAML_PGM_CLEAR	= 0
 Const PARAML_PGM_MATCH	= 1
 Const PARAML_PGM_PORT	= 2
 
+Const ChangeDefaultTag = ".ovr"
+Const EnvHoldTimeTag = ".hold"
+Const EnvTypeTag = ".env"
+Const GammaTag = ".gamma"
+Const ModCCChanTag = ".mccch"
+Const ModCCDestTag = ".mccdst"
+Const ModCCTag = ".mcc"
+Const ModVelDestTag = ".mvdst"
+Const Out1Tag = ".o1"
+Const Out2Tag = ".o2"
+Const Out3Tag = ".o3"
+Const Out4Tag = ".o4"
+Const Out5Tag = ".o5"
+Const Out6Tag = ".o6"
+Const Out7Tag = ".o7"
+Const Out8Tag = ".o8"
+Const PgmChanTag = ".pgmch"
+Const PgmTag = ".pgm"
+Const TrigCCTag = ".tcc" 
+Const TrigChanTag = ".tch"
+Const TrigMaxValueTag = ".tvmax"
+Const TrigMinValueTag = ".tvmin"
+Const TrigNoteTag = ".tnote" 
+Const TrigTypeTag = ".trig"
+
 	
 Dim dictMappings
+
+' =================================================================
+Function ForceInt(s) 
+	Dim v
+	v = Request.Form(s)
+	If v= "" Then 
+		ForceInt = 0
+	Else
+		ForceInt = CLng(v)
+	End If
+End Function 
 
 ' =================================================================
 Function WriteParam(a,b,c,d)
 '	Response.Write a & ", " & b & ", " & c & ", " & d & "<br>"
 	Response.BinaryWrite ChrB(a) & ChrB(b) & ChrB(c) & ChrB(d) 
 End Function
+
+
+' =================================================================
+' DEFAULT
+' =================================================================
+Class Defaults
+
+	Public Key
+	Public TrigChan 
+	Public PgmChan 
+	Public EnvType
+	Public EnvHoldTime
+	Public ModVelDest
+	Public ModCCDest
+	Public ModCCChan
+	Public ModCC
+	Public Gamma
+
+	
+	'--------------------------
+	Public Sub Class_Initialize
+		Me.Key = ""	
+		Me.TrigChan = 1
+		Me.PgmChan = 1
+		Me.EnvType = 0
+		Me.EnvHoldTime = 0
+		Me.ModVelDest = 0
+		Me.ModCCDest = 0
+		Me.ModCCChan = 0
+		Me.ModCC = 1
+		Me.Gamma = 0
+		
+	End Sub
+	'--------------------------	
+	Public Sub ReadForm
+		Me.TrigChan = ForceInt(Me.Key & TrigChanTag)
+		Me.PgmChan = ForceInt(Me.Key & PgmChanTag)
+		Me.EnvType= ForceInt(Me.Key & EnvTypeTag)
+		Me.EnvHoldTime = ForceInt(Me.Key & EnvHoldTimeTag)
+		Me.ModVelDest = ForceInt(Me.Key & ModVelDestTag)
+		Me.ModCCDest = ForceInt(Me.Key & ModCCDestTag)
+		Me.ModCCChan = ForceInt(Me.Key & ModCCChanTag)
+		Me.ModCC = ForceInt(Me.Key & ModCCTag)
+		Me.Gamma  = ForceInt(Me.Key & GammaTag)
+	End Sub	
+	'--------------------------		
+	Public Sub WriteSysex(id)
+	
+		WriteParam id, PARAML_TRIG2_CHAN, 0, Me.TrigChan
+		WriteParam id, PARAML_ENV_TYPE, 0, Me.EnvType
+		WriteParam id, PARAML_ENV_HOLD, CInt(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
+		WriteParam id, PARAML_GAMMA, 0, Me.Gamma
+		WriteParam id, PARAML_VEL_MOD_DEST, 0, Me.ModVelDest
+		WriteParam id, PARAML_CC_MOD_DEST, 0, Me.ModCCDest
+		WriteParam id, PARAML_CC_MOD_CHAN, 0, Me.ModCCChan
+		WriteParam id, PARAML_CC_MOD_CC, 0, Me.ModCC
+	End Sub
+	'--------------------------
+	Public Sub ReadSysex(p1, p2, v1, v2)
+		select case p2				
+			Case PARAML_TRIG2_CHAN
+				Me.TrigChan = v2
+			Case PARAML_ENV_TYPE
+				Me.EnvType = v2
+			Case PARAML_ENV_HOLD 
+				Me.EnvHoldTime = 128 * v1 + v2			
+			Case PARAML_GAMMA
+				Me.Gamma = v2
+			Case PARAML_VEL_MOD_DEST
+				Me.ModVelDest = v2
+			Case PARAML_CC_MOD_DEST
+				Me.ModCCDest = v2
+			Case PARAML_CC_MOD_CHAN
+				Me.ModCCChan = v2
+			Case PARAML_CC_MOD_CC
+				Me.ModCC = v2
+		end select
+	End Sub
+End Class
 
 ' =================================================================
 ' SWITCH OUTPUT
@@ -74,89 +190,77 @@ Class SwitchOutput
 	Public TrigType 
 	Public TrigChan 
 	Public TrigNote 
-	Public TrigNoteMinVel 
-	Public TrigNoteMaxVel 
 	Public TrigCC 
-	Public TrigCCMinValue 
-	Public TrigCCMaxValue
-	Public EnvSustain
+	Public TrigMinValue
+	Public TrigMaxValue
+	Public EnvType
 	Public EnvHoldTime
-	Public DurModType 
-	Public DurModCC 
-	Public PwmModType 
-	Public PwmModCC 
+	Public ChangeDefault
+	Public Gamma
+	Public ModVelDest
+	Public ModCCDest
+	Public ModCCChan
+	Public ModCC
 	
 	'--------------------------
 	Public Sub Class_Initialize
-		Key = ""	
-		TrigType = PARAML_TRIG_NONE
-		TrigChan = 1
-		TrigNote = 36 
-		TrigNoteMinVel = 0
-		TrigNoteMaxVel = 127
-		TrigCC = 1
-		TrigCCMinValue = 64
-		TrigCCMaxValue = 127
-		EnvSustain = 0
-		EnvHoldTime = 100
-		DurModType = PARAML_MOD_NONE
-		DurModCC = 1
-		PwmModType = PARAML_MOD_NONE
-		PwmModCC = 1
+		Me.Key = ""	
+		Me.TrigType = PARAML_TRIG_NONE
+		Me.TrigChan = 0
+		Me.TrigNote = 36 
+		Me.TrigCC = 1
+		Me.TrigMinValue = 1
+		Me.TrigMaxValue = 127
+		Me.EnvType = 0
+		Me.EnvHoldTime = 0		
+		Me.ChangeDefault = 0
+		Me.Gamma = 0
+		Me.ModVelDest = 0
+		Me.ModCCDest = 0
+		Me.ModCCChan = 0
+		Me.ModCC = 1
+		
 	End Sub
 	'--------------------------	
 	Public Sub ReadForm
-		Me.TrigType = CByte(Request.Form(Me.Key & ".trig"))
-		Me.TrigChan = CByte(Request.Form(Me.Key & ".t_ch"))
-		Me.TrigNote = CByte(Request.Form(Me.Key & ".t_note"))
-		Me.TrigNoteMinVel = CByte(Request.Form(Me.Key & ".t_minvel"))
-		Me.TrigNoteMaxVel = CByte(Request.Form(Me.Key & ".t_maxvel"))
-		Me.TrigCC = CByte(Request.Form(Me.Key & ".t_cc"))
-		Me.TrigCCMinValue = CByte(Request.Form(Me.Key & ".t_minvalue"))
-		Me.TrigCCMaxValue = CByte(Request.Form(Me.Key & ".t_maxvalue"))
-		Me.EnvSustain= CByte(Request.Form(Me.Key & ".e_sustain"))
-		Me.EnvHoldTime = CByte(Request.Form(Me.Key & ".e_hold"))
-		Me.DurModType = CByte(Request.Form(Me.Key & ".dmod"))
-		Me.DurModCC = CByte(Request.Form(Me.Key & ".dm_cc"))
-		Me.PwmModType = CByte(Request.Form(Me.Key & ".pmod"))
-		Me.PwmModCC = CByte(Request.Form(Me.Key & ".pm_cc"))
+		Me.TrigType = ForceInt(Me.Key & TrigTypeTag)
+		Me.TrigChan = ForceInt(Me.Key & TrigChanTag)
+		Me.TrigNote = ForceInt(Me.Key & TrigNoteTag)
+		Me.TrigCC = ForceInt(Me.Key & TrigCCTag)
+		Me.TrigMinValue = ForceInt(Me.Key & TrigMaxValueTag)
+		Me.TrigMaxValue = ForceInt(Me.Key & TrigMinValueTag)
+		Me.ChangeDefault = ForceInt(Me.Key & ChangeDefaultTag)
+		Me.EnvType= ForceInt(Me.Key & EnvTypeTag)
+		Me.EnvHoldTime = ForceInt(Me.Key & EnvHoldTimeTag)
+		Me.Gamma  = ForceInt(Me.Key & GammaTag)
+		Me.ModVelDest = ForceInt(Me.Key & ModVelDestTag)
+		Me.ModCCDest = ForceInt(Me.Key & ModCCDestTag)
+		Me.ModCCChan = ForceInt(Me.Key & ModCCChanTag)
+		Me.ModCC = ForceInt(Me.Key & ModCCTag)		
 	End Sub	
 	'--------------------------		
-	Public Sub WriteSysex(id)
-	
-		Select Case Me.TrigType
-			Case PARAML_TRIG_NONE, PARAML_TRIG_PGM
-				WriteParam id, Me.TrigType, 0, 0
-			Case PARAML_TRIG_NOTE
-				WriteParam id, PARAML_TRIG_NOTE, Me.TrigChan, Me.TrigNote
-				WriteParam id, PARAML_TRIG2_VELOCITY, Me.TrigNoteMaxVel, Me.TrigNoteMinVel
-				If Me.DurModType = PARAML_DUR_MOD_CC Then 
-					WriteParam id, Me.DurModType, Me.TrigChan, Me.DurModCC
-				Else 
-					WriteParam id,Me.DurModType, 0, 0
-				End If 
-				If Me.PwmModType = PARAML_PWM_MOD_CC Then 
-					WriteParam id, Me.PwmModType, Me.TrigChan, Me.PwmModCC
-				Else 
-					WriteParam id,Me.PwmModType, 0, 0
-				End If 
-			Case PARAML_TRIG_CC
-				WriteParam id, PARAML_TRIG_CC, Me.TrigChan, Me.TrigCC
-				WriteParam id, PARAML_TRIG2_VALUE, Me.TrigCCMaxValue, Me.TrigCCMinValue
-				If Me.DurModType = PARAML_DUR_MOD_CC Then 
-					WriteParam id, Me.DurModType, Me.TrigChan, Me.DurModCC
-				Else 
-					WriteParam id,Me.DurModType, 0, 0
-				End If 
-				If Me.PwmModType = PARAML_PWM_MOD_CC Then 
-					WriteParam id, Me.PwmModType, Me.TrigChan, Me.PwmModCC
-				Else 
-					WriteParam id,Me.PwmModType, 0, 0
-				End If 
-		End Select
-		If Me.TrigType <> PARAML_TRIG_NONE Then 
-			WriteParam id, PARAML_ENV_SUSTAIN, 0, Me.EnvSustain 
-			WriteParam id, PARAML_ENV_HOLD, CInt(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
+	Public Sub WriteSysex(id)			
+		If Me.TrigType = PARAML_TRIG_NONE Or _ 
+			Me.TrigType = PARAML_TRIG_PGM Then
+			WriteParam id, Me.TrigType, 0, 0
+		Else
+			If Me.TrigType = PARAML_TRIG_CC Then
+				WriteParam id, PARAML_TRIG_CC, 0, Me.TrigCC
+			Else
+				WriteParam id, PARAML_TRIG_NOTE, 0, Me.TrigNote
+			End If
+			WriteParam id, PARAML_TRIG2_VALUE_MIN, 0, Me.TrigMinValue
+			WriteParam id, PARAML_TRIG2_VALUE_MAX, 0, Me.TrigMaxValue
+			WriteParam id, PARAML_ENV_SET, 0, Me.ChangeDefault
+			If Me.ChangeDefault Then
+				WriteParam id, PARAML_ENV_TYPE, 0, Me.EnvType				
+				WriteParam id, PARAML_ENV_HOLD, CInt(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
+				WriteParam id, PARAML_GAMMA , 0, Me.Gamma				
+				WriteParam id, PARAML_VEL_MOD_DEST , 0, Me.ModVelDest				
+				WriteParam id, PARAML_CC_MOD_DEST , 0, Me.ModCCDest				
+				WriteParam id, PARAML_CC_MOD_CHAN , 0, Me.ModCCChan				
+				WriteParam id, PARAML_CC_MOD_CC  , 0, Me.ModCC				
+			End If
 		End If
 	End Sub
 	'--------------------------
@@ -166,30 +270,29 @@ Class SwitchOutput
 				Me.TrigType = p2
 			Case PARAML_TRIG_NOTE
 				Me.TrigType = p2
-				Me.TrigChan = v1
 				Me.TrigNote = v2				
 			Case PARAML_TRIG_CC
 				Me.TrigType = p2
-				Me.TrigChan = v1
 				Me.TrigCC = v2				
-			Case PARAML_TRIG2_VELOCITY
-				Me.TrigNoteMinVel = v2
-				Me.TrigNoteMaxVel = v1
-			Case PARAML_TRIG2_VALUE
-				Me.TrigCCMinValue = v2
-				Me.TrigCCMaxValue = v1
-			Case PARAML_ENV_SUSTAIN 
-				Me.EnvSustain = v2
-			Case PARAML_ENV_HOLD = 51
+			Case PARAML_TRIG2_VALUE_MIN
+				Me.TrigMinValue = v2
+				Me.TrigMaxValue = v1
+			Case PARAML_TRIG2_VALUE_MAX	
+				Me.TrigMaxValue = v1				
+			Case PARAML_ENV_TYPE
+				Me.EnvType = v2
+			Case PARAML_ENV_HOLD
 				Me.EnvHoldTime = 128 * v1 + v2
-			Case PARAML_MOD_NONE, PARAML_MOD_VELOCITY
-				Me.ModType = p2
-			Case PARAML_DUR_MOD_CC
-				Me.DurModType = p2
-				Me.DurModCC = v2	'always on the trigger channel
-			Case PARAML_PWM_MOD_CC
-				Me.PwmModType = p2
-				Me.PwmModCC = v2	'always on the trigger channel
+			Case PARAML_GAMMA
+				Me.Gamma = v2
+			Case PARAML_VEL_MOD_DEST
+				Me.ModVelDest = v2
+			Case PARAML_CC_MOD_DEST
+				Me.ModCCDest = v2
+			Case PARAML_CC_MOD_CHAN
+				Me.ModCCChan = v2
+			Case PARAML_CC_MOD_CC
+				Me.ModCC = v2
 		end select
 	End Sub
 End Class
@@ -200,7 +303,7 @@ End Class
 Class ProgramChange
 
 	Public Key
-	Public Chan
+	Public TrigChan
 	Public PGM 
 	Public Out1
 	Public Out2
@@ -214,35 +317,43 @@ Class ProgramChange
 	
 	'--------------------------
 	Public Sub Class_Initialize
-		Key = ""	
-		Chan = 0
-		PGM = 0
-		Out1 = 0
-		Out2 = 0
-		Out3 = 0
-		Out4 = 0
-		Out5 = 0
-		Out6 = 0
-		Out7 = 0
-		Out8 = 0 
+		Me.Key = ""	
+		Me.PGM = 0
+		Me.Out1 = 0
+		Me.Out2 = 0
+		Me.Out3 = 0
+		Me.Out4 = 0
+		Me.Out5 = 0
+		Me.Out6 = 0
+		Me.Out7 = 0
+		Me.Out8 = 0 
 	End Sub
 	'--------------------------	
 	Public Sub ReadForm
-		Me.Chan = CByte(Request.Form(Me.Key & ".chan"))
-		Me.PGM = CByte(Request.Form(Me.Key & ".pgm"))
-		Me.Out1 = CByte(Request.Form(Me.Key & ".out1")= "on")
-		Me.Out2 = CByte(Request.Form(Me.Key & ".out2")= "on")
-		Me.Out3 = CByte(Request.Form(Me.Key & ".out3")= "on")
-		Me.Out4 = CByte(Request.Form(Me.Key & ".out4")= "on")
-		Me.Out5 = CByte(Request.Form(Me.Key & ".out5")= "on")
-		Me.Out6 = CByte(Request.Form(Me.Key & ".out6")= "on")
-		Me.Out7= CByte(Request.Form(Me.Key & ".out7")= "on")
-		Me.Out8 = CByte(Request.Form(Me.Key & ".out8")= "on")
+		Me.PGM =ForceInt(Me.Key & PgmTag)
+		Me.Out1 = (Request.Form(Me.Key & Out1Tag)= "on")
+		Me.Out2 = (Request.Form(Me.Key & Out2Tag)= "on")
+		Me.Out3 = (Request.Form(Me.Key & Out3Tag)= "on")
+		Me.Out4 = (Request.Form(Me.Key & Out4Tag)= "on")
+		Me.Out5 = (Request.Form(Me.Key & Out5Tag)= "on")
+		Me.Out6 = (Request.Form(Me.Key & Out6Tag)= "on")
+		Me.Out7= (Request.Form(Me.Key & Out7Tag)= "on")
+		Me.Out8 = (Request.Form(Me.Key & Out8Tag)= "on")
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)
-		if Me.Chan <> 0 Then
-			WriteParam id, PARAML_PGM_MATCH, Me.Chan, Me.PGM
+		If Me.PGM = "" Then 
+			WriteParam id, PARAML_PGM_MATCH, 0, Me.PGM
+			WriteParam id, PARAML_PGM_PORT, 1, 0
+			WriteParam id, PARAML_PGM_PORT, 2, 0
+			WriteParam id, PARAML_PGM_PORT, 3, 0
+			WriteParam id, PARAML_PGM_PORT, 4, 0
+			WriteParam id, PARAML_PGM_PORT, 5, 0
+			WriteParam id, PARAML_PGM_PORT, 6, 0
+			WriteParam id, PARAML_PGM_PORT, 7, 0
+			WriteParam id, PARAML_PGM_PORT, 8, 0
+		Else 
+			WriteParam id, PARAML_PGM_MATCH, 0, Me.PGM
 			WriteParam id, PARAML_PGM_PORT, 1, Me.Out1
 			WriteParam id, PARAML_PGM_PORT, 2, Me.Out2
 			WriteParam id, PARAML_PGM_PORT, 3, Me.Out3
@@ -251,17 +362,14 @@ Class ProgramChange
 			WriteParam id, PARAML_PGM_PORT, 6, Me.Out6
 			WriteParam id, PARAML_PGM_PORT, 7, Me.Out7
 			WriteParam id, PARAML_PGM_PORT, 8, Me.Out8
-		Else
-			WriteParam id, PARAML_PGM_CLEAR, 0, 1 'clear
 		End If
 	End Sub
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2		
 			Case PARAML_PGM_MATCH
-				Me.Chan = v1
 				Me.PGM = v2
-			Case PARAML_TRIG_PORT
+			Case PARAML_PGM_PORT
 				Select Case v1
 					Case 1
 						Me.Out1 = v2
@@ -285,10 +393,17 @@ Class ProgramChange
 End Class
 
 Function InitMappings
+	Dim o, i	
 	Set dictMappings = Server.CreateObject("Scripting.Dictionary")
+
+	Set o = New Defaults
+	o.Key = "def"
+	dictMappings.Add PARAMH_PORT_DEFAULT, o
+	
 	For i = 1 to 8
 		Set o = New SwitchOutput
 		o.Key = "out" & i
+		o.TrigNote = 35+i
 		dictMappings.Add i, o
 	Next
 
@@ -300,12 +415,14 @@ Function InitMappings
 End Function
 
 Function ReadForm
+	Dim o
 	For each o in dictMappings.Items
 		o.ReadForm
 	Next
 End Function
 
 Function WriteSysex
+	Dim arrKeys, arrItems, i, o
 	arrKeys = dictMappings.Keys
 	arrItems = dictMappings.Items
 	response.binarywrite chrb(&HF0) 
@@ -320,7 +437,7 @@ Function WriteSysex
 End Function
 
 function ReadSysEx
-	Dim data
+	Dim data, index, i
 	ReadSysEx = false
 	data = request.BinaryRead(request.TotalBytes)
 	
