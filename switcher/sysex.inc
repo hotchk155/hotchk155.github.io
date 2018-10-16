@@ -36,6 +36,7 @@ Const PARAML_CC_MOD_DEST = 71
 Const PARAML_CC_MOD_CHAN = 72
 Const PARAML_CC_MOD_CC = 73
 
+Const PARAMH_PGM_CHAN 	= 20
 Const PARAMH_PGM_ALL 	= 10
 Const PARAMH_PGM_SLOT1 	= 11
 Const PARAMH_PGM_SLOT2 	= 12
@@ -89,10 +90,19 @@ Dim dictMappings
 Function ForceInt(s) 
 	Dim v
 	v = Request.Form(s)
-	If v= "" Then 
-		ForceInt = 0
-	Else
+	If IsNumeric(v) then 
 		ForceInt = CLng(v)
+	Else	
+		If v= "" Then 
+			ForceInt = 0
+		Else 
+			If v = "on" then 
+				ForceInt = 1
+			'else
+			'	ForceInt = 0
+			'	Response.write"{" & s & "=" & v & "}"
+			end if
+		end if 
 	End If
 End Function 
 
@@ -150,6 +160,7 @@ Class Defaults
 	Public Sub WriteSysex(id)
 	
 		WriteParam id, PARAML_TRIG2_CHAN, 0, Me.TrigChan
+		WriteParam id, PARAMH_PGM_CHAN, 0, Me.PgmChan
 		WriteParam id, PARAML_ENV_TYPE, 0, Me.EnvType
 		WriteParam id, PARAML_ENV_HOLD, CInt(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
 		WriteParam id, PARAML_GAMMA, 0, Me.Gamma
@@ -163,6 +174,8 @@ Class Defaults
 		select case p2				
 			Case PARAML_TRIG2_CHAN
 				Me.TrigChan = v2
+			Case PARAMH_PGM_CHAN
+				Me.PgmChan = v2
 			Case PARAML_ENV_TYPE
 				Me.EnvType = v2
 			Case PARAML_ENV_HOLD 
@@ -239,18 +252,21 @@ Class SwitchOutput
 		Me.ModCC = ForceInt(Me.Key & ModCCTag)		
 	End Sub	
 	'--------------------------		
-	Public Sub WriteSysex(id)			
-		If Me.TrigType = PARAML_TRIG_NONE Or _ 
-			Me.TrigType = PARAML_TRIG_PGM Then
-			WriteParam id, Me.TrigType, 0, 0
-		Else
+	Public Sub WriteSysex(id)					
+		If Me.TrigType = PARAML_TRIG_CC Or PARAML_TRIG_NOTE Then
 			If Me.TrigType = PARAML_TRIG_CC Then
 				WriteParam id, PARAML_TRIG_CC, 0, Me.TrigCC
 			Else
 				WriteParam id, PARAML_TRIG_NOTE, 0, Me.TrigNote
 			End If
+			WriteParam id, PARAML_TRIG2_CHAN, 0, Me.TrigChan
 			WriteParam id, PARAML_TRIG2_VALUE_MIN, 0, Me.TrigMinValue
 			WriteParam id, PARAML_TRIG2_VALUE_MAX, 0, Me.TrigMaxValue
+		Else
+			WriteParam id, Me.TrigType, 0, 0
+		End If
+		
+		If Me.TrigType <> PARAML_TRIG_NONE Then		
 			WriteParam id, PARAML_ENV_SET, 0, Me.ChangeDefault
 			If Me.ChangeDefault Then
 				WriteParam id, PARAML_ENV_TYPE, 0, Me.EnvType				
@@ -274,11 +290,15 @@ Class SwitchOutput
 			Case PARAML_TRIG_CC
 				Me.TrigType = p2
 				Me.TrigCC = v2				
+			Case PARAML_TRIG2_CHAN
+				Me.TrigChan = v2
 			Case PARAML_TRIG2_VALUE_MIN
 				Me.TrigMinValue = v2
 				Me.TrigMaxValue = v1
 			Case PARAML_TRIG2_VALUE_MAX	
 				Me.TrigMaxValue = v1				
+			Case PARAML_ENV_SET
+				Me.ChangeDefault = v2				
 			Case PARAML_ENV_TYPE
 				Me.EnvType = v2
 			Case PARAML_ENV_HOLD

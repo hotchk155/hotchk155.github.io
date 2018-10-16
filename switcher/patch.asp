@@ -32,7 +32,7 @@ table {
 
 <table width=800><tr><td>
 <center>
-<!-- <img width=600 src="img/cvocd.gif"> -->
+<img width=600 src="img/switcher.png"> 
 </center>
 <hr>
 <form name="sysex_file" action="patch.asp?file=true" enctype="multipart/form-data" method="post">
@@ -52,38 +52,28 @@ table {
 ' ================================================================================================
 %>
 <hr>
-<p><b>Defaults</b></p>
-
-<table>
+<p><b>Default Values For This Patch</b></p>
 <%
 	Dim o, i, count	
 	Set o = dictMappings.item(PARAMH_PORT_DEFAULT)
-
-	response.write "<tr><td>Default MIDI channel for note and CC triggers</td><td>"
-	RenderChan o.Key & TrigChanTag, o.TrigChan, false
-	response.write "</td>"
-	response.write "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>"	
-	response.write "<td>MIDI channel for program changes</td><td>"
-	RenderChan o.Key & PgmChanTag, o.PgmChan, false
-	response.write "</td></tr>"
-
-%>
-</table>
-<br>
+%>	
 <table>
 <tr>
-<td></td>
-<td>Envelope</td>
-<td>Time</td>
-<td>Vel.Mod</td>
-<td>CC.Mod</td>
-<td>CC.Chan</td>
-<td>CC#</td>
-<td>&gamma;.cor</td>
+<td title="The default MIDI channel where we listen for note and CC messages that will trigger the switch">Trig.Chan</td>
+<td title="The MIDI channel where we listen for program change messages">PGM.Chan</td>
+<td title="The default envelope shape for switching">Envelope</td>
+<td title="The default switching duration">Time</td>
+<td title="The default selection for how note velocity modulates switching">Vel.Mod</td>
+<td title="The default selection for how a separate CC can modulate switching">CC.Mod</td>
+<td title="The default selection for the MIDI channel where we listen for CC messages that modulate switching">CC.Chan</td>
+<td title="The default selection for the CC number that modulates switching">CC#</td>
+<td title="The default selection for whether gamma correction will apply to switching">&gamma;.cor</td>
 </tr>
 <%	
 	Response.Write "<tr><td>"
-	Response.Write "Defaults for modulation settings"
+	RenderChan o.Key & TrigChanTag, o.TrigChan, false 	
+	Response.Write "</td><td>"
+	RenderChan o.Key & PgmChanTag, o.PgmChan, false		
 	Response.Write "</td><td>"
 	RenderEnvType o.Key & EnvTypeTag, o.EnvType
 	Response.Write "</td><td>"
@@ -113,20 +103,20 @@ table {
 <table>
 <tr>
 <td></td>
-<td>Trigger</td>
-<td>Channel</td>
-<td>Note(Vel)</td>
-<td>CC#</td>
-<td>Min.Val</td>
+<td title="The type of MIDI messages that triggers switching on this channel&#13;Can be a MIDI note ON message, a CC value within a range or we can &#13;select that the channel is switched by program change messages">Trigger</td>
+<td title="The MIDI channel where we listen for note and CC messages to trigger switching">Channel</td>
+<td title="In Note mode, the specific MIDI note that will trigger this channel">Note(Vel)</td>
+<td title="In CC mode, this is the specific controller number that triggers the channel">CC#</td>
+<td title="In note mode these fields select the range of note velocities that can&#13;trigger the channel. In CC mode this is a range of controller values &#13;that will trigger the channel">Min.Val</td>
 <td>Max.Val</td>
-<td>...</td>
-<td>Envelope</td>
-<td>Time</td>
-<td>Vel.Mod</td>
-<td>CC.Mod</td>
-<td>CC.Chan</td>
-<td>CC#</td>
-<td>&gamma;.cor</td>
+<td title="Check the box to override the default pulse-shaping for this channel">...</td>
+<td title="Select the 'shape' of the pulse using this setting:&#13;'Sustain' means that the switch stays on as long as the trigger is present&#13;'Hold' means that the switch stays on for the specified time period&#13;These can be combined to give a minimum switch time or to extend the trigger time&#13;'Release' means that the switch power 'fades away' during Hold time and is most useful with LEDs or light bulbs">Envelope</td>
+<td title="The duration of the 'Hold' or 'Release' period">Time</td>
+<td title="Whether the note velocity scales, or 'modulates', the Hold time or PWM duty (power)">Vel.Mod</td>
+<td title="Whether a specified MIDI controller scales, or 'modulates', the Hold time or PWM duty (power)">CC.Mod</td>
+<td title="The MIDI channel where we listen for the CC for modulation">CC.Chan</td>
+<td title="The CC number controlling modulation">CC#</td>
+<td title="Whether we apply 'gamma correction' to the PWM duty (switch power)&#13;When used with LEDs or light bulbs, this gives them a better range of perceived brightness">&gamma;.cor</td>
 </tr>
 <%
 for count = 1 to 8
@@ -209,7 +199,7 @@ XAble_SwitchOutput(<%=count%>);
 <table>
 <tr>
 <td></td>
-<td>PGM#</td>
+<td title="The MIDI program number that will activate this 'slot' and trigger selected channels">PGM#</td>
 <td>A</td>
 <td>B</td>
 <td>C</td>
@@ -220,7 +210,7 @@ XAble_SwitchOutput(<%=count%>);
 <td>H</td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td></td>
-<td>PGM#</td>
+<td title="The MIDI program number that will activate this 'slot' and trigger selected channels">PGM#</td>
 <td>A</td>
 <td>B</td>
 <td>C</td>
