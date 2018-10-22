@@ -229,7 +229,7 @@ XAble_SwitchOutput(<%=count%>);
 <%
 for count = 0 to 7
 
-	Set o = dictMappings.item(11+count)
+	Set o = dictMappings.item(10+count)
 	Response.Write "<tr><td>"
 	If count = 0 Then 
 		Response.Write "INIT"
@@ -260,7 +260,7 @@ for count = 0 to 7
 	
 	Response.Write "</td><td>"
 
-	Set o = dictMappings.item(19+count)
+	Set o = dictMappings.item(18+count)
 	Response.Write "Slot." & (count+8)
 	Response.Write "</td><td>"
 	RenderPgm o.Key & PgmTag, o.Pgm

@@ -347,7 +347,7 @@ Class ProgramChange
 	'--------------------------
 	Public Sub Class_Initialize
 		Me.Key = ""	
-		Me.PGM = 0
+		Me.PGM = -1
 		Me.Out1 = 0
 		Me.Out2 = 0
 		Me.Out3 = 0
@@ -359,7 +359,11 @@ Class ProgramChange
 	End Sub
 	'--------------------------	
 	Public Sub ReadForm
-		Me.PGM =ForceInt(Me.Key & PgmTag)
+		If Request.Form(Me.Key & PgmTag) = "-1" Then 
+			Me.PGM = -1
+		Else
+			Me.PGM =ForceInt(Me.Key & PgmTag)
+		End If
 		Me.Out1 = IIF((Request.Form(Me.Key & Out1Tag)= "on"),1,0)
 		Me.Out2 = IIF((Request.Form(Me.Key & Out2Tag)= "on"),1,0)
 		Me.Out3 = IIF((Request.Form(Me.Key & Out3Tag)= "on"),1,0)
@@ -371,8 +375,8 @@ Class ProgramChange
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)
-		If Me.PGM = "" Then 
-			WriteParam id, PARAML_PGM_MATCH, 0, Me.PGM
+		If Me.PGM = -1 Then 
+			WriteParam id, PARAML_PGM_MATCH, 0, 0
 			WriteParam id, PARAML_PGM_PORT, 1, 0
 			WriteParam id, PARAML_PGM_PORT, 2, 0
 			WriteParam id, PARAML_PGM_PORT, 3, 0
@@ -382,7 +386,7 @@ Class ProgramChange
 			WriteParam id, PARAML_PGM_PORT, 7, 0
 			WriteParam id, PARAML_PGM_PORT, 8, 0
 		Else 
-			WriteParam id, PARAML_PGM_MATCH, 0, Me.PGM
+			WriteParam id, PARAML_PGM_MATCH, 1, Me.PGM
 			WriteParam id, PARAML_PGM_PORT, 1, Me.Out1
 			WriteParam id, PARAML_PGM_PORT, 2, Me.Out2
 			WriteParam id, PARAML_PGM_PORT, 3, Me.Out3
@@ -397,7 +401,11 @@ Class ProgramChange
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2		
 			Case PARAML_PGM_MATCH
-				Me.PGM = v2
+				If v1 = 1 then 
+					Me.PGM = v2
+				Else
+					Me.PGM = -1
+				End If
 			Case PARAML_PGM_PORT
 				Select Case v1
 					Case 1
@@ -436,7 +444,7 @@ Function InitMappings
 		dictMappings.Add i, o
 	Next
 
-	For i = 1 to 16
+	For i = 0 to 15
 		Set o = New ProgramChange
 		o.Key = "pc" & i
 		dictMappings.Add 10+i, o

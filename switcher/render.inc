@@ -124,11 +124,11 @@ End Function
 Function RenderPgm(tag, value)
 	Dim i
 	response.Write "<select name=""" & tag & """ id=""" & tag & """>"
-	Response.Write "<option value="""">(none)</option>"
-	For i = 1 to 127	
+	Response.Write "<option value=""-1"">(none)</option>"
+	For i = 0 to 127	
 		response.Write "<option value=""" & i & """"
 		if value = i then Response.write " selected"
-		response.Write ">" & i & "</option>"
+		response.Write ">" & (i+1) & "</option>"
 	next
 	Response.Write "</select>"
 end function
