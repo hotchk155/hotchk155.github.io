@@ -91,8 +91,17 @@ table {
 	Response.Write "</td></tr>"	
 %>
 </table>
+<script language="javascript">
+function XAble_Default() {
+	var id = <%=PARAMH_PORT_DEFAULT%>;
+	var e_modcc = (document.getElementById("def<%=ModCCDestTag%>").value) != "0";
 
-
+	document.getElementById("def<%=ModCCChanTag%>").disabled = !e_modcc;
+	document.getElementById("def<%=ModCCTag%>").disabled =  !e_modcc;
+}
+document.getElementById("def<%=ModCCDestTag%>").onchange=function(){XAble_Default(<%=count%>);}
+XAble_Default();
+</script>
 <%
 ' ================================================================================================
 ' SWITCHES
@@ -122,7 +131,7 @@ table {
 for count = 1 to 8
 	Set o = dictMappings.item(count)
 	Response.Write "<tr><td>"
-	Response.Write "Port." & Chr(64+count)
+	Response.Write Chr(64+count)
 	Response.Write "</td><td>"
 	RenderTrigType o.Key & TrigTypeTag, o.TrigType
 	Response.Write "</td><td>"
@@ -156,36 +165,32 @@ next
 %>
 </table>
 <script language="javascript">
-var o_form = document.forms[1];
 function XAble_SwitchOutput(id) {
-	var trig = (document.getElementById("out" + id + ".trig").value);
-	var dur_mod = (document.getElementById("out" + id + ".dmod").value);
-	var pwm_mod = (document.getElementById("out" + id + ".pmod").value);
-		
+	var trig = (document.getElementById("out" + id + "<%=TrigTypeTag%>").value);		
 	var e_any_trig = (trig != "0");
 	var e_note_trig = (trig == "1");
 	var e_cc_trig = (trig == "2");
-	var e_cc_dmod = (dur_mod == "102");
-	var e_cc_pmod = (pwm_mod == "112");
-		
-	document.getElementById("out" + id + ".t_ch").disabled = !(e_note_trig || e_cc_trig || e_cc_dmod || e_cc_pmod);
-	document.getElementById("out" + id + ".t_note").disabled = !e_note_trig;
-	document.getElementById("out" + id + ".t_minvel").disabled =!e_note_trig;
-	document.getElementById("out" + id + ".t_maxvel").disabled = !e_note_trig;
-	document.getElementById("out" + id + ".t_cc").disabled = !e_cc_trig;
-	document.getElementById("out" + id + ".t_minvalue").disabled = !e_cc_trig;
-	document.getElementById("out" + id + ".t_maxvalue").disabled = !e_cc_trig;
-	document.getElementById("out" + id + ".e_hold").disabled = !(e_note_trig || e_cc_trig);
-	document.getElementById("out" + id + ".e_sustain").disabled = !(e_note_trig || e_cc_trig);
-	document.getElementById("out" + id + ".dmod").disabled = !e_any_trig
-	document.getElementById("out" + id + ".dm_cc").disabled = !(e_any_trig && e_cc_dmod);
-	document.getElementById("out" + id + ".pmod").disabled = !e_any_trig
-	document.getElementById("out" + id + ".pm_cc").disabled = !(e_any_trig && e_cc_pmod);
+	var e_ovr = e_any_trig && document.getElementById("out" + id + "<%=ChangeDefaultTag%>").checked;
+	var e_modcc = (document.getElementById("out" + id + "<%=ModCCDestTag%>").value) != "0";
+
+	document.getElementById("out" + id + "<%=TrigChanTag%>").disabled = !(e_note_trig || e_cc_trig);
+	document.getElementById("out" + id + "<%=TrigNoteTag%>").disabled = !e_note_trig;
+	document.getElementById("out" + id + "<%=TrigCCTag%>").disabled = !e_cc_trig;
+	document.getElementById("out" + id + "<%=TrigMaxValueTag%>").disabled = !(e_note_trig || e_cc_trig);
+	document.getElementById("out" + id + "<%=TrigMinValueTag%>").disabled = !(e_note_trig || e_cc_trig);
+	document.getElementById("out" + id + "<%=ChangeDefaultTag%>").disabled = !e_any_trig;
+	document.getElementById("out" + id + "<%=EnvTypeTag%>").disabled = !e_ovr;
+	document.getElementById("out" + id + "<%=EnvHoldTimeTag%>").disabled = !e_ovr;
+	document.getElementById("out" + id + "<%=ModVelDestTag%>").disabled = !e_ovr;
+	document.getElementById("out" + id + "<%=ModCCDestTag%>").disabled = !e_ovr;
+	document.getElementById("out" + id + "<%=ModCCChanTag%>").disabled = !(e_ovr && e_modcc);
+	document.getElementById("out" + id + "<%=ModCCTag%>").disabled =  !(e_ovr && e_modcc);
+	document.getElementById("out" + id + "<%=GammaTag%>").disabled = !e_ovr;	
 }
 <% For count = 1 to 8 %>
-document.getElementById("out<%=count%>.trig").onchange=function(){XAble_SwitchOutput(<%=count%>);}
-document.getElementById("out<%=count%>.dmod").onchange=function(){XAble_SwitchOutput(<%=count%>);}
-document.getElementById("out<%=count%>.pmod").onchange=function(){XAble_SwitchOutput(<%=count%>);}
+document.getElementById("out<%=count%><%=TrigTypeTag%>").onchange=function(){XAble_SwitchOutput(<%=count%>);}
+document.getElementById("out<%=count%><%=ChangeDefaultTag%>").onchange=function(){XAble_SwitchOutput(<%=count%>);}
+document.getElementById("out<%=count%><%=ModCCDestTag%>").onchange=function(){XAble_SwitchOutput(<%=count%>);}
 XAble_SwitchOutput(<%=count%>);
 <% Next %>	
 </script>
@@ -222,15 +227,19 @@ XAble_SwitchOutput(<%=count%>);
 
 </tr>
 <%
-dim slot
-for count = 1 to 8
+for count = 0 to 7
 
-	slot = count
-	Set o = dictMappings.item(10+slot)
+	Set o = dictMappings.item(11+count)
 	Response.Write "<tr><td>"
-	Response.Write "Slot." & slot
-	Response.Write "</td><td>"
-	RenderPgm o.Key & PgmTag, o.Pgm
+	If count = 0 Then 
+		Response.Write "INIT"
+		Response.Write "</td><td>"
+
+	Else
+		Response.Write "Slot." & (count)
+		Response.Write "</td><td>"
+		RenderPgm o.Key & PgmTag, o.Pgm
+	End If 
 	Response.Write "</td><td>"
 	RenderCheckbox o.Key & Out1Tag, o.Out1
 	Response.Write "</td><td>"
@@ -251,9 +260,8 @@ for count = 1 to 8
 	
 	Response.Write "</td><td>"
 
-	slot = 8 + count
-	Set o = dictMappings.item(10+slot)
-	Response.Write "Slot." & slot
+	Set o = dictMappings.item(19+count)
+	Response.Write "Slot." & (count+8)
 	Response.Write "</td><td>"
 	RenderPgm o.Key & PgmTag, o.Pgm
 	Response.Write "</td><td>"
@@ -276,6 +284,23 @@ for count = 1 to 8
 	Response.Write "</td></tr>"	
 next	
 %>
+<script language="javascript">
+function XAble_PGM(id) {
+	var pgm = (document.getElementById("pc" + id + "<%=PgmTag%>").value);		
+	document.getElementById("pc" + id + "<%=Out1Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out2Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out3Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out4Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out5Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out6Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out7Tag%>").disabled = !pgm;
+	document.getElementById("pc" + id + "<%=Out8Tag%>").disabled = !pgm;
+}
+<% For count = 1 to 16 %>
+document.getElementById("pc<%=count%><%=PgmTag%>").onchange=function(){XAble_PGM(<%=count%>);}
+XAble_PGM(<%=count%>);
+<% Next %>	
+</script>
 </table>
 
 

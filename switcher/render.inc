@@ -26,6 +26,7 @@ Function RenderTrigType(tag, value)
 	dict.add "1", "Note"
 	dict.add "2", "CC"
 	dict.add "3", "PGM"
+	dict.add "4", "Always"
 	RenderSelection tag, value, dict
 end function	
 ' =================================================================
@@ -48,7 +49,7 @@ Function RenderNote(tag, value)
 	response.Write "<select name=""" & tag & """ id=""" & tag & """>"
 	For i = 0 to 127	
 		strNote = mid(" CC# DD# E FF# GG# AA# B", 1 + 2 * (i mod 12), 2)
-		strNote = trim(strNote & (int(i/12)-1))	
+		strNote = trim(strNote & (int(i/12)-2))	
 	
 		response.Write "<option value=""" & i & """"
 		if value = i then Response.write " selected"
@@ -76,7 +77,7 @@ end function
 Function RenderValue(tag, value)
 	Dim i
 	response.Write "<select name=""" & tag & """ id=""" & tag & """>"
-	For i = 1 to 127	
+	For i = 0 to 127	
 		response.Write "<option value=""" & i & """"
 		if value = i then Response.write " selected"
 		response.Write ">" & i & "</option>"

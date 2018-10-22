@@ -22,6 +22,7 @@ Const PARAML_TRIG_NONE = 0
 Const PARAML_TRIG_NOTE = 1
 Const PARAML_TRIG_CC = 2
 Const PARAML_TRIG_PGM = 3
+Const PARAML_TRIG_ALWAYS = 4
 
 Const PARAML_TRIG2_CHAN			= 10
 Const PARAML_TRIG2_VALUE_MIN	= 11
@@ -37,7 +38,6 @@ Const PARAML_CC_MOD_CHAN = 72
 Const PARAML_CC_MOD_CC = 73
 
 Const PARAMH_PGM_CHAN 	= 20
-Const PARAMH_PGM_ALL 	= 10
 Const PARAMH_PGM_SLOT1 	= 11
 Const PARAMH_PGM_SLOT2 	= 12
 Const PARAMH_PGM_SLOT3 	= 13
@@ -85,6 +85,15 @@ Const TrigTypeTag = ".trig"
 
 	
 Dim dictMappings
+
+' =================================================================
+Function IIF(c,a,b) 
+	If c Then 
+		IIF = a
+	Else 
+		IIF = b
+	End If
+End Function
 
 ' =================================================================
 Function ForceInt(s) 
@@ -240,8 +249,8 @@ Class SwitchOutput
 		Me.TrigChan = ForceInt(Me.Key & TrigChanTag)
 		Me.TrigNote = ForceInt(Me.Key & TrigNoteTag)
 		Me.TrigCC = ForceInt(Me.Key & TrigCCTag)
-		Me.TrigMinValue = ForceInt(Me.Key & TrigMaxValueTag)
-		Me.TrigMaxValue = ForceInt(Me.Key & TrigMinValueTag)
+		Me.TrigMinValue = ForceInt(Me.Key & TrigMinValueTag)
+		Me.TrigMaxValue = ForceInt(Me.Key & TrigMaxValueTag)
 		Me.ChangeDefault = ForceInt(Me.Key & ChangeDefaultTag)
 		Me.EnvType= ForceInt(Me.Key & EnvTypeTag)
 		Me.EnvHoldTime = ForceInt(Me.Key & EnvHoldTimeTag)
@@ -253,7 +262,7 @@ Class SwitchOutput
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)					
-		If Me.TrigType = PARAML_TRIG_CC Or PARAML_TRIG_NOTE Then
+		If Me.TrigType = PARAML_TRIG_CC Or Me.TrigType = PARAML_TRIG_NOTE Then
 			If Me.TrigType = PARAML_TRIG_CC Then
 				WriteParam id, PARAML_TRIG_CC, 0, Me.TrigCC
 			Else
@@ -270,7 +279,7 @@ Class SwitchOutput
 			WriteParam id, PARAML_ENV_SET, 0, Me.ChangeDefault
 			If Me.ChangeDefault Then
 				WriteParam id, PARAML_ENV_TYPE, 0, Me.EnvType				
-				WriteParam id, PARAML_ENV_HOLD, CInt(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
+				WriteParam id, PARAML_ENV_HOLD, Int(Me.EnvHoldTime/128), Me.EnvHoldTime Mod 128
 				WriteParam id, PARAML_GAMMA , 0, Me.Gamma				
 				WriteParam id, PARAML_VEL_MOD_DEST , 0, Me.ModVelDest				
 				WriteParam id, PARAML_CC_MOD_DEST , 0, Me.ModCCDest				
@@ -282,7 +291,7 @@ Class SwitchOutput
 	'--------------------------
 	Public Sub ReadSysex(p1, p2, v1, v2)
 		select case p2		
-			Case PARAML_TRIG_NONE, PARAML_TRIG_PGM
+			Case PARAML_TRIG_NONE, PARAML_TRIG_PGM, PARAML_TRIG_ALWAYS
 				Me.TrigType = p2
 			Case PARAML_TRIG_NOTE
 				Me.TrigType = p2
@@ -294,9 +303,9 @@ Class SwitchOutput
 				Me.TrigChan = v2
 			Case PARAML_TRIG2_VALUE_MIN
 				Me.TrigMinValue = v2
-				Me.TrigMaxValue = v1
+				Me.TrigMaxValue = v2
 			Case PARAML_TRIG2_VALUE_MAX	
-				Me.TrigMaxValue = v1				
+				Me.TrigMaxValue = v2				
 			Case PARAML_ENV_SET
 				Me.ChangeDefault = v2				
 			Case PARAML_ENV_TYPE
@@ -351,14 +360,14 @@ Class ProgramChange
 	'--------------------------	
 	Public Sub ReadForm
 		Me.PGM =ForceInt(Me.Key & PgmTag)
-		Me.Out1 = (Request.Form(Me.Key & Out1Tag)= "on")
-		Me.Out2 = (Request.Form(Me.Key & Out2Tag)= "on")
-		Me.Out3 = (Request.Form(Me.Key & Out3Tag)= "on")
-		Me.Out4 = (Request.Form(Me.Key & Out4Tag)= "on")
-		Me.Out5 = (Request.Form(Me.Key & Out5Tag)= "on")
-		Me.Out6 = (Request.Form(Me.Key & Out6Tag)= "on")
-		Me.Out7= (Request.Form(Me.Key & Out7Tag)= "on")
-		Me.Out8 = (Request.Form(Me.Key & Out8Tag)= "on")
+		Me.Out1 = IIF((Request.Form(Me.Key & Out1Tag)= "on"),1,0)
+		Me.Out2 = IIF((Request.Form(Me.Key & Out2Tag)= "on"),1,0)
+		Me.Out3 = IIF((Request.Form(Me.Key & Out3Tag)= "on"),1,0)
+		Me.Out4 = IIF((Request.Form(Me.Key & Out4Tag)= "on"),1,0)
+		Me.Out5 = IIF((Request.Form(Me.Key & Out5Tag)= "on"),1,0)
+		Me.Out6 = IIF((Request.Form(Me.Key & Out6Tag)= "on"),1,0)
+		Me.Out7= IIF((Request.Form(Me.Key & Out7Tag)= "on"),1,0)
+		Me.Out8 = IIF((Request.Form(Me.Key & Out8Tag)= "on"),1,0)
 	End Sub	
 	'--------------------------		
 	Public Sub WriteSysex(id)
