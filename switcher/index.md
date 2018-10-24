@@ -6,7 +6,17 @@ layout: default
 
 Set your MIDI free!! MIDI switcher allows you to switch real-world devices using MIDI. It is ideal for building electric percussion or for augmenting MIDI performances using lamps, motors etc. The only limit is your imagination (well.. and certain voltage and current constraints)
 
-There are two flavours of MIDI Switcher available, shown below (<a href="choice.html">How to decide</a>):
+<h2>Mini Module</h2>
+MIDI Switcher is currentlty sold as a pre-built module and is configured via MIDI System Exclusive (Sysex) files which are created using a web page
+<img src="img/MIDISWITCHER2.JPG"><br>
+Download the <a href="MIDI Switcher - User Guide.pdf">User Guide</a><br>
+Click to access the <a href="patch.asp">The Configuration Page</a><br>
+
+
+
+<h2>Older MIDI Switchers</h2>
+
+There are two older flavours of MIDI Switcher available, shown below (<a href="choice.html">How to decide</a>):
 
 <table>
 <tr>
