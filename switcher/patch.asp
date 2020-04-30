@@ -19,7 +19,7 @@ table {
 </style>
 </head>
 <body>
-<h1>MIDI SWITCHER SysEx Builder</h1>
+<h1>MIDI SWITCHER/RELAY SWITCHER SysEx Builder</h1>
 <%
 	InitMappings
 	
